@@ -147,12 +147,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="Object.h" />
@@ -163,11 +165,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FrameworkRelease_x64.dll" />
+    <None Include="Hero_model.ini" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="BottomSide1.tga" />
+    <Image Include="BottomSide2.tga" />
+    <Image Include="RightSde1.tga" />
+    <Image Include="RightSde2.tga" />
+    <Image Include="Leftside2.tga" />
+    <Image Include="Leftside1.tga" />
     <Image Include="bullet.tga" />
-    <Image Include="tank1.tga" />
-    <Image Include="tank2.tga" />
+    <Image Include="FrontAnimaiot1.tga" />
+    <Image Include="FrontAnimaiot2.tga" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

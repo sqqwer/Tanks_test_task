@@ -18,32 +18,27 @@ public:
 
 	virtual bool Init() {
 		tm = Time(getTickCount);
-		/*hero = Hero(createSprite(
-			"C:/Users/rozum/source/repos/Test_task/Test_task/data/NES.png"
-		), 3, 200, 200);
-		*/
 
-		hero = Hero(3, 200, 200);
-		getSpriteSize(hero.object[0], hero.size_w, hero.size_h);
+		hero = Hero("Hero_model.ini", 2, 1, 200, 200);
+		getSpriteSize(
+			hero.Draw(0.0f, 0.0f), hero.size_w, hero.size_h
+		);
+
 		return true;
 	}
 
 	virtual void Close() {
-		for (int i = 0; i < 2; i++)
-		{
-			destroySprite(hero.object[i]);
-		}
+		hero.FreeSprite();
 	}
 
 	virtual bool Tick() {
 		const float mark = tm.Mark();
 
 		drawTestBackground();
-		drawSprite(
-			hero.object[(hero.i == 0) ? hero.i = 1: hero.i = 0],
+		drawSprite(	
+			hero.Draw(hero.velocity_x, hero.velocity_y), 
 			hero.GetX(), hero.GetY()
 		);
-		
 		hero.Update(1280, 720, mark);
 		
 		return false;

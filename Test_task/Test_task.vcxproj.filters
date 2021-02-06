@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\general tank">
+      <UniqueIdentifier>{5afeb9ce-d25e-4d00-8d62-cc6295a917ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
@@ -25,6 +28,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Time.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,6 +47,9 @@
     <ClInclude Include="Time.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="FrameworkRelease_x64.lib">
@@ -51,16 +60,37 @@
     <None Include="FrameworkRelease_x64.dll">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="Hero_model.ini">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="bullet.tga">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="tank2.tga">
-      <Filter>Resource Files</Filter>
+    <Image Include="FrontAnimaiot1.tga">
+      <Filter>Resource Files\general tank</Filter>
     </Image>
-    <Image Include="tank1.tga">
-      <Filter>Resource Files</Filter>
+    <Image Include="FrontAnimaiot2.tga">
+      <Filter>Resource Files\general tank</Filter>
+    </Image>
+    <Image Include="Leftside1.tga">
+      <Filter>Resource Files\general tank</Filter>
+    </Image>
+    <Image Include="Leftside2.tga">
+      <Filter>Resource Files\general tank</Filter>
+    </Image>
+    <Image Include="RightSde1.tga">
+      <Filter>Resource Files\general tank</Filter>
+    </Image>
+    <Image Include="RightSde2.tga">
+      <Filter>Resource Files\general tank</Filter>
+    </Image>
+    <Image Include="BottomSide1.tga">
+      <Filter>Resource Files\general tank</Filter>
+    </Image>
+    <Image Include="BottomSide2.tga">
+      <Filter>Resource Files\general tank</Filter>
     </Image>
   </ItemGroup>
 </Project>

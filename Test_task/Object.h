@@ -16,14 +16,15 @@ public:
 	int GetX() const;
 	int GetY() const;
 
-	Sprite* object[2];
+	Sprite* object[4];
 	int i = 0;
+
+	float velocity_x;
+	float velocity_y;
 protected:
 	// possition on map
 	float possition_x;
 	float possition_y;
 	// Velocity for bullet
-	float velocity_x;
-	float velocity_y;
 
 };

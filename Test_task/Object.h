@@ -11,8 +11,7 @@ public:
 	virtual void PressKey(FRKey k) = 0;
 	virtual void ReleasedKey() = 0;
 	virtual void Update(int w, int h, float spec) = 0;
-	// Destructe sprite
-	Sprite* SriteRef();
+
 	// function for get possition of object
 	int GetX() const;
 	int GetY() const;

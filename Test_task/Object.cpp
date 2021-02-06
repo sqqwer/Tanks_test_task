@@ -6,9 +6,8 @@ Object::Object()
 	velocity_x(0.0f), velocity_y(0.0f)
 {}
 
-Object::Object(Sprite* obj, float poss_x, float poss_y)
+Object::Object(float poss_x, float poss_y)
 	:
-	object(obj), 
 	possition_x(poss_x), possition_y(poss_y),
 	velocity_x(0.0f), velocity_y(0.0f)
 {}
@@ -19,8 +18,4 @@ int Object::GetX() const {
 
 int Object::GetY() const {
 	return (int)possition_y;
-}
-// Destructe sprite
-Sprite* Object::SriteRef() {
-	return object;
 }

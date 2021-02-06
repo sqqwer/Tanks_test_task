@@ -24,9 +24,7 @@ public:
 		*/
 
 		hero = Hero(3, 200, 200);
-		getSpriteSize(
-			hero.SriteRef(), hero.size_w, hero.size_h
-		);
+		getSpriteSize(hero.object[0], hero.size_w, hero.size_h);
 		return true;
 	}
 

@@ -16,6 +16,7 @@ public:
 
 	int size_w;
 	int size_h;
+
 	FRKey last;
 private:
 	bool live;

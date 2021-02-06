@@ -59,5 +59,8 @@
     <Image Include="tank2.tga">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="tank1.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -1,8 +1,8 @@
-
-#include "Framework.h"
+#include "Land.h"
 #include "Hero.h"
 #include "Time.h"
 #include <iostream>
+#include "Framework.h"
 
 /* Test Framework realization */
 class MyFramework : public Framework {
@@ -19,13 +19,14 @@ public:
 	virtual bool Init() {
 		tm = Time(getTickCount);
 
-		hero = Hero("Hero_model.ini", 2, 1, 200, 200);
-		getSpriteSize(
-			hero.Draw(0.0f, 0.0f),
+		land = Land("land.ini");
+		hero = Hero("Hero_model_ver1.ini", 1, 200, 200);
+		if (!land.GetStatus() || !hero.GetStatus())
+			return false;		
+		getSpriteSize(hero.Draw(0.0f, 0.0f),
 			hero.GetRefSizeW(),
 			hero.GetRefSizeH()
-			);
-
+		);
 		return true;
 	}
 
@@ -35,22 +36,23 @@ public:
 
 	virtual bool Tick() {
 		const float mark = tm.Mark();
-		if (hero.GetX() > 300)
+	/*	if (hero.GetX() > 300)
 		{
 			hero.LoadPreset("Hero_model.ini");
 		}
 		else if (hero.GetX() < 300)
 		{
 			hero.LoadPreset("Hero_model_ver1.ini");
-		}
-
-//		drawTestBackground();
+		}*/
+		drawSprite(
+			land.GetSprite(), land.GetX(), land.GetY()
+		);
 		drawSprite(	
 			hero.Draw(
 			hero.GetvellX(), hero.GetvellY()),
 			hero.GetX(), hero.GetY()
 		);
-		hero.Update(600, 550, mark);
+		hero.Update(680, 570, mark);
 		
 		return false;
 	}
@@ -63,7 +65,7 @@ public:
 
 	}
 
-	virtual void onKeyPressed(FRKey k) {	
+ 	virtual void onKeyPressed(FRKey k) {	
 		hero.PressKey(k);
 		
 	}
@@ -79,6 +81,7 @@ public:
 private:
 	Time tm;
 	Hero hero;
+	Land land;
 };
 
 int main(int argc, char* argv[])

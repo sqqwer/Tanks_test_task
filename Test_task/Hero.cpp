@@ -7,11 +7,11 @@ Hero::Hero()
 {}
 
 Hero::Hero(
-	const char* name_ini, unsigned int range,
+	const char* name_ini,
 	int lives, int poss_x, int poss_y
 )
 	:
-	Animation(name_ini, range),
+	Animation(name_ini),
 	Object(poss_x, poss_y), alives(lives)
 {}
 // Function update possiition of object

@@ -9,7 +9,7 @@ class Hero : public Object, public Animation
 public:
 	Hero();
 	Hero(
-		const char* name_ini, unsigned int range,
+		const char* name_ini,
 		int lives, int poss_x, int poss_y
 	);
 	void PressKey(FRKey k) override;

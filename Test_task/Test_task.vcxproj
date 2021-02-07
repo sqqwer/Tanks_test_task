@@ -169,12 +169,14 @@
     <None Include="FrameworkRelease_x64.dll" />
     <None Include="Hero_model.ini" />
     <None Include="Hero_model_ver1.ini" />
+    <None Include="land.ini" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="BottomSide1.tga" />
     <Image Include="BottomSide2.tga" />
     <Image Include="BottomSide3.tga" />
     <Image Include="FrontAnimaiot3.tga" />
+    <Image Include="Land.tga" />
     <Image Include="RightSde3.tga" />
     <Image Include="Leftside3.tga" />
     <Image Include="Tank_Right1.tga" />

@@ -78,6 +78,9 @@
     <None Include="Hero_model_ver1.ini">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="land.ini">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="bullet.tga">
@@ -154,6 +157,9 @@
     </Image>
     <Image Include="RightSde3.tga">
       <Filter>Resource Files\general tank</Filter>
+    </Image>
+    <Image Include="Land.tga">
+      <Filter>Resource Files\texture</Filter>
     </Image>
   </ItemGroup>
 </Project>

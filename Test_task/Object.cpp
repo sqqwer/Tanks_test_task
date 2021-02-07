@@ -16,7 +16,7 @@ Object::Object(float poss_x, float poss_y)
 // Update possition
 void Object::Update(int w, int h, float spec)
 {
-	const int out = 50;
+	const int out = 30;
 	possition_x += velocity_x * (spec);
 	possition_y += velocity_y * (spec);
 	const int right = static_cast<int>(possition_x) + size_w;

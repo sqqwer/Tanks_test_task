@@ -39,7 +39,7 @@ public:
 			hero.Draw(hero.velocity_x, hero.velocity_y), 
 			hero.GetX(), hero.GetY()
 		);
-		hero.Update(1280, 720, mark);
+		hero.Update(200, 200, mark);
 		
 		return false;
 	}

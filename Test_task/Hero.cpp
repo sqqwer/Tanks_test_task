@@ -78,38 +78,46 @@ void Hero::Update(int w, int h, float spec)
 // Animation
 Sprite* Hero::Draw(float vellX, float vellY)
 {
-	wichOne = (vellX == 0 && vellY == 0) ? wichOne :
-		(vellY < 0) ? (int)anim::FRONT:
-		(vellY > 0) ? (int)anim::BOTTOM - 1:
-		(vellX < 0) ? (int)anim::LEFT - 1 :
-		(int)anim::RIGHT - 1;
+	wichOne =
+		(vellY < 0) ? (wichOne >= (int)anim::FRONT - 1 && wichOne < (int)anim::LEFT - 1)
+		? wichOne : (int)anim::FRONT - 1 :
+		(vellY > 0) ? (wichOne >= (int)anim::BOTTOM - 1 && wichOne < (int)anim::COUNT - 1)
+		? wichOne : (int)anim::BOTTOM - 1 :
+		(vellX < 0) ? (wichOne >= (int)anim::LEFT - 1 && wichOne < (int)anim::RIGHT - 1)
+		? wichOne : (int)anim::LEFT - 1 :
+		(vellX > 0) ? (wichOne >= (int)anim::RIGHT - 1 && wichOne < (int)anim::BOTTOM - 1)
+		? wichOne : (int)anim::RIGHT - 1 : wichOne;
 
-	if (wichOne >= (int)anim::FRONT && wichOne < (int)anim::LEFT - 1)
+	if (wichOne >= (int)anim::FRONT - 1 && wichOne < (int)anim::LEFT - 1)
 	{
 		(wichOne >= (int)anim::LEFT - 2)
-			? wichOne = (int)anim::FRONT : 
-			(vellX == 0) ? wichOne : wichOne++;
+			? wichOne = (int)anim::FRONT - 1 : 
+			(vellY == 0) ? wichOne : 
+			wichOne++;
 		return obj[wichOne];
 	}
 	if (wichOne >= (int)anim::LEFT - 1 && wichOne < (int)anim::RIGHT - 1)
 	{
 		(wichOne >= (int)anim::RIGHT - 2)
 			? wichOne = (int)anim::LEFT - 1 :
-			(vellX == 0) ? wichOne : wichOne++;
+			(vellX == 0) ? wichOne : 
+			wichOne++;
 		return obj[wichOne];
 	}
 	if (wichOne >= (int)anim::RIGHT - 1 && wichOne < (int)anim::BOTTOM - 1)
 	{
 		(wichOne >= (int)anim::BOTTOM - 2)
 			? wichOne = (int)anim::RIGHT - 1 :
-			(vellY == 0) ? wichOne : wichOne++;
+			(vellX == 0) ? wichOne : 
+			wichOne++;
 		return obj[wichOne];
 	}
 	if (wichOne >= (int)anim::BOTTOM - 1 && wichOne < (int)anim::COUNT - 1)
 	{
 		(wichOne >= (int)anim::COUNT - 2)
 			? wichOne = (int)anim::BOTTOM - 1 :
-			(vellY == 0) ? wichOne : wichOne++;
+			(vellY == 0) ? wichOne : 
+			wichOne++;
 		return obj[wichOne];
 	}
 }

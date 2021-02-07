@@ -14,11 +14,11 @@ public:
 	void FreeSprite();
 	enum class anim
 	{
-		FRONT = 0,
-		LEFT = 3,
-		RIGHT = 5,
-		BOTTOM = 7,
-		COUNT = 9
+		FRONT = 1,
+		LEFT = FRONT + range,
+		RIGHT = LEFT + range,
+		BOTTOM = RIGHT + range,
+		COUNT = BOTTOM + range
 	};
 protected:
 	int wichOne;

@@ -20,9 +20,7 @@ public:
 		tm = Time(getTickCount);
 
 		hero = Hero("Hero_model.ini", 2, 1, 200, 200);
-		getSpriteSize(
-			hero.Draw(0.0f, 0.0f), hero.size_w, hero.size_h
-		);
+		getSpriteSize(hero.Draw(0.0f, 0.0f), hero.size_w, hero.size_h);
 
 		return true;
 	}
@@ -33,13 +31,20 @@ public:
 
 	virtual bool Tick() {
 		const float mark = tm.Mark();
+		if (hero.GetX() > 300)
+		{
+			hero.LoadPreset("Hero_model.ini");
+		}
+		else if (hero.GetX() < 300)
+		{
+			hero.LoadPreset("Hero_model_ver1.ini");
+		}
 
-		drawTestBackground();
+//		drawTestBackground();
 		drawSprite(	
-			hero.Draw(hero.velocity_x, hero.velocity_y), 
-			hero.GetX(), hero.GetY()
+			hero.Draw(hero.velocity_x, hero.velocity_y), hero.GetX(), hero.GetY()
 		);
-		hero.Update(200, 200, mark);
+		hero.Update(600, 550, mark);
 		
 		return false;
 	}

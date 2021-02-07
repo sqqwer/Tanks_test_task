@@ -12,8 +12,7 @@ public:
 		const char* name_ini, unsigned int range,
 		int lives, int poss_x, int poss_y
 	);
-	
-	Sprite* Draw(float vellX, float vellY) override;
+
 	void PressKey(FRKey k) override;
 	void ReleasedKey() override;
 	void Update(int w, int h, float spec) override;

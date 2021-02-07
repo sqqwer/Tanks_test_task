@@ -3,15 +3,18 @@
 #include <map>
 #include "Framework.h"
 
-const unsigned int range = 2;
+const unsigned int range = 3;
 
 class Animation
 {
 public:
 	Animation();
 	Animation(const char* name, unsigned int range);
-	virtual Sprite* Draw(float vellX, float vellY) = 0;
+	
+	bool LoadPreset(const char * name);
+	Sprite* Draw(float vellX, float vellY);
 	void FreeSprite();
+
 	enum class anim
 	{
 		FRONT = 1,
@@ -23,10 +26,6 @@ public:
 protected:
 	int wichOne;
 	std::map<int, Sprite*> obj;
-private:
-	// range of animation
 	int size_of_animation;
-
-	//	std::vector<std::vector<Sprite*>> obj;
 };
 

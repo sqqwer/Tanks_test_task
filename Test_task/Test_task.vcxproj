@@ -166,10 +166,26 @@
   <ItemGroup>
     <None Include="FrameworkRelease_x64.dll" />
     <None Include="Hero_model.ini" />
+    <None Include="Hero_model_ver1.ini" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="BottomSide1.tga" />
     <Image Include="BottomSide2.tga" />
+    <Image Include="BottomSide3.tga" />
+    <Image Include="FrontAnimaiot3.tga" />
+    <Image Include="RightSde3.tga" />
+    <Image Include="Leftside3.tga" />
+    <Image Include="Tank_Right1.tga" />
+    <Image Include="Tank_Right2.tga" />
+    <Image Include="Tank_Right3.tga" />
+    <Image Include="Tank_Left3.tga" />
+    <Image Include="Tank_Left2.tga" />
+    <Image Include="Tank_Front3.tga" />
+    <Image Include="Tank_Front2.tga" />
+    <Image Include="Tank_Front1.tga" />
+    <Image Include="Tank_Botton1.tga" />
+    <Image Include="Tank_Botton2.tga" />
+    <Image Include="Tank_Botton3.tga" />
     <Image Include="RightSde1.tga" />
     <Image Include="RightSde2.tga" />
     <Image Include="Leftside2.tga" />
@@ -177,6 +193,7 @@
     <Image Include="bullet.tga" />
     <Image Include="FrontAnimaiot1.tga" />
     <Image Include="FrontAnimaiot2.tga" />
+    <Image Include="Tank_Left1.tga" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -7,6 +7,6 @@ public:
 	float Mark();
 private:
 	unsigned int (*GetTime)(void);
-	float last;
+	float last{};
 };
 

@@ -18,40 +18,37 @@ Animation::Animation(const char* name, unsigned int range)
 // Load ini file preset
 bool Animation::LoadPreset(const char* name)
 {
-	if (obj.size())
-	{
-		FreeSprite();
-	}
+	if (obj.size())	FreeSprite();
 	int i = 0;
 	std::string tmp;
 	std::ifstream file;
 	file.open(name);
-	if (!file.is_open())
-	{
-		std::cout << "Can't open ini file";
-		return false;
-	}
-	while (!file.eof())
+	if (file.is_open()) while (!file.eof())
 	{
 		file >> tmp;
 		if (tmp[0] == '#') continue;
 		Sprite* t = createSprite(tmp.c_str());
 		obj.insert(std::pair<int, Sprite*>(i++, t));
 	}
+	else return false;
 	size_of_animation = i--;
 	return true;
 }
-// Animation
+// Choice out frame
 Sprite* Animation::Draw(float vellX, float vellY)
 {
 	wichOne =
-		(vellY < 0) ? (wichOne >= (int)anim::FRONT - 1 && wichOne < (int)anim::LEFT - 1)
+		(vellY < 0) 
+		? (wichOne >= (int)anim::FRONT - 1 && wichOne < (int)anim::LEFT - 1)
 		? wichOne : (int)anim::FRONT - 1 :
-		(vellY > 0) ? (wichOne >= (int)anim::BOTTOM - 1 && wichOne < (int)anim::COUNT - 1)
+		(vellY > 0) 
+		? (wichOne >= (int)anim::BOTTOM - 1 && wichOne < (int)anim::COUNT - 1)
 		? wichOne : (int)anim::BOTTOM - 1 :
-		(vellX < 0) ? (wichOne >= (int)anim::LEFT - 1 && wichOne < (int)anim::RIGHT - 1)
+		(vellX < 0) 
+		? (wichOne >= (int)anim::LEFT - 1 && wichOne < (int)anim::RIGHT - 1)
 		? wichOne : (int)anim::LEFT - 1 :
-		(vellX > 0) ? (wichOne >= (int)anim::RIGHT - 1 && wichOne < (int)anim::BOTTOM - 1)
+		(vellX > 0) 
+		? (wichOne >= (int)anim::RIGHT - 1 && wichOne < (int)anim::BOTTOM - 1)
 		? wichOne : (int)anim::RIGHT - 1 :
 		wichOne;
 
@@ -87,11 +84,12 @@ Sprite* Animation::Draw(float vellX, float vellY)
 			wichOne++;
 		return obj[wichOne];
 	}
+	return obj[0];
 }
-// clear
+// clear sprite map
 void Animation::FreeSprite()
 {
-	for (size_t i = 0; i < size_of_animation; i++)
+	for (int i = 0; i < size_of_animation; i++)
 	{
 			destroySprite(obj[i]);
 	}

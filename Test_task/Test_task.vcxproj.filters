@@ -19,6 +19,9 @@
     <Filter Include="Resource Files\tank ver1">
       <UniqueIdentifier>{eb1c2cd0-8855-4a00-81fa-559e8ad40a0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\texture">
+      <UniqueIdentifier>{e360365b-c76b-46a3-b1a4-6b469a116959}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
@@ -36,6 +39,9 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Land.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h">
@@ -51,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Land.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

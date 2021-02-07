@@ -3,7 +3,8 @@
 Object::Object()
 	: 
 	possition_x(0), possition_y(0),
-	velocity_x(0.0f), velocity_y(0.0f)
+	velocity_x(0.0f), velocity_y(0.0f),
+	size_w(0), size_h(0)
 {}
 
 Object::Object(float poss_x, float poss_y)
@@ -11,11 +12,29 @@ Object::Object(float poss_x, float poss_y)
 	possition_x(poss_x), possition_y(poss_y),
 	velocity_x(0.0f), velocity_y(0.0f)
 {}
-// function for get possition of object
-int Object::GetX() const {
-	return (int)possition_x;
-}
 
-int Object::GetY() const {
-	return (int)possition_y;
+// Update possition
+void Object::Update(int w, int h, float spec)
+{
+	const int out = 50;
+	possition_x += velocity_x * (spec);
+	possition_y += velocity_y * (spec);
+	const int right = static_cast<int>(possition_x) + size_w;
+	if (possition_x < out)
+	{
+		possition_x = static_cast<float>(out);
+	}
+	else if (right >= w)
+	{
+		possition_x = static_cast<float>(w) - size_w;
+	}
+	const int bottom = static_cast<int>(possition_y) + size_h;
+	if (possition_y < out)
+	{
+		possition_y = static_cast<float>(out);
+	}
+	else if (bottom >= h)
+	{
+		possition_y = static_cast<float>(h) - size_h;
+	}
 }

@@ -10,8 +10,10 @@ class Animation
 public:
 	Animation();
 	Animation(const char* name, unsigned int range);
-	
 	bool LoadPreset(const char * name);
+	Sprite* GetSprite() {
+		return obj[wichOne];
+	}
 	Sprite* Draw(float vellX, float vellY);
 	void FreeSprite();
 
@@ -24,8 +26,8 @@ public:
 		COUNT = BOTTOM + range
 	};
 protected:
-	int wichOne;
-	std::map<int, Sprite*> obj;
-	int size_of_animation;
+	int wichOne{};
+	int size_of_animation{};
+	std::map<int, Sprite*> obj{};
 };
 

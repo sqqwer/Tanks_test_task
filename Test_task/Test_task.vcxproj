@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Block.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="game.cpp" />
@@ -158,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Block.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Framework.h" />
@@ -170,6 +172,7 @@
     <Library Include="FrameworkRelease_x64.lib" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="block.ini" />
     <None Include="bullet.ini" />
     <None Include="FrameworkRelease_x64.dll" />
     <None Include="Hero_model.ini" />
@@ -186,6 +189,7 @@
     <Image Include="bullet4.tga" />
     <Image Include="bullet5.tga" />
     <Image Include="bullet6.tga" />
+    <Image Include="brick.tga" />
     <Image Include="Land.tga" />
     <Image Include="RightSde3.tga" />
     <Image Include="Leftside3.tga" />

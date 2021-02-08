@@ -1,17 +1,17 @@
 #include "Object.h"
 
 Object::Object()
-	: 
+	:
 	possition_x(0), possition_y(0),
 	velocity_x(0.0f), velocity_y(0.0f),
 	size_w(0), size_h(0)
-{}
+{};
 
 Object::Object(const float poss_x, const float poss_y)
 	:
 	possition_x(poss_x), possition_y(poss_y),
 	velocity_x(0.0f), velocity_y(0.0f), size_w(0), size_h(0)
-{}
+{};
 // Update possition
 void Object::Update(int w, int h, float spec)
 {
@@ -35,5 +35,53 @@ void Object::Update(int w, int h, float spec)
 	else if (bottom >= h)
 	{
 		possition_y = static_cast<float>(h) - size_h;
+	}
+};
+
+void Object::Colisium(
+	const float possX, const float possY,
+	const float width, const float height, const float mark
+)
+{
+	if (
+		possition_x + size_w  >= possX - width &&
+		possition_x - size_w  <= possX + width
+	)
+	{
+		if (
+			possition_y + size_h >= possY - height &&
+			possition_y - size_h <= possY + height
+		)
+		{
+				possition_x -= (velocity_x)*mark;
+				possition_y -= (velocity_y)*mark;
+		}
+	}
+}
+
+void Object::TankColisium(
+	const float possX, const float possY,
+	const float width, const float height, const float mark
+)
+{
+	if (
+		possition_x + size_w >= possX &&
+		possition_x <= possX + width
+		)
+	{
+		if (
+			possition_y + size_h >= possY &&
+			possition_y <= possY + height
+			)
+		{
+			if (!velocity_y)
+			{
+				possition_x -= velocity_x * mark;
+			}
+			else if (!velocity_x)
+			{
+				possition_y -= velocity_y * mark;
+			}
+		}
 	}
 }

@@ -1,4 +1,7 @@
 #pragma once
+
+const float millToSec = (0.001f);
+
 class Time
 {
 public:

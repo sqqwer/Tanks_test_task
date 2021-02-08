@@ -9,6 +9,8 @@ public:
 	Land();
 	Land(const char* name, void (*draw)(Sprite*, int, int));
 	void Draw() override;
+private:
+	// initialization virtual function
 	void ReleasedKey() {};
 	void PressKey(FRKey k) {};
 };

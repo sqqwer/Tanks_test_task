@@ -25,6 +25,12 @@
     <Filter Include="Resource Files\bullet">
       <UniqueIdentifier>{a10c098d-e0cb-4f63-8597-f18371fbfcf2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\IniFile">
+      <UniqueIdentifier>{a851ad87-55b7-43db-adaa-6ae38a55fd09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\block">
+      <UniqueIdentifier>{d24e0f9d-b60a-4c2b-b72f-c6ebd15c6dc3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
@@ -49,6 +55,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,6 +86,9 @@
     <ClInclude Include="Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="FrameworkRelease_x64.lib">
@@ -87,17 +99,20 @@
     <None Include="FrameworkRelease_x64.dll">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="Hero_model.ini">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Hero_model_ver1.ini">
-      <Filter>Resource Files</Filter>
+    <None Include="bullet.ini">
+      <Filter>Resource Files\IniFile</Filter>
     </None>
     <None Include="land.ini">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\IniFile</Filter>
     </None>
-    <None Include="bullet.ini">
-      <Filter>Resource Files</Filter>
+    <None Include="Hero_model_ver1.ini">
+      <Filter>Resource Files\IniFile</Filter>
+    </None>
+    <None Include="Hero_model.ini">
+      <Filter>Resource Files\IniFile</Filter>
+    </None>
+    <None Include="block.ini">
+      <Filter>Resource Files\IniFile</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +208,9 @@
     </Image>
     <Image Include="bullet6.tga">
       <Filter>Resource Files\bullet</Filter>
+    </Image>
+    <Image Include="brick.tga">
+      <Filter>Resource Files\block</Filter>
     </Image>
   </ItemGroup>
 </Project>

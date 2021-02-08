@@ -6,11 +6,11 @@
 Animation::Animation()
 	:
 	wichOne(0)
-{}
+{};
 // poot path of ini file
 Animation::Animation(
 	const char* name, void (*draw)(Sprite*, int, int)
-	)
+)
 	:
 	size_of_animation(0), wichOne(0), draw(draw)
 {
@@ -18,7 +18,7 @@ Animation::Animation(
 	{
 		return;
 	}
-}
+};
 // Load ini file preset
 bool Animation::LoadPreset(const char* name)
 {
@@ -42,7 +42,7 @@ bool Animation::LoadPreset(const char* name)
 	size_of_animation = i--;
 	file.close();
 	return (isOpen = true);
-}
+};
 // Choice out frame
 Sprite* Animation::Choice(float vellX, float vellY)
 {
@@ -80,13 +80,13 @@ Sprite* Animation::Choice(float vellX, float vellY)
 		return obj[wichOne];
 	}
 	return obj[wichOne];
-}
+};
 // clear sprite map
 void Animation::FreeSprite()
 {
 	for (int i = 0; i < size_of_animation; i++)
 	{
-			destroySprite(obj[i]);
+		destroySprite(obj[i]);
 	}
 	obj.clear();
-}
+};

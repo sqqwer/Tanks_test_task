@@ -4,6 +4,8 @@
 #include "Object.h"
 #include "Animation.h"
 #include "Bullet.h"
+#include "Enemy.h"
+#include "Block.h"
 
 #include <vector>
 #include <string>
@@ -14,17 +16,18 @@ public:
 	Hero();
 	Hero(
 		const char* name_ini, const char* bull_preset,
-		int lives, int poss_x, int poss_y,
+		int lives, const float poss_x, const float poss_y,
 		void (*draw)(Sprite*, int, int)
 	);
 	void Shoot();
 	void ClerBull(const unsigned int elem);
-	void UpdateBullet(int screenX, int screenY, float mark);
-	
+	void UpdateBullet(
+		int screenX, int screenY, float mark,
+		std::vector<Enemy> &en
+	);
 	void Draw() override;
 	void PressKey(FRKey k) override;
 	void ReleasedKey() override;
-
 	void ChioceOutShoot();
 	bool isAlive() const {
 		return live;
@@ -39,5 +42,5 @@ private:
 	bool live{};
 	int	 alives{};
 	std::string bull_preset;
-	float vellB = 150.0f;
+	float vellB = 250.0f;
 };

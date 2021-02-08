@@ -1,11 +1,25 @@
 #include "Land.h"
 #include "Hero.h"
 #include "Time.h"
-#include "Bullet.h"
 #include "Enemy.h"
+#include "Bullet.h"
+#include "Block.h"
+#include "Framework.h"
+
 #include <string>
 #include <iostream>
-#include "Framework.h"
+
+void UpdateBlock(
+	std::vector<Block>& block,
+	Hero& hero, const float mark
+);
+
+void UpdateEnemy(
+	std::vector<Enemy>& enemy,
+	std::vector<Block>& block,
+	Hero& hero, const float mark,
+	const int screenX, const int screenY
+);
 
 /* Test Framework realization */
 class MyFramework : public Framework {
@@ -23,9 +37,11 @@ public:
 		{
 			if (!strcmp(argv[1],"-window"))
 			{
+				char* str_height = nullptr;
+				char* str_width = nullptr;
 				const char* str = argv[2];
-				char* str_width = new char[10];
-				char* str_height = new char[10];
+				str_width = new char[10];
+				str_height = new char[10];
 				int i = 0, x = 0, s = 0;
 				while (str[i] != '\0')
 				{
@@ -40,13 +56,16 @@ public:
 						str_height[s] = str[i];
 					i++; s++;
 				}
-				screenX = width = atoi(str_width);
-				screenY = height = atoi(str_height);
+				if (str_width || str_height)
+				{
+					screenX = width = atoi(str_width);
+					screenY = height = atoi(str_height);
+				}
 				delete[] str_width;
 				delete[] str_height;
 			}
 		}
-		else
+		if ((screenX <= 0 || screenY <= 0))
 		{
 			width = 800;
 			height = 600;
@@ -58,39 +77,54 @@ public:
 		tm = Time(getTickCount);
 		land = Land("land.ini", drawSprite);
 		hero = Hero("Hero_model_ver1.ini", "bullet.ini", 1, 200, 200, drawSprite);
-		enemy = Enemy("Hero_model_ver1.ini", "bullet.ini", 1, 400, 400, drawSprite);
+
+		float b_x = 300.0f;
+		float b_y = 200.0f;
+		for (int i = 0; i < 5; i++)
+		{
+			block.push_back(Block("block.ini", b_x, b_y, drawSprite));
+			b_x += 30;
+		}
+		
+		float x = 10.0f;
+		float y = 50.0f;
+		for (int i = 0; i < 10; i++)
+		{
+			enemy.push_back(Enemy((i % 2 == 0) ? "Hero_model_ver1.ini" : "Hero_model.ini", 
+				"bullet.ini", 1, x, y, drawSprite));
+			x += 40; y += 40;
+		}
 		if (!land.GetStatus() || !hero.GetStatus())
 			return false;
 		getSpriteSize(land.GetSprite(), land.GetRefSizeW(), land.GetRefSizeW());
 		getSpriteSize(hero.GetSprite(), hero.GetRefSizeW(), hero.GetRefSizeH());
-		getSpriteSize(enemy.GetSprite(), enemy.GetRefSizeW(), enemy.GetRefSizeH());
+		for (int i = 0; i < enemy.size(); i++)
+		{
+			if (i % 2 == 0) enemy[i].SetVellX(70.0f); else enemy[i].SetVellY(100.0f);
+			getSpriteSize(enemy[i].GetSprite(), enemy[i].GetRefSizeW(), enemy[i].GetRefSizeH());
+		}
 
 		return true;
 	}
 
 	virtual void Close() {
 		hero.FreeSprite();
+		for (int i = 0; i < enemy.size(); i++)
+		{
+			
+		}
+		enemy.clear();
 	}
 
 	virtual bool Tick() {
 		const float mark = tm.Mark();	
-		hero.last += mark; enemy.last += mark;
-		land.Draw();	hero.Draw();	enemy.Draw();
-
-		if (enemy.last > 2.25)
-		{
-			enemy.last = 0;
-			enemy.Shoot();
-			getSpriteSize(
-				enemy.bull[enemy.bull.size() - 1].GetSprite(),
-				enemy.bull[enemy.bull.size() - 1].GetRefSizeW(),
-				enemy.bull[enemy.bull.size() - 1].GetRefSizeH()
-			);
-		}
-		enemy.UpdateBullet(screenX - 120, screenY - 30, mark);
-
+		hero.last += mark;
+		land.Draw();	hero.Draw();	
 		hero.Update(screenX - 120, screenY - 30, mark);
-		hero.UpdateBullet(screenX - 120, screenY - 30, mark);
+		UpdateBlock(block, hero, mark);
+		hero.UpdateBullet(screenX - 120, screenY - 30, mark, enemy);
+		UpdateEnemy(enemy, block, hero, mark, screenX, screenY);
+
 		return false;
 	}
 
@@ -116,7 +150,6 @@ public:
 
  	virtual void onKeyPressed(FRKey k) {	
 		hero.PressKey(k);
-		
 	}
 
 	virtual void onKeyReleased(FRKey k) {
@@ -127,20 +160,100 @@ public:
 	{
 		return "Tanks";
 	}
+
 private:
 	int* argc;
 	char** argv;
-	int screenX;
-	int screenY;
+	int screenX = 0;
+	int screenY = 0;
 
 	Time tm;
-
-	Enemy enemy;
 	Hero  hero;
 	Land  land;
+
+	std::vector<Block> block;
+	std::vector<Enemy> enemy;
 };
 
 int main(int argc, char* argv[])
 {
 	return run(new MyFramework(&argc, argv));
+}
+
+void UpdateEnemy(
+	std::vector<Enemy>& enemy,
+	std::vector<Block>& block,
+	Hero& hero, const float mark,
+	const int screenX, const int screenY
+)
+{
+	for (int i = 0; i < enemy.size(); i++)
+	{
+		if (enemy[i].isAlive())
+		{
+			enemy[i].last += mark;	enemy[i].Draw();
+
+			if (enemy[i].last > 5)
+			{
+				if (enemy[i].last > 5 && !enemy[i].GetvellX() && !enemy[i].GetvellY())
+				{
+					enemy[i].SetVellX(70.0f);
+				}
+				enemy[i].last = 0;	enemy[i].Shoot();
+				getSpriteSize(
+					enemy[i].bull[enemy[i].bull.size() - 1].GetSprite(),
+					enemy[i].bull[enemy[i].bull.size() - 1].GetRefSizeW(),
+					enemy[i].bull[enemy[i].bull.size() - 1].GetRefSizeH()
+				);
+			}
+			enemy[i].Update(screenX - 120, screenY - 30, mark);
+			for (int j = 0; j < enemy.size(); j++)
+			{
+				if (i != j)
+					enemy[i].Enemy::TankColisium(
+						(float)enemy[j].GetX(), (float)enemy[j].GetY(),
+						(float)enemy[j].GetSpW(), (float)enemy[j].GetSpH(), mark
+					);
+			}
+			enemy[i].TankColisium(
+				(float)hero.GetX(), (float)hero.GetY(),
+				(float)hero.GetSpW(), (float)hero.GetSpH(), mark
+			);
+			hero.TankColisium(
+				(float)enemy[i].GetX(), (float)enemy[i].GetY(),
+				(float)enemy[i].GetSpW(), (float)enemy[i].GetSpH(), mark
+			);
+			for (int j = 0; j < block.size(); j++)
+			{
+				enemy[i].Enemy::Colisium(
+					(float)block[j].GetX(), (float)block[j].GetY(),
+					(float)block[j].GetSpW(), (float)block[j].GetSpH(), mark
+				);
+			}
+		}
+		else if (!enemy[i].isAlive() && !enemy[i].bull.size())
+		{
+			enemy[i].FreeSprite();
+			enemy.erase(enemy.begin() + i);
+		}
+		enemy[i].UpdateBullet(screenX - 120, screenY - 30, mark, enemy);
+	}
+}
+
+void UpdateBlock(
+	std::vector<Block>& block,
+	Hero& hero, const float mark
+)
+{
+	for (int i = 0; i < block.size(); i++)
+	{
+		block[i].Draw();
+	}
+	for (int i = 0; i < block.size(); i++)
+	{
+		hero.Colisium(
+			(float)block[i].GetX(), (float)block[i].GetY(),
+			(float)block[i].GetSpW(), (float)block[i].GetSpH(), mark
+		);
+	}
 }

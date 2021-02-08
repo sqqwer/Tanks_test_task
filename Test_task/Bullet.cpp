@@ -1,5 +1,8 @@
 #include "Bullet.h"
 
+Bullet::Bullet()
+{};
+
 Bullet::Bullet(
 	const char* name,
 	const float vellX, const float vellY,
@@ -10,7 +13,7 @@ Bullet::Bullet(
 	Animation(name, draw), Object(possX, possY), isWork(live)
 {
 	velocity_x = vellX; velocity_y = vellY;
-}
+};
 
 void Bullet::Update(int w, int h, float spec)
 {
@@ -28,11 +31,11 @@ void Bullet::Update(int w, int h, float spec)
 	{
 		FreeSprite();	isWork = false;
 	}
-}
+};
 
 void Bullet::Draw()
 {
 	draw(
 		Choice(velocity_x, velocity_y), GetX(), GetY()
 	);
-}
+};

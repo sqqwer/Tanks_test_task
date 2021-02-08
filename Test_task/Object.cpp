@@ -7,7 +7,7 @@ Object::Object()
 	size_w(0), size_h(0)
 {}
 
-Object::Object(float poss_x, float poss_y)
+Object::Object(const float poss_x, const float poss_y)
 	:
 	possition_x(poss_x), possition_y(poss_y),
 	velocity_x(0.0f), velocity_y(0.0f)

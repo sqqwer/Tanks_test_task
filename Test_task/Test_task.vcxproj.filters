@@ -22,6 +22,9 @@
     <Filter Include="Resource Files\texture">
       <UniqueIdentifier>{e360365b-c76b-46a3-b1a4-6b469a116959}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\bullet">
+      <UniqueIdentifier>{a10c098d-e0cb-4f63-8597-f18371fbfcf2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
@@ -40,6 +43,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Land.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,6 +68,9 @@
     <ClInclude Include="Land.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="FrameworkRelease_x64.lib">
@@ -81,11 +90,11 @@
     <None Include="land.ini">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="bullet.ini">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bullet.tga">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="FrontAnimaiot1.tga">
       <Filter>Resource Files\general tank</Filter>
     </Image>
@@ -160,6 +169,24 @@
     </Image>
     <Image Include="Land.tga">
       <Filter>Resource Files\texture</Filter>
+    </Image>
+    <Image Include="bullet1.tga">
+      <Filter>Resource Files\bullet</Filter>
+    </Image>
+    <Image Include="bullet2.tga">
+      <Filter>Resource Files\bullet</Filter>
+    </Image>
+    <Image Include="bullet3.tga">
+      <Filter>Resource Files\bullet</Filter>
+    </Image>
+    <Image Include="bullet4.tga">
+      <Filter>Resource Files\bullet</Filter>
+    </Image>
+    <Image Include="bullet5.tga">
+      <Filter>Resource Files\bullet</Filter>
+    </Image>
+    <Image Include="bullet6.tga">
+      <Filter>Resource Files\bullet</Filter>
     </Image>
   </ItemGroup>
 </Project>

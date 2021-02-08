@@ -42,21 +42,7 @@ bool Animation::LoadPreset(const char* name)
 // Choice out frame
 Sprite* Animation::Draw(float vellX, float vellY)
 {
-	wichOne =
-		(vellY < 0) 
-		? (wichOne >= (int)anim::FRONT - 1 && wichOne < (int)anim::LEFT - 1)
-		? wichOne : (int)anim::FRONT - 1 :
-		(vellY > 0) 
-		? (wichOne >= (int)anim::BOTTOM - 1 && wichOne < (int)anim::COUNT - 1)
-		? wichOne : (int)anim::BOTTOM - 1 :
-		(vellX < 0) 
-		? (wichOne >= (int)anim::LEFT - 1 && wichOne < (int)anim::RIGHT - 1)
-		? wichOne : (int)anim::LEFT - 1 :
-		(vellX > 0) 
-		? (wichOne >= (int)anim::RIGHT - 1 && wichOne < (int)anim::BOTTOM - 1)
-		? wichOne : (int)anim::RIGHT - 1 :
-		wichOne;
-
+	WI(wichOne);
 	if (wichOne >= (int)anim::FRONT - 1 && wichOne < (int)anim::LEFT - 1)
 	{
 		(wichOne >= (int)anim::LEFT - 2)

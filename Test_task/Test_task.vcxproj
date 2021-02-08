@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Land.cpp" />
@@ -156,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="Land.h" />
@@ -166,6 +168,7 @@
     <Library Include="FrameworkRelease_x64.lib" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bullet.ini" />
     <None Include="FrameworkRelease_x64.dll" />
     <None Include="Hero_model.ini" />
     <None Include="Hero_model_ver1.ini" />
@@ -176,6 +179,11 @@
     <Image Include="BottomSide2.tga" />
     <Image Include="BottomSide3.tga" />
     <Image Include="FrontAnimaiot3.tga" />
+    <Image Include="bullet2.tga" />
+    <Image Include="bullet3.tga" />
+    <Image Include="bullet4.tga" />
+    <Image Include="bullet5.tga" />
+    <Image Include="bullet6.tga" />
     <Image Include="Land.tga" />
     <Image Include="RightSde3.tga" />
     <Image Include="Leftside3.tga" />
@@ -194,7 +202,7 @@
     <Image Include="RightSde2.tga" />
     <Image Include="Leftside2.tga" />
     <Image Include="Leftside1.tga" />
-    <Image Include="bullet.tga" />
+    <Image Include="bullet1.tga" />
     <Image Include="FrontAnimaiot1.tga" />
     <Image Include="FrontAnimaiot2.tga" />
     <Image Include="Tank_Left1.tga" />

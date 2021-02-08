@@ -2,6 +2,8 @@
 #include "Hero.h"
 #include "Time.h"
 #include "Bullet.h"
+#include "Enemy.h"
+#include <string>
 #include <iostream>
 #include "Framework.h"
 
@@ -10,22 +12,59 @@ class MyFramework : public Framework {
 
 public:
 
+	MyFramework(int* argc, char* argv[])
+		:
+		argc(argc), argv(argv), screenX(0), screenY(0)
+	{}
+
 	virtual void PreInit(int& width, int& height, bool& fullscreen)
 	{
-		width = 800;
-		height = 600;
+		if (*argc == 3)
+		{
+			if (!strcmp(argv[1],"-window"))
+			{
+				const char* str = argv[2];
+				char* str_width = new char[10];
+				char* str_height = new char[10];
+				int i = 0, x = 0, s = 0;
+				while (str[i] != '\0')
+				{
+					if (str[i] == 'x')
+					{
+						x = 1; s = 0; i++;
+						continue;
+					}
+					if (!x)
+						str_width[s] = str[i];
+					else
+						str_height[s] = str[i];
+					i++; s++;
+				}
+				screenX = width = atoi(str_width);
+				screenY = height = atoi(str_height);
+				delete[] str_width;
+				delete[] str_height;
+			}
+		}
+		else
+		{
+			width = 800;
+			height = 600;
+		}
 		fullscreen = false;
 	}
 
 	virtual bool Init() {
 		tm = Time(getTickCount);
-
-		land = Land("land.ini");
-		hero = Hero("Hero_model_ver1.ini", "bullet.ini", 1, 200, 200);
-		
+		land = Land("land.ini", drawSprite);
+		hero = Hero("Hero_model_ver1.ini", "bullet.ini", 1, 200, 200, drawSprite);
+		enemy = Enemy("Hero_model_ver1.ini", "bullet.ini", 1, 400, 400, drawSprite);
 		if (!land.GetStatus() || !hero.GetStatus())
-			return false;		
+			return false;
+		getSpriteSize(land.GetSprite(), land.GetRefSizeW(), land.GetRefSizeW());
 		getSpriteSize(hero.GetSprite(), hero.GetRefSizeW(), hero.GetRefSizeH());
+		getSpriteSize(enemy.GetSprite(), enemy.GetRefSizeW(), enemy.GetRefSizeH());
+
 		return true;
 	}
 
@@ -34,43 +73,24 @@ public:
 	}
 
 	virtual bool Tick() {
-		const float mark = tm.Mark();	hero.last += mark;
-		drawSprite(
-			land.GetSprite(), land.GetX(), land.GetY()
-		);
-		drawSprite(	
-			hero.Draw(
-			hero.GetvellX(), hero.GetvellY()),
-			hero.GetX(), hero.GetY()
-		);
-		if (hero.bull.size())
-		{
-			for (int i = 0; i < hero.bull.size(); i++)
-			{
-				drawSprite(
-					hero.bull[i].Draw(
-						hero.bull[i].GetvellX(),
-						hero.bull[i].GetvellY()
-					),
-					hero.bull[i].GetX(), 
-					hero.bull[i].GetY()
-				);
-			}
-		}
+		const float mark = tm.Mark();	
+		hero.last += mark; enemy.last += mark;
+		land.Draw();	hero.Draw();	enemy.Draw();
 
-		hero.Update(680, 570, mark);
-		
-		if (hero.bull.capacity() && !hero.bull.size())
+		if (enemy.last > 2.25)
 		{
-			hero.bull.clear();
-			std::vector<Bullet>().swap(hero.bull);
+			enemy.last = 0;
+			enemy.Shoot();
+			getSpriteSize(
+				enemy.bull[enemy.bull.size() - 1].GetSprite(),
+				enemy.bull[enemy.bull.size() - 1].GetRefSizeW(),
+				enemy.bull[enemy.bull.size() - 1].GetRefSizeH()
+			);
 		}
-		for (int i = 0; i < hero.bull.size(); i++)
-		{
-			hero.bull[i].Update(680, 570, mark);
-			if (!hero.bull[i].Work())
-				hero.ClerBull(i);
-		}
+		enemy.UpdateBullet(screenX - 120, screenY - 30, mark);
+
+		hero.Update(screenX - 120, screenY - 30, mark);
+		hero.UpdateBullet(screenX - 120, screenY - 30, mark);
 		return false;
 	}
 
@@ -108,12 +128,19 @@ public:
 		return "Tanks";
 	}
 private:
+	int* argc;
+	char** argv;
+	int screenX;
+	int screenY;
+
 	Time tm;
-	Hero hero;
-	Land land;
+
+	Enemy enemy;
+	Hero  hero;
+	Land  land;
 };
 
 int main(int argc, char* argv[])
 {
-	return run(new MyFramework);
+	return run(new MyFramework(&argc, argv));
 }

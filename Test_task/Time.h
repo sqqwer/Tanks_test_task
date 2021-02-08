@@ -9,4 +9,3 @@ private:
 	unsigned int (*GetTime)(void);
 	float last{};
 };
-

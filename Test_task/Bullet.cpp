@@ -3,10 +3,11 @@
 Bullet::Bullet(
 	const char* name,
 	const float vellX, const float vellY,
-	const float possX, const float possY, bool live
+	const float possX, const float possY, bool live,
+	void (*draw)(Sprite*, int, int)
 )
 	:
-	Animation(name), Object(possX, possY), isWork(live)
+	Animation(name, draw), Object(possX, possY), isWork(live)
 {
 	velocity_x = vellX; velocity_y = vellY;
 }
@@ -27,4 +28,11 @@ void Bullet::Update(int w, int h, float spec)
 	{
 		FreeSprite();	isWork = false;
 	}
+}
+
+void Bullet::Draw()
+{
+	draw(
+		Choice(velocity_x, velocity_y), GetX(), GetY()
+	);
 }

@@ -4,11 +4,15 @@
 #include <string>
 
 Animation::Animation()
+	:
+	wichOne(0)
 {}
 // poot path of ini file
-Animation::Animation(const char* name)
+Animation::Animation(
+	const char* name, void (*draw)(Sprite*, int, int)
+	)
 	:
-	size_of_animation(0), wichOne(0)
+	size_of_animation(0), wichOne(0), draw(draw)
 {
 	if (!LoadPreset(name))
 	{
@@ -40,7 +44,7 @@ bool Animation::LoadPreset(const char* name)
 	return (isOpen = true);
 }
 // Choice out frame
-Sprite* Animation::Draw(float vellX, float vellY)
+Sprite* Animation::Choice(float vellX, float vellY)
 {
 	WI(wichOne);
 	if (wichOne >= (int)anim::FRONT - 1 && wichOne < (int)anim::LEFT - 1)

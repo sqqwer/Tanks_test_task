@@ -33,7 +33,9 @@ class Animation
 {
 public:
 	Animation();
-	Animation(const char* name);
+	Animation(
+		const char* name, void (*draw)(Sprite*, int, int)
+	);
 	bool LoadPreset(const char * name);
 	Sprite* GetSprite() {
 		return obj[wichOne];
@@ -41,7 +43,8 @@ public:
 	bool GetStatus() const {
 		return isOpen;
 	}
-	Sprite* Draw(float vellX, float vellY);
+	virtual void Draw() = 0;
+	Sprite* Choice(float vellX, float vellY);
 	void FreeSprite();
 
 	enum class anim
@@ -54,9 +57,11 @@ public:
 	};
 protected:
 	bool isOpen{false};
-	side sd;
+	side sd {};
 	int wichOne{};
 	int size_of_animation{};
+
+	void (*draw)(Sprite*, int, int) {};
 	std::map<int, Sprite*> obj{};
 };
 

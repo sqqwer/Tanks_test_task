@@ -9,16 +9,18 @@ public:
 	Bullet() {};
 	Bullet(const char* name,
 		const float vellX, const float vellY,
-		const float possX, const float possY, bool live
+		const float possX, const float possY, bool live,
+		void (*draw)(Sprite*, int, int)
 	);
+
+	void Draw() override;
+	void Update(int w, int h, float spec) override;
 	bool Work() const {
 		return isWork;
 	};
-	void Update(int w, int h, float spec) override;
 	// initialization virtual function
 	void ReleasedKey() {};
 	void PressKey(FRKey k) {};
 private:
 	bool isWork{false};
 };
-

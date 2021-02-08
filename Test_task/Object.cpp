@@ -10,9 +10,8 @@ Object::Object()
 Object::Object(const float poss_x, const float poss_y)
 	:
 	possition_x(poss_x), possition_y(poss_y),
-	velocity_x(0.0f), velocity_y(0.0f)
+	velocity_x(0.0f), velocity_y(0.0f), size_w(0), size_h(0)
 {}
-
 // Update possition
 void Object::Update(int w, int h, float spec)
 {

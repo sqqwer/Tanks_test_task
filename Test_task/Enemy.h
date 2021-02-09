@@ -36,7 +36,8 @@ public:
 	void UpdateBullet(
 		int screenX, int screenY, float mark,
 		std::vector<Enemy>& en,
-		std::vector<Block>& bl
+		std::vector<Block>& bl,
+		const int wich
 	);
 	void ClerBull(const unsigned int elem);
 	void Update(int w, int h, float spec) override;

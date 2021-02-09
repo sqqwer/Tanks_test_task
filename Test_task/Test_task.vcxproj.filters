@@ -114,6 +114,12 @@
     <None Include="block.ini">
       <Filter>Resource Files\IniFile</Filter>
     </None>
+    <None Include="Map.ini">
+      <Filter>Resource Files\IniFile</Filter>
+    </None>
+    <None Include="TemplateMap.ini">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="FrontAnimaiot1.tga">

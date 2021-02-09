@@ -39,6 +39,35 @@ void Hero::PressKey(FRKey k)
 		velocity_y = -speed;
 		velocity_x = 0.0f;
 	}
+}
+void Hero::TankColisium(Enemy& en, const float mark)
+{
+	if (
+		possition_x + size_w >= en.GetX() &&
+		possition_x <= en.GetX() + en.GetSpW()
+		)
+	{
+		if (
+			possition_y + size_h >= en.GetY() &&
+			possition_y <= en.GetY() + en.GetSpH()
+			)
+		{
+			en.BackX(en.GetvellX(), mark);
+			en.BackY(en.GetvellY(), mark);
+			en.SetVellX(0.0f);
+			en.SetVellY(0.0f);
+
+
+			if (!velocity_y)
+			{
+				BackX(velocity_x, mark);
+			}
+			else if (!velocity_x)
+			{
+				BackY(velocity_y, mark);
+			}
+		}
+	}
 };
 
 void Hero::ReleasedKey()
@@ -115,10 +144,9 @@ void Hero::UpdateBullet(
 				{
 					bull[i].SetWork(false);
 					en[j].SetLive(false);
+					en[j].FreeSprite();
 					en[j].SetVellY(0.0f);
 					en[j].SetVellX(0.0f);
-					if (!en[i].bull.size())
-						en.erase(en.begin() + j);
 				}
 			}
 		}
@@ -136,7 +164,8 @@ void Hero::UpdateBullet(
 				}
 			}
 		}
-		if (!bull[i].Work()) ClerBull(i);
+		if (!bull[i].Work() && bull.capacity())
+			ClerBull(i);
 	}
 	if (bull.size()) for (int i = 0; i < bull.size(); i++)
 	{

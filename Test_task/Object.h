@@ -23,6 +23,12 @@ public:
 	virtual void ReleasedKey() = 0;
 	virtual void Update(int w, int h, float spec);
 	// function for get possition of object
+	void BackX(const float vell, const float mark) {
+		possition_x -= vell * mark;
+	};
+	void BackY(const float vell, const float mark) {
+		possition_y -= vell * mark;
+	};
 	void SetVellX(const float vellX) {
 		velocity_x = vellX;
 	};

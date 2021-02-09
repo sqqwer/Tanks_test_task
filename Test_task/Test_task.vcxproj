@@ -178,6 +178,8 @@
     <None Include="Hero_model.ini" />
     <None Include="Hero_model_ver1.ini" />
     <None Include="land.ini" />
+    <None Include="Map.ini" />
+    <None Include="TemplateMap.ini" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="BottomSide1.tga" />

@@ -26,6 +26,9 @@ public:
 		std::vector<Enemy> &en,
 		std::vector<Block> &bl
 	);
+	void TankColisium(
+		Enemy& en, const float mark
+	);
 	void Draw() override;
 	void PressKey(FRKey k) override;
 	void ReleasedKey() override;

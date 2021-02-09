@@ -189,14 +189,15 @@ void UpdateEnemy(
 {
 	for (int i = 0; i < enemy.size(); i++)
 	{
-		enemy[i].UpdateBullet(screenX - 120, screenY - 30, mark, enemy, block);
+		enemy[i].UpdateBullet(screenX - 120, screenY - 30, mark, enemy, block, i);
 		if (enemy[i].isAlive())
 		{
-			enemy[i].last += mark;	enemy[i].Draw();
-
+			enemy[i].last += mark;
+			enemy[i].Update(screenX - 120, screenY - 30, mark);
+			enemy[i].Draw();
 			if (enemy[i].last > 5)
 			{
-				if (enemy[i].last > 5 && !enemy[i].GetvellX() && !enemy[i].GetvellY())
+				if (enemy[i].last > 3.5 && !enemy[i].GetvellX() && !enemy[i].GetvellY())
 				{
 					enemy[i].SetVellX(70.0f);
 				}
@@ -207,7 +208,8 @@ void UpdateEnemy(
 					enemy[i].bull[enemy[i].bull.size() - 1].GetRefSizeH()
 				);
 			}
-			enemy[i].Update(screenX - 120, screenY - 30, mark);
+
+			hero.Hero::TankColisium(enemy[i], mark);
 			for (int j = 0; j < enemy.size(); j++)
 			{
 				if (i != j)
@@ -216,14 +218,6 @@ void UpdateEnemy(
 						(float)enemy[j].GetSpW(), (float)enemy[j].GetSpH(), mark
 					);
 			}
-			enemy[i].TankColisium(
-				(float)hero.GetX(), (float)hero.GetY(),
-				(float)hero.GetSpW(), (float)hero.GetSpH(), mark
-			);
-			hero.TankColisium(
-				(float)enemy[i].GetX(), (float)enemy[i].GetY(),
-				(float)enemy[i].GetSpW(), (float)enemy[i].GetSpH(), mark
-			);
 			for (int j = 0; j < block.size(); j++)
 			{
 				enemy[i].Enemy::Colisium(
@@ -232,7 +226,9 @@ void UpdateEnemy(
 				);
 			}
 		}
-		else if (!enemy[i].isAlive() && !enemy[i].bull.size())
+		else if (
+			!enemy[i].isAlive() && !enemy[i].bull.size() && !enemy[i].bull.capacity()
+			)
 		{
 			enemy[i].FreeSprite();
 			enemy.erase(enemy.begin() + i);

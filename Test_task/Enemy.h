@@ -3,6 +3,7 @@
 #include "Framework.h"
 #include "Object.h"
 #include "Animation.h"
+#include "Block.h"
 #include "Bullet.h"
 
 #include <vector>
@@ -34,7 +35,8 @@ public:
 	void Shoot();
 	void UpdateBullet(
 		int screenX, int screenY, float mark,
-		std::vector<Enemy>& en
+		std::vector<Enemy>& en,
+		std::vector<Block>& bl
 	);
 	void ClerBull(const unsigned int elem);
 	void Update(int w, int h, float spec) override;

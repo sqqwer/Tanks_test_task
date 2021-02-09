@@ -83,6 +83,7 @@ public:
 		for (int i = 0; i < 5; i++)
 		{
 			block.push_back(Block("block.ini", b_x, b_y, drawSprite));
+			getSpriteSize(block[i].GetSprite(), block[i].GetRefSizeW(), block[i].GetRefSizeH());
 			b_x += 30;
 		}
 		
@@ -92,37 +93,36 @@ public:
 		{
 			enemy.push_back(Enemy((i % 2 == 0) ? "Hero_model_ver1.ini" : "Hero_model.ini", 
 				"bullet.ini", 1, x, y, drawSprite));
+			if (i % 2 == 0) enemy[i].SetVellX(70.0f); else enemy[i].SetVellY(100.0f);
+			getSpriteSize(enemy[i].GetSprite(), enemy[i].GetRefSizeW(), enemy[i].GetRefSizeH());
 			x += 40; y += 40;
 		}
 		if (!land.GetStatus() || !hero.GetStatus())
 			return false;
 		getSpriteSize(land.GetSprite(), land.GetRefSizeW(), land.GetRefSizeW());
 		getSpriteSize(hero.GetSprite(), hero.GetRefSizeW(), hero.GetRefSizeH());
-		for (int i = 0; i < enemy.size(); i++)
-		{
-			if (i % 2 == 0) enemy[i].SetVellX(70.0f); else enemy[i].SetVellY(100.0f);
-			getSpriteSize(enemy[i].GetSprite(), enemy[i].GetRefSizeW(), enemy[i].GetRefSizeH());
-		}
 
 		return true;
 	}
 
 	virtual void Close() {
 		hero.FreeSprite();
-		for (int i = 0; i < enemy.size(); i++)
-		{
-			
+		land.FreeSprite();
+		for (int i = 0; i < block.size(); i++) {
+			block[i].FreeSprite();
 		}
-		enemy.clear();
+		for (int i = 0; i < enemy.size(); i++) {
+			enemy[i].FreeSprite();
+		}
+		_CrtDumpMemoryLeaks();
 	}
 
 	virtual bool Tick() {
-		const float mark = tm.Mark();	
-		hero.last += mark;
+		const float mark = tm.Mark();	hero.last += mark;
 		land.Draw();	hero.Draw();	
 		hero.Update(screenX - 120, screenY - 30, mark);
 		UpdateBlock(block, hero, mark);
-		hero.UpdateBullet(screenX - 120, screenY - 30, mark, enemy);
+		hero.UpdateBullet(screenX - 120, screenY - 30, mark, enemy, block);
 		UpdateEnemy(enemy, block, hero, mark, screenX, screenY);
 
 		return false;
@@ -189,6 +189,7 @@ void UpdateEnemy(
 {
 	for (int i = 0; i < enemy.size(); i++)
 	{
+		enemy[i].UpdateBullet(screenX - 120, screenY - 30, mark, enemy, block);
 		if (enemy[i].isAlive())
 		{
 			enemy[i].last += mark;	enemy[i].Draw();
@@ -236,7 +237,10 @@ void UpdateEnemy(
 			enemy[i].FreeSprite();
 			enemy.erase(enemy.begin() + i);
 		}
-		enemy[i].UpdateBullet(screenX - 120, screenY - 30, mark, enemy);
+	}
+	if (enemy.capacity() && !enemy.size())
+	{
+		enemy.shrink_to_fit();
 	}
 }
 

@@ -190,6 +190,11 @@
     <Image Include="bullet5.tga" />
     <Image Include="bullet6.tga" />
     <Image Include="brick.tga" />
+    <Image Include="Image.bmp" />
+    <Image Include="Tank_Front4.tga" />
+    <Image Include="Tank_Left4.tga" />
+    <Image Include="Tank_Right4.tga" />
+    <Image Include="Tank_Botton4.tga" />
     <Image Include="Land.tga" />
     <Image Include="RightSde3.tga" />
     <Image Include="Leftside3.tga" />

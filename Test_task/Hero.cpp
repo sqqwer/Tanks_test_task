@@ -49,7 +49,7 @@ void Hero::ReleasedKey()
 
 void Hero::Shoot()
 {
-	WICH_SIDE(sd);
+	sd = (side)ShootSide();
 	ChioceOutShoot();
 	bull.push_back(Bullet(
 		bull_preset.c_str(),
@@ -85,7 +85,7 @@ void Hero::ChioceOutShoot()
 
 void Hero::ClerBull(const unsigned int elem)
 {
-	bull.erase(bull.begin() + elem);
+	bull[elem].FreeSprite(); bull.erase(bull.begin() + elem);
 };
 
 void Hero::Draw()
@@ -97,7 +97,7 @@ void Hero::Draw()
 
 void Hero::UpdateBullet(
 	int screenX, int screenY, float mark,
-	std::vector<Enemy>& en
+	std::vector<Enemy>& en, std::vector<Block>& bl
 )
 {
 	for (int i = 0; i < bull.size(); i++)
@@ -122,17 +122,28 @@ void Hero::UpdateBullet(
 				}
 			}
 		}
-		if (!bull[i].Work())
-			ClerBull(i);
+		if (bull[i].Work()) for (int j = 0; j < bl.size(); j++)
+		{
+			if (bull[i].GetX() + bull[i].GetSpW() <=
+				bl[j].GetX() + bl[j].GetSpW() + 2.0f &&
+				bull[i].GetX() >= bl[j].GetX() - 2.0f)
+			{
+				if (bull[i].GetY() + bull[i].GetSpH() <=
+					bl[j].GetY() + bl[j].GetSpH() + 2.0f &&
+					bull[i].GetY() >= bl[j].GetY() - 2.0f)
+				{
+					bull[i].SetWork(false);
+				}
+			}
+		}
+		if (!bull[i].Work()) ClerBull(i);
 	}
-	if (bull.size())
+	if (bull.size()) for (int i = 0; i < bull.size(); i++)
 	{
-		for (int i = 0; i < bull.size(); i++)
-			bull[i].Draw();
+		if (bull[i].Work())	bull[i].Draw();
 	}
 	if (bull.capacity() && !bull.size())
 	{
-		bull.clear();
-		std::vector<Bullet>().swap(bull);
+		bull.shrink_to_fit();
 	}
 };

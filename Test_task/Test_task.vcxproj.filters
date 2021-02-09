@@ -212,5 +212,20 @@
     <Image Include="brick.tga">
       <Filter>Resource Files\block</Filter>
     </Image>
+    <Image Include="Tank_Botton4.tga">
+      <Filter>Resource Files\tank ver1</Filter>
+    </Image>
+    <Image Include="Tank_Right4.tga">
+      <Filter>Resource Files\tank ver1</Filter>
+    </Image>
+    <Image Include="Tank_Left4.tga">
+      <Filter>Resource Files\tank ver1</Filter>
+    </Image>
+    <Image Include="Image.bmp">
+      <Filter>Resource Files\tank ver1</Filter>
+    </Image>
+    <Image Include="Tank_Front4.tga">
+      <Filter>Resource Files\tank ver1</Filter>
+    </Image>
   </ItemGroup>
 </Project>

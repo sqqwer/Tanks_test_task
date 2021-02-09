@@ -23,7 +23,8 @@ public:
 	void ClerBull(const unsigned int elem);
 	void UpdateBullet(
 		int screenX, int screenY, float mark,
-		std::vector<Enemy> &en
+		std::vector<Enemy> &en,
+		std::vector<Block> &bl
 	);
 	void Draw() override;
 	void PressKey(FRKey k) override;

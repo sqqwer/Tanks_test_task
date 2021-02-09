@@ -18,6 +18,19 @@ Animation::Animation(
 	{
 		return;
 	}
+}
+int Animation::ShootSide()
+{
+	return (
+		(wichOne >= sideC[(int)side::FRONT] && wichOne < sideC[(int)side::LEFT])
+		? (int)side::FRONT :
+		(wichOne >= sideC[(int)side::LEFT] && wichOne < sideC[(int)side::RIGHT])
+		? (int)side::LEFT :
+		(wichOne >= sideC[(int)side::RIGHT] && wichOne < sideC[(int)side::BOTTOM])
+		? (int)side::RIGHT :
+		(wichOne >= sideC[(int)side::BOTTOM] && wichOne < sideC[(int)side::COUNT])
+		? (int)side::BOTTOM : (int)sd
+	);
 };
 // Load ini file preset
 bool Animation::LoadPreset(const char* name)
@@ -39,7 +52,13 @@ bool Animation::LoadPreset(const char* name)
 		file.close();
 		return (isOpen = false);
 	}
-	size_of_animation = i--;
+	size_of_animation = i;
+	range = i / 4;
+	sideC[0] = 0;
+	for (int i = 1; i < 5; i++)
+	{
+		sideC[i] = sideC[i - 1] + range;
+	}
 	file.close();
 	return (isOpen = true);
 };
@@ -47,36 +66,28 @@ bool Animation::LoadPreset(const char* name)
 Sprite* Animation::Choice(float vellX, float vellY)
 {
 	WI(wichOne);
-	if (wichOne >= (int)anim::FRONT - 1 && wichOne < (int)anim::LEFT - 1)
+	if (wichOne >= sideC[(int)side::FRONT] && wichOne < sideC[(int)side::LEFT])
 	{
-		(wichOne >= (int)anim::LEFT - 2)
-			? wichOne = (int)anim::FRONT - 1 :
-			(vellY == 0) ? wichOne :
-			wichOne++;
+		(wichOne >= sideC[(int)side::LEFT] - 1) ? wichOne = sideC[(int)side::FRONT] :
+			(vellY == 0) ? wichOne : wichOne++;
 		return obj[wichOne];
 	}
-	if (wichOne >= (int)anim::LEFT - 1 && wichOne < (int)anim::RIGHT - 1)
+	if (wichOne >= sideC[(int)side::LEFT] && wichOne < sideC[(int)side::RIGHT])
 	{
-		(wichOne >= (int)anim::RIGHT - 2)
-			? wichOne = (int)anim::LEFT - 1 :
-			(vellX == 0) ? wichOne :
-			wichOne++;
+		(wichOne >= sideC[(int)side::RIGHT] - 1) ? wichOne = sideC[(int)side::LEFT] :
+			(vellX == 0) ? wichOne : wichOne++;
 		return obj[wichOne];
 	}
-	if (wichOne >= (int)anim::RIGHT - 1 && wichOne < (int)anim::BOTTOM - 1)
+	if (wichOne >= sideC[(int)side::RIGHT] && wichOne < sideC[(int)side::BOTTOM])
 	{
-		(wichOne >= (int)anim::BOTTOM - 2)
-			? wichOne = (int)anim::RIGHT - 1 :
-			(vellX == 0) ? wichOne :
-			wichOne++;
+		(wichOne >= sideC[(int)side::BOTTOM] - 1) ? wichOne = sideC[(int)side::RIGHT]:
+			(vellX == 0) ? wichOne : wichOne++;
 		return obj[wichOne];
 	}
-	if (wichOne >= (int)anim::BOTTOM - 1 && wichOne < (int)anim::COUNT - 1)
+	if (wichOne >= sideC[(int)side::BOTTOM] && wichOne < sideC[(int)side::COUNT])
 	{
-		(wichOne >= (int)anim::COUNT - 2)
-			? wichOne = (int)anim::BOTTOM - 1 :
-			(vellY == 0) ? wichOne :
-			wichOne++;
+		(wichOne >= sideC[(int)side::COUNT] - 1) ? wichOne = sideC[(int)side::BOTTOM] :
+			(vellY == 0) ? wichOne : wichOne++;
 		return obj[wichOne];
 	}
 	return obj[wichOne];
@@ -84,9 +95,13 @@ Sprite* Animation::Choice(float vellX, float vellY)
 // clear sprite map
 void Animation::FreeSprite()
 {
-	for (int i = 0; i < size_of_animation; i++)
+	if (!obj.empty())
 	{
-		destroySprite(obj[i]);
+		for (int i = 0; i < size_of_animation; i++)
+		{
+			destroySprite(obj[i]);
+			obj.erase(i);
+		}
+		std::map<int, Sprite*>().swap(obj);
 	}
-	obj.clear();
 };

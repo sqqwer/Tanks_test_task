@@ -3,30 +3,24 @@
 #include <map>
 #include "Framework.h"
 
-const unsigned int range = 3;
 // Macross define
 #define WI(wichOne) wichOne =\
-	(vellY < 0) ? (wichOne >= (int)anim::FRONT - 1 && wichOne < (int)anim::LEFT - 1)\
-	? wichOne : (int)anim::FRONT - 1 : (vellY > 0)\
-	? (wichOne >= (int)anim::BOTTOM - 1 && wichOne < (int)anim::COUNT - 1)\
-	? wichOne : (int)anim::BOTTOM - 1 : (vellX < 0)\
-	? (wichOne >= (int)anim::LEFT - 1 && wichOne < (int)anim::RIGHT - 1)\
-	? wichOne : (int)anim::LEFT - 1 : (vellX > 0)\
-	? (wichOne >= (int)anim::RIGHT - 1 && wichOne < (int)anim::BOTTOM - 1)\
-	? wichOne : (int)anim::RIGHT - 1 : wichOne;
-#define WICH_SIDE(sd) sd = \
-	(wichOne >= (int)anim::FRONT - 1 && wichOne < (int)anim::LEFT - 1) ? side::FRONT :\
-	(wichOne >= (int)anim::LEFT - 1 && wichOne < (int)anim::RIGHT - 1) ? side::LEFT : \
-	(wichOne >= (int)anim::RIGHT - 1 && wichOne < (int)anim::BOTTOM - 1) ? side::RIGHT :\
-	(wichOne >= (int)anim::BOTTOM - 1 && wichOne < (int)anim::COUNT - 1) ? side::BOTTOM : sd;
+	wichOne = (vellY < 0) ? (wichOne >= sideC[(int)side::FRONT] && wichOne < sideC[(int)side::LEFT])\
+		? wichOne : sideC[(int)side::FRONT] :\
+	(vellY > 0) ? (wichOne >= sideC[(int)side::BOTTOM] && wichOne < sideC[(int)side::COUNT])\
+		? wichOne : sideC[(int)side::BOTTOM] :\
+	(vellX < 0) ? (wichOne >= sideC[(int)side::LEFT] && wichOne < sideC[(int)side::RIGHT])\
+		? wichOne : sideC[(int)side::LEFT] :\
+	(vellX > 0) ? (wichOne >= sideC[(int)side::RIGHT] && wichOne < sideC[(int)side::BOTTOM])\
+		? wichOne : sideC[(int)side::RIGHT] : wichOne;
 
 enum class side
 {
-	FRONT,
-	BOTTOM,
-	LEFT,
-	RIGHT,
-	COUNT
+	FRONT = 0,
+	LEFT = 1,
+	RIGHT = 2,
+	BOTTOM = 3,
+	COUNT = 4
 };
 
 class Animation
@@ -36,31 +30,27 @@ public:
 	Animation(
 		const char* name, void (*draw)(Sprite*, int, int)
 	);
-	virtual void Draw() = 0;
-	bool LoadPreset(const char * name);
 	Sprite* GetSprite() {
 		return obj[wichOne];
 	};
 	bool GetStatus() const {
 		return isOpen;
 	};
-	Sprite* Choice(float vellX, float vellY);
+	int ShootSide();
 	void FreeSprite();
-	enum class anim
-	{
-		FRONT = 1,
-		LEFT = FRONT + range,
-		RIGHT = LEFT + range,
-		BOTTOM = RIGHT + range,
-		COUNT = BOTTOM + range
-	};
+	virtual void Draw() = 0;
+	bool LoadPreset(const char* name);
+	Sprite* Choice(float vellX, float vellY);
 protected:
-	bool isOpen{false};
-	side sd {};
+	side sd{};
 	int wichOne{};
+	int sideC[5]{};
+	bool isOpen{false};
+	int* psideC = sideC;
+	unsigned int range{0};
 	int size_of_animation{};
 protected:
-	void (*draw)(Sprite*, int, int) {};
+	void (*draw)(Sprite*, int, int){};
 	std::map<int, Sprite*> obj{};
 };
 

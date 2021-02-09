@@ -6,6 +6,7 @@
 #include "Bullet.h"
 #include "Enemy.h"
 #include "Block.h"
+#include "Map.h"
 
 #include <vector>
 #include <string>
@@ -23,8 +24,7 @@ public:
 	void ClerBull(const unsigned int elem);
 	void UpdateBullet(
 		int screenX, int screenY, float mark,
-		std::vector<Enemy> &en,
-		std::vector<Block> &bl
+		std::vector<Enemy> &en, Map& map
 	);
 	void TankColisium(
 		Enemy& en, const float mark

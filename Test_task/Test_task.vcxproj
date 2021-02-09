@@ -154,6 +154,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Land.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
@@ -165,6 +166,7 @@
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="Land.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Time.h" />
   </ItemGroup>
@@ -178,8 +180,12 @@
     <None Include="Hero_model.ini" />
     <None Include="Hero_model_ver1.ini" />
     <None Include="land.ini" />
+    <None Include="leafs.ini" />
     <None Include="Map.ini" />
+    <None Include="monument.ini" />
+    <None Include="steel.ini" />
     <None Include="TemplateMap.ini" />
+    <None Include="water.ini" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="BottomSide1.tga" />
@@ -193,6 +199,14 @@
     <Image Include="bullet6.tga" />
     <Image Include="brick.tga" />
     <Image Include="Image.bmp" />
+    <Image Include="leafsBlock.tga" />
+    <Image Include="monumentBlock.tga" />
+    <Image Include="steelBlock.tga" />
+    <Image Include="water6.tga" />
+    <Image Include="water5.tga" />
+    <Image Include="water4.tga" />
+    <Image Include="water3.tga" />
+    <Image Include="water2.tga" />
     <Image Include="Tank_Front4.tga" />
     <Image Include="Tank_Left4.tga" />
     <Image Include="Tank_Right4.tga" />
@@ -219,6 +233,7 @@
     <Image Include="FrontAnimaiot1.tga" />
     <Image Include="FrontAnimaiot2.tga" />
     <Image Include="Tank_Left1.tga" />
+    <Image Include="water1.tga" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

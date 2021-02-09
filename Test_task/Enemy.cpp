@@ -68,7 +68,7 @@ void Enemy::Draw()
 void Enemy::UpdateBullet(
 	int screenX, int screenY, float mark,
 	std::vector<Enemy>& en,
-	std::vector<Block>& bl,
+	Map& map,
 	const int wich 
 )
 {
@@ -96,20 +96,40 @@ void Enemy::UpdateBullet(
 				}
 		}
 		if (bull[i].Work())
-			for (int j = 0; j < bl.size(); j++)
+		{
+			for (int k = 0; k < map.GetH(); k++)
 			{
-				if (bull[i].GetX() + bull[i].GetSpW() <=
-					bl[j].GetX() + bl[j].GetSpW() + 2.0f &&
-					bull[i].GetX() >= bl[j].GetX() - 2.0f)
+				for (int j = 0; j < map.GetW(); j++)
 				{
-					if (bull[i].GetY() + bull[i].GetSpH() <=
-						bl[j].GetY() + bl[j].GetSpH() + 2.0f &&
-						bull[i].GetY() >= bl[j].GetY() - 2.0f)
+					if (map.map[k][j].work &&
+						((int)Type::WATER != map.map[k][j].GetType() &&
+							((int)Type::LEAAFS) != map.map[k][j].GetType()))
 					{
-						bull[i].SetWork(false);
+						if (bull[i].GetX() + bull[i].GetSpW() <=
+							(float)map.map[k][j].GetX() +
+							(float)map.map[k][j].GetSpW() + 2.0f &&
+							bull[i].GetX() >=
+							(float)map.map[k][j].GetX() - 2.0f)
+						{
+							if (bull[i].GetY() + bull[i].GetSpH() <=
+								(float)map.map[k][j].GetY() +
+								(float)map.map[k][j].GetSpH() + 2.0f &&
+								bull[i].GetY() >=
+								(float)map.map[k][j].GetY() - 2.0f)
+							{
+								bull[i].SetWork(false);
+								if ((int)Type::STEEL !=
+									map.map[k][j].GetType())
+								{
+									map.map[k][j].work = false;
+									map.map[k][j].FreeSprite();
+								}
+							}
+						}
 					}
 				}
 			}
+		}
 		if (!bull[i].Work() && bull.capacity())
 			ClerBull(i);
 	}
@@ -162,13 +182,13 @@ void Enemy::Colisium(
 )
 {
 	if (
-		possition_x + size_w >= possX - width &&
-		possition_x - size_w <= possX + width
+		possition_x + size_w - 2 >= possX &&
+		possition_x + 2 <= possX + width
 		)
 	{
 		if (
-			possition_y + size_h >= possY - height &&
-			possition_y - size_h <= possY + height
+			possition_y + size_h - 2 >= possY &&
+			possition_y + 2 <= possY + height
 			)
 		{
 			possition_x -= (velocity_x)*mark;
@@ -187,13 +207,13 @@ void Enemy::TankColisium(
 )
 {
 	if (
-		possition_x + size_w >= possX &&
-		possition_x <= possX + width
+		possition_x + size_w - 2 >= possX &&
+		possition_x + 2 <= possX + width
 		)
 	{
 		if (
-			possition_y + size_h >= possY &&
-			possition_y <= possY + height
+			possition_y + size_h - 2 >= possY &&
+			possition_y + 2 <= possY + height
 			)
 		{
 			if (!velocity_y)

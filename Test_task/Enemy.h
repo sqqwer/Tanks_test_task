@@ -5,6 +5,7 @@
 #include "Animation.h"
 #include "Block.h"
 #include "Bullet.h"
+#include "Map.h"
 
 #include <vector>
 #include <string>
@@ -36,7 +37,7 @@ public:
 	void UpdateBullet(
 		int screenX, int screenY, float mark,
 		std::vector<Enemy>& en,
-		std::vector<Block>& bl,
+		Map& map,
 		const int wich
 	);
 	void ClerBull(const unsigned int elem);

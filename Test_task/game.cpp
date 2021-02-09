@@ -1,3 +1,4 @@
+#include "Map.h"
 #include "Land.h"
 #include "Hero.h"
 #include "Time.h"
@@ -10,13 +11,13 @@
 #include <iostream>
 
 void UpdateBlock(
-	std::vector<Block>& block,
-	Hero& hero, const float mark
+	Map& map,
+	Hero& hero, 
+	const float mark
 );
 
 void UpdateEnemy(
-	std::vector<Enemy>& enemy,
-	std::vector<Block>& block,
+	std::vector<Enemy>& enemy, Map& map,
 	Hero& hero, const float mark,
 	const int screenX, const int screenY
 );
@@ -76,17 +77,24 @@ public:
 	virtual bool Init() {
 		tm = Time(getTickCount);
 		land = Land("land.ini", drawSprite);
-		hero = Hero("Hero_model_ver1.ini", "bullet.ini", 1, 200, 200, drawSprite);
-
-		float b_x = 300.0f;
-		float b_y = 200.0f;
-		for (int i = 0; i < 5; i++)
+		map.LoadMap("Map.ini", drawSprite, getSpriteSize);
+		hero = Hero("Hero_model_ver1.ini", "bullet.ini", 1,
+			map.GetHszX(), map.GetHszY(), drawSprite
+		);
+		for (int i = 0; i < map.GetH(); i++)
 		{
-			block.push_back(Block("block.ini", b_x, b_y, drawSprite));
-			getSpriteSize(block[i].GetSprite(), block[i].GetRefSizeW(), block[i].GetRefSizeH());
-			b_x += 30;
+			for (int j = 0; j < map.GetW(); j++)
+			{
+				if (map.map[i][j].work) {
+					getSpriteSize(
+						map.map[i][j].GetSprite(),
+						map.map[i][j].GetRefSizeW(),
+						map.map[i][j].GetRefSizeH()
+					);
+				}
+			}
 		}
-		
+	
 		float x = 10.0f;
 		float y = 50.0f;
 		for (int i = 0; i < 10; i++)
@@ -108,9 +116,9 @@ public:
 	virtual void Close() {
 		hero.FreeSprite();
 		land.FreeSprite();
-		for (int i = 0; i < block.size(); i++) {
+		/*for (int i = 0; i < block.size(); i++) {
 			block[i].FreeSprite();
-		}
+		}*/
 		for (int i = 0; i < enemy.size(); i++) {
 			enemy[i].FreeSprite();
 		}
@@ -118,12 +126,13 @@ public:
 	}
 
 	virtual bool Tick() {
-		const float mark = tm.Mark();	hero.last += mark;
-		land.Draw();	hero.Draw();	
+		const float mark = tm.Mark();	
+		hero.last += mark;	map.mark += mark;
+		land.Draw();	hero.Draw();
 		hero.Update(screenX - 120, screenY - 30, mark);
-		UpdateBlock(block, hero, mark);
-		hero.UpdateBullet(screenX - 120, screenY - 30, mark, enemy, block);
-		UpdateEnemy(enemy, block, hero, mark, screenX, screenY);
+		UpdateBlock(map, hero, mark);
+		hero.UpdateBullet(screenX - 120, screenY - 30, mark, enemy, map);
+		UpdateEnemy(enemy, map, hero, mark, screenX, screenY);
 
 		return false;
 	}
@@ -162,17 +171,18 @@ public:
 	}
 
 private:
-	int* argc;
-	char** argv;
-	int screenX = 0;
-	int screenY = 0;
+int* argc;
+char** argv;
+float amark{ 0 };
+int screenX = 0;
+int screenY = 0;
 
-	Time tm;
-	Hero  hero;
-	Land  land;
+Time tm;
+Hero  hero;
+Land  land;
 
-	std::vector<Block> block;
-	std::vector<Enemy> enemy;
+Map map;
+std::vector<Enemy> enemy;
 };
 
 int main(int argc, char* argv[])
@@ -181,15 +191,14 @@ int main(int argc, char* argv[])
 }
 
 void UpdateEnemy(
-	std::vector<Enemy>& enemy,
-	std::vector<Block>& block,
+	std::vector<Enemy>& enemy, Map& map,
 	Hero& hero, const float mark,
 	const int screenX, const int screenY
 )
 {
 	for (int i = 0; i < enemy.size(); i++)
 	{
-		enemy[i].UpdateBullet(screenX - 120, screenY - 30, mark, enemy, block, i);
+		enemy[i].UpdateBullet(screenX - 120, screenY - 30, mark, enemy, map, i);
 		if (enemy[i].isAlive())
 		{
 			enemy[i].last += mark;
@@ -208,27 +217,35 @@ void UpdateEnemy(
 					enemy[i].bull[enemy[i].bull.size() - 1].GetRefSizeH()
 				);
 			}
-
 			hero.Hero::TankColisium(enemy[i], mark);
 			for (int j = 0; j < enemy.size(); j++)
 			{
-				if (i != j)
+				if (i != j && (enemy[i].isAlive() && enemy[j].isAlive()))
 					enemy[i].Enemy::TankColisium(
 						(float)enemy[j].GetX(), (float)enemy[j].GetY(),
 						(float)enemy[j].GetSpW(), (float)enemy[j].GetSpH(), mark
 					);
 			}
-			for (int j = 0; j < block.size(); j++)
+			for (int k = 0; k < map.GetH(); k++)
 			{
-				enemy[i].Enemy::Colisium(
-					(float)block[j].GetX(), (float)block[j].GetY(),
-					(float)block[j].GetSpW(), (float)block[j].GetSpH(), mark
-				);
+
+				for (int j = 0; j < map.GetW(); j++)
+				{
+					if (map.map[k][j].work && enemy[i].isAlive() &&
+						(int)Type::LEAAFS != map.map[k][j].GetType())
+					{
+						enemy[i].Enemy::Colisium(
+							(float)map.map[k][j].GetX(),
+							(float)map.map[k][j].GetY(),
+							(float)map.map[k][j].GetSpW(),
+							(float)map.map[k][j].GetSpH(), mark
+						);
+					}
+				}
 			}
 		}
-		else if (
-			!enemy[i].isAlive() && !enemy[i].bull.size() && !enemy[i].bull.capacity()
-			)
+		else if (!enemy[i].isAlive() && !enemy[i].bull.size() &&
+			!enemy[i].bull.capacity())
 		{
 			enemy[i].FreeSprite();
 			enemy.erase(enemy.begin() + i);
@@ -241,19 +258,29 @@ void UpdateEnemy(
 }
 
 void UpdateBlock(
-	std::vector<Block>& block,
+	Map& map,
 	Hero& hero, const float mark
 )
 {
-	for (int i = 0; i < block.size(); i++)
+	for (int i = 0; i < map.GetH(); i++)
 	{
-		block[i].Draw();
+		for (int j = 0; j < map.GetW(); j++)
+		{
+			if (map.map[i][j].work)
+			{
+				map.map[i][j].Block::Draw(map.mark);
+				if ((int)Type::LEAAFS
+					!= map.map[i][j].GetType())
+				{
+					hero.Object::Colisium(
+						(float)map.map[i][j].GetX(),
+						(float)map.map[i][j].GetY(),
+						(float)map.map[i][j].GetSpW(),
+						(float)map.map[i][j].GetSpH(), mark
+					);
+				}
+			}
+		}
 	}
-	for (int i = 0; i < block.size(); i++)
-	{
-		hero.Colisium(
-			(float)block[i].GetX(), (float)block[i].GetY(),
-			(float)block[i].GetSpW(), (float)block[i].GetSpH(), mark
-		);
-	}
+	if (map.mark > 0.10f) map.mark = 0;
 }

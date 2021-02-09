@@ -28,8 +28,10 @@ class Animation
 public:
 	Animation();
 	Animation(
-		const char* name, void (*draw)(Sprite*, int, int)
+		const char* name,
+		void (*draw)(Sprite*, int, int)
 	);
+	Sprite* DrawPresset(float& mark);
 	Sprite* GetSprite() {
 		return obj[wichOne];
 	};

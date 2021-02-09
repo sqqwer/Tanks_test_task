@@ -31,6 +31,21 @@
     <Filter Include="Resource Files\block">
       <UniqueIdentifier>{d24e0f9d-b60a-4c2b-b72f-c6ebd15c6dc3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\block\water">
+      <UniqueIdentifier>{f5f006da-e2d4-4437-a394-261f012bc041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\block\brick">
+      <UniqueIdentifier>{1fa591ce-0cb2-4250-9ecf-1560bcfd794a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\block\steel">
+      <UniqueIdentifier>{d2004af3-89c5-419e-8edd-45534c2c37e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\block\leafs">
+      <UniqueIdentifier>{8fdfb490-8df2-4dc7-8f1a-36f04a8a38f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\monument">
+      <UniqueIdentifier>{9e2bf3d1-c5ec-4ba9-a479-8a4dcbb52c8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
@@ -58,6 +73,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Block.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,6 +107,9 @@
     <ClInclude Include="Block.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="FrameworkRelease_x64.lib">
@@ -118,7 +139,19 @@
       <Filter>Resource Files\IniFile</Filter>
     </None>
     <None Include="TemplateMap.ini">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\IniFile</Filter>
+    </None>
+    <None Include="water.ini">
+      <Filter>Resource Files\IniFile</Filter>
+    </None>
+    <None Include="steel.ini">
+      <Filter>Resource Files\IniFile</Filter>
+    </None>
+    <None Include="leafs.ini">
+      <Filter>Resource Files\IniFile</Filter>
+    </None>
+    <None Include="monument.ini">
+      <Filter>Resource Files\IniFile</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -215,9 +248,6 @@
     <Image Include="bullet6.tga">
       <Filter>Resource Files\bullet</Filter>
     </Image>
-    <Image Include="brick.tga">
-      <Filter>Resource Files\block</Filter>
-    </Image>
     <Image Include="Tank_Botton4.tga">
       <Filter>Resource Files\tank ver1</Filter>
     </Image>
@@ -232,6 +262,36 @@
     </Image>
     <Image Include="Tank_Front4.tga">
       <Filter>Resource Files\tank ver1</Filter>
+    </Image>
+    <Image Include="water1.tga">
+      <Filter>Resource Files\block\water</Filter>
+    </Image>
+    <Image Include="water2.tga">
+      <Filter>Resource Files\block\water</Filter>
+    </Image>
+    <Image Include="water3.tga">
+      <Filter>Resource Files\block\water</Filter>
+    </Image>
+    <Image Include="water4.tga">
+      <Filter>Resource Files\block\water</Filter>
+    </Image>
+    <Image Include="water5.tga">
+      <Filter>Resource Files\block\water</Filter>
+    </Image>
+    <Image Include="water6.tga">
+      <Filter>Resource Files\block\water</Filter>
+    </Image>
+    <Image Include="brick.tga">
+      <Filter>Resource Files\block\brick</Filter>
+    </Image>
+    <Image Include="steelBlock.tga">
+      <Filter>Resource Files\block\steel</Filter>
+    </Image>
+    <Image Include="leafsBlock.tga">
+      <Filter>Resource Files\block\leafs</Filter>
+    </Image>
+    <Image Include="monumentBlock.tga">
+      <Filter>Resource Files\monument</Filter>
     </Image>
   </ItemGroup>
 </Project>

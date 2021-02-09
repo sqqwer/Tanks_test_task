@@ -1,7 +1,8 @@
 #include "Animation.h"
+
+#include <string>
 #include <fstream>
 #include <iostream>
-#include <string>
 
 Animation::Animation()
 	:
@@ -105,3 +106,10 @@ void Animation::FreeSprite()
 		std::map<int, Sprite*>().swap(obj);
 	}
 };
+// Draw Presset
+Sprite* Animation::DrawPresset(float& mark)
+{
+	if (mark > 0.10f) wichOne++;
+	if (wichOne >= obj.size()) wichOne = 0;
+	return obj[wichOne];
+}

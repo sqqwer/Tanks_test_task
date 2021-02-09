@@ -1,5 +1,4 @@
 #include "Hero.h"
-#include <iostream>
 
 Hero::Hero()
 	:
@@ -126,7 +125,7 @@ void Hero::Draw()
 
 void Hero::UpdateBullet(
 	int screenX, int screenY, float mark,
-	std::vector<Enemy>& en, std::vector<Block>& bl
+	std::vector<Enemy>& en, Map& map
 )
 {
 	for (int i = 0; i < bull.size(); i++)
@@ -150,17 +149,37 @@ void Hero::UpdateBullet(
 				}
 			}
 		}
-		if (bull[i].Work()) for (int j = 0; j < bl.size(); j++)
+		if (bull[i].Work()) 
 		{
-			if (bull[i].GetX() + bull[i].GetSpW() <=
-				bl[j].GetX() + bl[j].GetSpW() + 2.0f &&
-				bull[i].GetX() >= bl[j].GetX() - 2.0f)
+			for (int k = 0; k < map.GetH(); k++)
 			{
-				if (bull[i].GetY() + bull[i].GetSpH() <=
-					bl[j].GetY() + bl[j].GetSpH() + 2.0f &&
-					bull[i].GetY() >= bl[j].GetY() - 2.0f)
+				for (int j = 0; j < map.GetW(); j++)
 				{
-					bull[i].SetWork(false);
+					if (map.map[k][j].work &&
+						((int)Type::WATER != map.map[k][j].GetType() &&
+						 ((int)Type::LEAAFS) != map.map[k][j].GetType()))
+					{
+						if (bull[i].GetX() + bull[i].GetSpW() <=
+							(float)map.map[k][j].GetX() +
+							(float)map.map[k][j].GetSpW() + 2.0f &&
+							bull[i].GetX() >=
+							(float)map.map[k][j].GetX() - 2.0f)
+						{
+							if (bull[i].GetY() + bull[i].GetSpH() <=
+								(float)map.map[k][j].GetY() +
+								(float)map.map[k][j].GetSpH() + 2.0f &&
+								bull[i].GetY() >=
+								(float)map.map[k][j].GetY() - 2.0f)
+							{
+								bull[i].SetWork(false);
+								if ((int)Type::STEEL !=
+									map.map[k][j].GetType())
+								{
+									map.map[k][j].work = false;
+								}
+							}
+						}
+					}
 				}
 			}
 		}

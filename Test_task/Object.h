@@ -48,10 +48,10 @@ public:
 		return (int)possition_y;
 	};
 	int& GetRefSizeW() {
-		return size_h;
+		return size_w;
 	};
 	int& GetRefSizeH() {
-		return size_w;
+		return size_h;
 	};
 	float GetvellX() const {
 		return velocity_x;

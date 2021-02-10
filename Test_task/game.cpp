@@ -293,5 +293,5 @@ void UpdateBlock(
 			}
 		}
 	}
-	if (map.mark > 0.10f) map.mark = 0;
+	if (map.mark > 0.15f) map.mark = 0;
 };

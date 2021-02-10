@@ -305,5 +305,17 @@
     <Image Include="brickRigth.tga">
       <Filter>Resource Files\block\brick</Filter>
     </Image>
+    <Image Include="steelBlockFront.tga">
+      <Filter>Resource Files\block\steel</Filter>
+    </Image>
+    <Image Include="steelBlockLeft.tga">
+      <Filter>Resource Files\block\steel</Filter>
+    </Image>
+    <Image Include="steelBlockRight.tga">
+      <Filter>Resource Files\block\steel</Filter>
+    </Image>
+    <Image Include="steelBlockBottom.tga">
+      <Filter>Resource Files\block\steel</Filter>
+    </Image>
   </ItemGroup>
 </Project>

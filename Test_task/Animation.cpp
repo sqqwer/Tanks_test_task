@@ -110,7 +110,7 @@ void Animation::FreeSprite()
 // Draw Presset
 Sprite* Animation::DrawPresset(float& mark)
 {
-	if (mark > 0.10f) wichOne++;
+	if (mark > 0.15f) wichOne++;
 	if (wichOne >= obj.size()) wichOne = 0;
 	return obj[wichOne];
 };

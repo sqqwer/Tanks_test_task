@@ -203,6 +203,10 @@
     <Image Include="brickBottom.tga" />
     <Image Include="brickRigth.tga" />
     <Image Include="brickLeft.tga" />
+    <Image Include="steelBlockBottom.tga" />
+    <Image Include="steelBlockFront.tga" />
+    <Image Include="steelBlockLeft.tga" />
+    <Image Include="steelBlockRight.tga" />
     <Image Include="leafsBlock.tga" />
     <Image Include="monumentBlock.tga" />
     <Image Include="steelBlock.tga" />

@@ -50,43 +50,54 @@ void Map::LoadMap(
 				map[i][j].work = false;
 				break;
 			case (int)Type::BRICK:
+				map[i][j].SetStatus(side::COUNT);
 				map[i][j] = Block("block.ini",
-					(j + 1) * 30, (i + 1) * 30, draw,
-					(int)Type::BRICK
+					(float)((j + 1) * 30),
+					(float)((i + 1) * 30),
+					draw, (int)Type::BRICK
 				);
 				map[i][j].work = true;
 				break;
 			case (int)Type::STEEL:
+				map[i][j].SetStatus(side::COUNT);
 				map[i][j] = Block("steel.ini",
-					(j + 1) * 30, (i + 1) * 30, draw,
-					(int)Type::STEEL
+					(float)((j + 1) * 30),
+					(float)((i + 1) * 30),
+					draw, (int)Type::STEEL
 				);
 				map[i][j].work = true;
 				break;
 			case (int)Type::WATER:
+				map[i][j].SetStatus(side::COUNT);
 				map[i][j] = Block("water.ini",
-					(j + 1) * 30, (i + 1) * 30, draw,
-					(int)Type::WATER
+					(float)((j + 1) * 30),
+					(float)((i + 1) * 30),
+					draw, (int)Type::WATER
 				);
 				map[i][j].work = true;
 				break;
 			case (int)Type::LEAAFS:
+				map[i][j].SetStatus(side::COUNT);
 				map[i][j] = Block("leafs.ini",
-					(j + 1) * 30, (i + 1) * 30, draw,
-					(int)Type::LEAAFS
+					(float)((j + 1) * 30), 
+					(float)((i + 1) * 30),
+					draw, (int)Type::LEAAFS
 				);
 				map[i][j].work = true;
 				break;
 			case (int)Type::MONUMENT:
+				map[i][j].SetStatus(side::COUNT);
 				map[i][j] = Block("monument.ini",
-					(j + 1) * 30, (i + 1) * 30, draw,
-					(int)Type::MONUMENT
+					(float)((j + 1) * 30),
+					(float)((i + 1) * 30),
+					draw, (int)Type::MONUMENT
 				);
 				map[i][j].work = true;
 				break;
 			case (int)Type::HSZ:
-				hsz_x = (j + 1) * 30;
-				hsz_y = (i + 1) * 30;
+				map[i][j].SetStatus(side::COUNT);
+				hsz_x = (float)((j + 1) * 30);
+				hsz_y = (float)((i + 1) * 30);
 				map[i][j].work = false;
 				break;
 			case (int)Type::ESZ:

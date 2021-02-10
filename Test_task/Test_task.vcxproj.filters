@@ -293,5 +293,17 @@
     <Image Include="monumentBlock.tga">
       <Filter>Resource Files\monument</Filter>
     </Image>
+    <Image Include="brickFront.tga">
+      <Filter>Resource Files\block\brick</Filter>
+    </Image>
+    <Image Include="brickBottom.tga">
+      <Filter>Resource Files\block\brick</Filter>
+    </Image>
+    <Image Include="brickLeft.tga">
+      <Filter>Resource Files\block\brick</Filter>
+    </Image>
+    <Image Include="brickRigth.tga">
+      <Filter>Resource Files\block\brick</Filter>
+    </Image>
   </ItemGroup>
 </Project>

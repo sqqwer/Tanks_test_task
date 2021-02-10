@@ -46,18 +46,18 @@ void Object::Colisium(
 	if (
 		possition_x + size_w - 2 >= possX &&
 		possition_x + 2 <= possX + width
-	)
+		)
 	{
 		if (
 			possition_y + size_h - 2 >= possY &&
 			possition_y + 2 <= possY + height
 			)
 		{
-				possition_x -= (velocity_x)*mark;
-				possition_y -= (velocity_y)*mark;
+			possition_x -= (velocity_x)*mark;
+			possition_y -= (velocity_y)*mark;
 		}
 	}
-}
+};
 
 void Object::TankColisium(
 	const float possX, const float possY,
@@ -84,4 +84,4 @@ void Object::TankColisium(
 			}
 		}
 	}
-}
+};

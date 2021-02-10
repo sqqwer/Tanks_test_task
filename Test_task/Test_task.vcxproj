@@ -199,6 +199,10 @@
     <Image Include="bullet6.tga" />
     <Image Include="brick.tga" />
     <Image Include="Image.bmp" />
+    <Image Include="brickFront.tga" />
+    <Image Include="brickBottom.tga" />
+    <Image Include="brickRigth.tga" />
+    <Image Include="brickLeft.tga" />
     <Image Include="leafsBlock.tga" />
     <Image Include="monumentBlock.tga" />
     <Image Include="steelBlock.tga" />

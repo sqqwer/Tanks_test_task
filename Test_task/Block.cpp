@@ -14,7 +14,7 @@ Block::Block(
 
 void Block::Draw()
 {
-	draw(GetSprite(), GetX(), GetY());
+	draw(GetWallPoss(), GetX(), GetY());
 };
 
 void Block::Draw(float& mark)

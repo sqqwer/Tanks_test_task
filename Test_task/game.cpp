@@ -38,8 +38,8 @@ public:
 		{
 			if (!strcmp(argv[1],"-window"))
 			{
-				char* str_height = nullptr;
-				char* str_width = nullptr;
+				char* str_height = NULL;
+				char* str_width = NULL;
 				const char* str = argv[2];
 				str_width = new char[10];
 				str_height = new char[10];
@@ -86,8 +86,8 @@ public:
 			for (int j = 0; j < map.GetW(); j++)
 			{
 				if (map.map[i][j].work) {
-					getSpriteSize(
-						map.map[i][j].GetSprite(),
+					getSpriteSize( 
+						map.map[i][j].GetWallPoss(),
 						map.map[i][j].GetRefSizeW(),
 						map.map[i][j].GetRefSizeH()
 					);
@@ -255,7 +255,7 @@ void UpdateEnemy(
 	{
 		enemy.shrink_to_fit();
 	}
-}
+};
 
 void UpdateBlock(
 	Map& map,
@@ -268,19 +268,30 @@ void UpdateBlock(
 		{
 			if (map.map[i][j].work)
 			{
-				map.map[i][j].Block::Draw(map.mark);
-				if ((int)Type::LEAAFS
-					!= map.map[i][j].GetType())
+				if (
+					(int)Type::LEAAFS == map.map[i][j].GetType() ||
+					(int)Type::MONUMENT == map.map[i][j].GetType() ||
+					(int)Type::WATER == map.map[i][j].GetType()
+					)
+				{
+					map.map[i][j].Block::Draw(map.mark);
+				}
+				else
+				{
+					map.map[i][j].Block::Draw();
+				}
+				if ((int)Type::LEAAFS != map.map[i][j].GetType())
 				{
 					hero.Object::Colisium(
 						(float)map.map[i][j].GetX(),
 						(float)map.map[i][j].GetY(),
 						(float)map.map[i][j].GetSpW(),
-						(float)map.map[i][j].GetSpH(), mark
+						(float)map.map[i][j].GetSpH(),
+						mark
 					);
 				}
 			}
 		}
 	}
 	if (map.mark > 0.10f) map.mark = 0;
-}
+};

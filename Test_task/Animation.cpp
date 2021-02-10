@@ -19,7 +19,8 @@ Animation::Animation(
 	{
 		return;
 	}
-}
+};
+
 int Animation::ShootSide()
 {
 	return (
@@ -112,4 +113,4 @@ Sprite* Animation::DrawPresset(float& mark)
 	if (mark > 0.10f) wichOne++;
 	if (wichOne >= obj.size()) wichOne = 0;
 	return obj[wichOne];
-}
+};

@@ -118,11 +118,37 @@ void Enemy::UpdateBullet(
 								(float)map.map[k][j].GetY() - 2.0f)
 							{
 								bull[i].SetWork(false);
-								if ((int)Type::STEEL !=
-									map.map[k][j].GetType())
+								if ((int)Type::STEEL != map.map[k][j].GetType())
 								{
-									map.map[k][j].work = false;
-									map.map[k][j].FreeSprite();
+									if (map.map[k][j].GetStatus() == side::COUNT)
+									{
+										side sd =
+											(bull[i].GetvellX() < 0) ? side::RIGHT :
+											(bull[i].GetvellX() > 0) ? side::LEFT :
+											(bull[i].GetvellY() < 0) ? side::BOTTOM :
+											(bull[i].GetvellY() > 0) ? side::FRONT : side::COUNT;
+										map.map[k][j].SetStatus(sd);
+										if (sd != side::COUNT)
+										{
+											getSpriteSize(
+												map.map[k][j].GetWallPoss(),
+												map.map[k][j].GetRefSizeW(),
+												map.map[k][j].GetRefSizeH()
+											);
+										}
+										map.map[k][j].SetPossX(
+											(sd == side::LEFT) ?
+											((int)map.map[k][j].GetSpW()) : 0.0f
+										);
+										map.map[k][j].SetPossY(
+											(sd == side::FRONT) ?
+											((int)map.map[k][j].GetSpH()) : 0.f
+										);
+									}
+									else
+									{
+										map.map[k][j].work = false;
+									}
 								}
 							}
 						}

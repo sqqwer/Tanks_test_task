@@ -9,33 +9,30 @@ void Logic::InitAllResources(const char* nameMap, const char* nameLand)
 {
 	tm = Time(getTickCount);
 	land = Land(nameLand, drawSprite);
-	upgrade.push_back(Upgrade("upgradeArrow.ini", 150, 150, drawSprite, powerUps::UPGRADE));
-	upgrade.push_back(Upgrade("upgradeArrow.ini", 130, 150, drawSprite, powerUps::UPGRADE));
-	upgrade.push_back(Upgrade("upgradeArrow.ini", 110, 150, drawSprite, powerUps::UPGRADE));
-	upgrade.push_back(Upgrade("upgradeBonusGear.ini", 180, 150, drawSprite, powerUps::EXTRALIVE));
-	upgrade.push_back(Upgrade("darkSidePower.ini", 210, 150, drawSprite, powerUps::MOREPOWER));
+	upgrade.push_back(Upgrade("./data/upgrade/upgradeArrow.ini", 150, 150, drawSprite, powerUps::UPGRADE));
+	upgrade.push_back(Upgrade("./data/upgrade/upgradeArrow.ini", 130, 150, drawSprite, powerUps::UPGRADE));
+	upgrade.push_back(Upgrade("./data/upgrade/upgradeArrow.ini", 110, 150, drawSprite, powerUps::UPGRADE));
+	upgrade.push_back(Upgrade("./data/upgrade/upgradeBonusGear.ini", 180, 150, drawSprite, powerUps::EXTRALIVE));
+	upgrade.push_back(Upgrade("./data/upgrade/darkSidePower.ini", 210, 150, drawSprite, powerUps::MOREPOWER));
 	map.LoadMap(nameMap, drawSprite);
-	hero = Hero(tankPreset::HEROTANK1, map.GetHszX(), map.GetHszY(), drawSprite);
-
-	//enemy.push_back(Enemy(tankPreset::HEROTANK1, map.enemySpawn[0].posX, map.enemySpawn[0].posY, drawSprite));
-
+	hero = Hero(tankPreset::HEROTANK1, 200, 200, drawSprite);
 };
 
 bool Logic::CheackInitConstructor()
 {
 	if (!land.GetStatus())
 	{
-		std::cout << "Logic : Can't load Land file!" << std::endl;
+		std::cout << "Logic : Couldn't load Land file!" << std::endl;
 		return false;
 	}
 	if (!map.GetStatus())
 	{
-		std::cout << "Logic : Can't load Map file!" << std::endl;
+		std::cout << "Logic : Couldn't load Map file!" << std::endl;
 		return false;
 	}
 	if (!hero.GetStatus())
 	{
-		std::cout << "Logic : Can't load Hero preset file!" << std::endl;
+		std::cout << "Logic : Couldn't load Hero preset file!" << std::endl;
 		return false;
 	}
 	for (auto i : upgrade)
@@ -44,19 +41,11 @@ bool Logic::CheackInitConstructor()
 		{
 			if (!i.unit[j].Animation::GetStatus())
 			{
-				std::cout << "Logic : Can't load Upgrade file!" << std::endl;
+				std::cout << "Logic : Couldn't load Upgrade file!" << std::endl;
 				return false;
 			}
 		}
 	}
-	//for (auto i : enemy)
-	//{
-	//	if (!i.GetStatus())
-	//	{
-	//		std::cout << "Logic : Can't load Enemy file!" << std::endl;
-	//		return false;
-	//	}
-	//}
 	return true;
 };
 
@@ -91,9 +80,10 @@ bool Logic::InitSpriteSize()
 
 void Logic::Draw()
 {
-	mark = tm.Mark();
+	mark = tm.Mark(); spawMark += mark;
 	hero.UpdateReloadMark(mark); map.UpdateMark(mark);
-	land.Draw(); DrawUpgrade(mark); hero.Draw();
+	land.Draw(); 
+	DrawUpgrade(mark); hero.Draw();
 	map.DrawMap(map.GetRefMark()); hero.TickTimer(-mark);
 };
 
@@ -131,8 +121,8 @@ void Logic::WallHeroColisium()
 						if (map.map[i][j].unit[k].GetWorkUnit() )
 						{
 							hero.Object::Colisium(
-								(float)map.map[i][j].unit[k].GetPosX(), 
-								(float)map.map[i][j].unit[k].GetPosY(),
+								(float)map.map[i][j].unit[k].GetAnimPosX(),
+								(float)map.map[i][j].unit[k].GetAnimPosY(),
 								(float)map.map[i][j].GetSpW(), (float)map.map[i][j].GetSpH(),
 								mark
 							);
@@ -149,10 +139,10 @@ void Logic::UpdateTank(const int screenX, const int screenY)
 	Draw();
 	UpdateHeroTank(screenX, screenY);
 	UpdateEnemyTank(screenX, screenY);
-	CheckSpawnEnemy();
-	for (int i = 0; i < enemy.size(); i++)
+	if (spawMark > 2.0f)
 	{
-		getSpriteSize(enemy[i].GetSprite(), enemy[i].GetRefSizeW(), enemy[i].GetRefSizeH());
+		CheckSpawnEnemy();
+		spawMark = 0;
 	}
 };
 
@@ -202,12 +192,15 @@ void Logic::UpdateEnemyTank(const int screenX, const int screenY)
 					if (map.map[k][j].GetLiveBlock() && enemy[i].isAlive() &&
 						(int)Type::LEAAFS != map.map[k][j].GetType())
 					{
-						enemy[i].Enemy::Colisium(
-							(float)map.map[k][j].GetX(),
-							(float)map.map[k][j].GetY(),
-							(float)map.map[k][j].GetSpW(),
-							(float)map.map[k][j].GetSpH(), mark
-						);
+						for (int l = 0; l < map.map[k][j].unit.size(); l++)
+						{
+							enemy[i].Enemy::Colisium(
+								(float)map.map[k][j].unit[l].GetAnimPosX(),
+								(float)map.map[k][j].unit[l].GetAnimPosY(),
+								(float)map.map[k][j].GetSpW(),
+								(float)map.map[k][j].GetSpH(), mark
+							);
+						}
 					}
 				}
 			}
@@ -287,42 +280,48 @@ void Logic::ClearLand()
 
 void Logic::CheckSpawnEnemy()
 {
-	if (enemyCount)
+	if (enemyCount > 0)
 	{
 		for (int i = 0; i < map.enemySpawn.size(); i++)
 		{
-			/*if (!enemy.size())
+			if (!enemy.size())
 			{
 				enemy.push_back(
-					Enemy(tankPreset::HEROTANK1,
-						map.enemySpawn[i].posX, map.enemySpawn[i].posY, drawSprite)
+					Enemy(tankPreset::HEROTANK1, map.enemySpawn[i].posX, map.enemySpawn[i].posY, drawSprite)
 				);
+				getSpriteSize(enemy[enemy.size() - 1].GetSprite(), enemy[enemy.size() - 1].GetRefSizeW(), enemy[enemy.size() - 1].GetRefSizeH());
+				enemy[enemy.size() - 1].SetVellY(-50);
 				--enemyCount;
 			}
 			else
 			{
-				for (int j = 0; j < enemy.size(); j++)
+				if (SpawnPointClear(map.enemySpawn[i]))
 				{
-					if (enemy[j].GetPosX() >= map.enemySpawn[i].posX + enemy[j].GetSpW() &&
-						enemy[j].GetPosX() <= map.enemySpawn[i].posX - enemy[j].GetSpW())
-					{
-						if (enemy[j].GetPosY() >= map.enemySpawn[i].posY + enemy[j].GetSpH() &&
-							enemy[j].GetPosY() <= map.enemySpawn[i].posY - enemy[j].GetSpH())
-						{
-							continue;
-						}
-					}
-					else
-					{
-						enemy.push_back(
-							Enemy(tankPreset::HEROTANK1,
-								map.enemySpawn[i].posX, map.enemySpawn[i].posY, drawSprite)
-						);
-						--enemyCount;
-					}
-
+					enemy.push_back(
+						Enemy(tankPreset::HEROTANK1, map.enemySpawn[i].posX, map.enemySpawn[i].posY, drawSprite)
+					);
+					getSpriteSize(enemy[enemy.size() - 1].GetSprite(), enemy[enemy.size() - 1].GetRefSizeW(), enemy[enemy.size() - 1].GetRefSizeH());
+					enemy[enemy.size() - 1].SetVellY(-50);
+					--enemyCount;
 				}
-			}*/
+			}
 		}
 	}
+};
+
+bool Logic::SpawnPointClear(struct possition enSp)
+{
+	for (int j = 0; j < enemy.size(); j++)
+	{
+		if (enemy[j].Object::GetX() + enemy[j].GetSpW() >= enSp.posX &&
+			enemy[j].Object::GetX() <= enSp.posX + enemy[j].GetSpW())
+		{
+			if (enemy[j].Object::GetY() + enemy[j].GetSpH() >= enSp.posY &&
+				enemy[j].Object::GetY() <= enSp.posY + enemy[j].GetSpH())
+			{
+				return false;
+			}
+		}
+	}
+	return true;
 };

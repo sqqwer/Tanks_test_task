@@ -20,16 +20,16 @@ void Preset::LoadPreset(tankPreset type)
 	switch (type)
 	{
 	case tankPreset::HEROTANK1:
-		ReadFile("Hero_preset1.ini");
+		ReadFile("./data/tank/preset/Hero_preset2.ini");
 		break;
 	case tankPreset::HEROTANK2:
-		ReadFile("Hero_preset2.ini");
+		ReadFile("./data/tank/preset/Hero_preset2.ini");
 		break;
 	case tankPreset::HEROTANK3:
-		ReadFile("WidthTank.ini");
+		ReadFile("./data/tank/preset/WidthTank.ini");
 		break;
 	case tankPreset::ENEMYTANKEASY:
-		ReadFile("WidthTank.ini");
+		ReadFile("./data/tank/preset/WidthTank.ini");
 		break;
 	case tankPreset::ENEMYTANKFAST:
 		break;
@@ -38,7 +38,7 @@ void Preset::LoadPreset(tankPreset type)
 	case tankPreset::ENEMYTANKARMOR:
 		break;
 	case tankPreset::WIDTHTANK:
-		ReadFile("WidthTank.ini");
+		//ReadFile("WidthTank.ini");
 		break;
 	case tankPreset::COUNT:
 		break;

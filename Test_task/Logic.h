@@ -16,6 +16,9 @@ class Logic
 public:
 	Logic();
 
+	bool SpawnPointClear(struct possition enSp);
+	float spawMark{ 0.0f };
+
 	// Check spawn enemy
 	void CheckSpawnEnemy();
 	// Init fuction
@@ -43,7 +46,7 @@ private:
 	bool CheackInitConstructor();
 private:
 	unsigned int possition{ 0 };
-	unsigned int enemyCount{ 20 };
+	int enemyCount{ 3 };
 	float mark{0.0f};
 	Map map{};
 	Time tm{};

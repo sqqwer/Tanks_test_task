@@ -13,69 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Resource Files\texture">
-      <UniqueIdentifier>{e360365b-c76b-46a3-b1a4-6b469a116959}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\bullet">
-      <UniqueIdentifier>{a10c098d-e0cb-4f63-8597-f18371fbfcf2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\IniFile">
-      <UniqueIdentifier>{a851ad87-55b7-43db-adaa-6ae38a55fd09}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\block">
-      <UniqueIdentifier>{d24e0f9d-b60a-4c2b-b72f-c6ebd15c6dc3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\block\water">
-      <UniqueIdentifier>{f5f006da-e2d4-4437-a394-261f012bc041}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\block\brick">
-      <UniqueIdentifier>{1fa591ce-0cb2-4250-9ecf-1560bcfd794a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\block\steel">
-      <UniqueIdentifier>{d2004af3-89c5-419e-8edd-45534c2c37e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\block\leafs">
-      <UniqueIdentifier>{8fdfb490-8df2-4dc7-8f1a-36f04a8a38f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\monument">
-      <UniqueIdentifier>{9e2bf3d1-c5ec-4ba9-a479-8a4dcbb52c8d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\tank">
-      <UniqueIdentifier>{5c300fa4-92cb-46fd-8b8b-04f22c368e0e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\tank\tank ver1">
-      <UniqueIdentifier>{eb1c2cd0-8855-4a00-81fa-559e8ad40a0f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\tank\general tank">
-      <UniqueIdentifier>{5afeb9ce-d25e-4d00-8d62-cc6295a917ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\tank\enemy">
-      <UniqueIdentifier>{8b3bd1a5-00bb-4fb5-8a8f-78fdde05fd0d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\tank\enemy\ver1">
-      <UniqueIdentifier>{f01c8503-4621-4c9b-9526-edbf22ad9e74}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Preset file">
-      <UniqueIdentifier>{a20181bb-5f52-4663-9f57-0b54878046ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\upgrade">
-      <UniqueIdentifier>{35777899-89ed-4e38-93f7-2aa1ba42861a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Preset file\Upgrade">
-      <UniqueIdentifier>{a6f1d351-3ba1-44b5-bd44-32d83f33fa2b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Preset file\Tank">
-      <UniqueIdentifier>{b57f8a9a-1520-4e6c-8859-2232a07c1638}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\block\brick\Old">
-      <UniqueIdentifier>{8403a9a4-4f53-4430-bd37-ff0cac84890b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\block\steel\Old">
-      <UniqueIdentifier>{9fe96f89-8773-4000-bea1-4f5c3c16d89e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Map">
-      <UniqueIdentifier>{05ee2242-878a-49e9-a7a3-66910d81be7d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
@@ -160,268 +97,275 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="bullet.ini">
-      <Filter>Resource Files\IniFile</Filter>
+    <Image Include="data\upgrade\model\bonusGear.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model1\BottomSide1.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model1\BottomSide2.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model1\BottomSide3.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\brick\model\old\brick.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\brick\model\old\brickBottom.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\brick\model\old\brickFront.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\brick\model\old\brickLeft.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\brick\model\old\brickRigth.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\bullet\model\bullet1.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\bullet\model\bullet2.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\bullet\model\bullet3.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\bullet\model\bullet4.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\bullet\model\bullet5.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\bullet\model\bullet6.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\upgrade\model\extraLife.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model1\FrontAnimaiot1.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model1\FrontAnimaiot2.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model1\FrontAnimaiot3.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\land\model\Land1.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\leafs\model\leafsBlock.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model1\Leftside1.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model1\Leftside2.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model1\Leftside3.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\monument\model\monumentBlock.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\brick\model\new\oneUnit.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model1\RightSde1.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model1\RightSde2.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model1\RightSde3.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\upgrade\model\rockIt.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\steel\model\old\steelBlock.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\steel\model\old\steelBlockBottom.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\steel\model\old\steelBlockFront.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\steel\model\old\steelBlockLeft.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\steel\model\old\steelBlockRight.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\steel\model\new\stellUnit.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model2\Tank_Botton1.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model2\Tank_Botton2.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model2\Tank_Botton3.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model2\Tank_Botton4.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model2\Tank_Front1.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model2\Tank_Front2.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model2\Tank_Front3.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model2\Tank_Front4.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model2\Tank_Left1.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model2\Tank_Left2.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model2\Tank_Left3.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model2\Tank_Left4.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model2\Tank_Right1.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model2\Tank_Right2.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model2\Tank_Right3.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model2\Tank_Right4.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model3\tank_ver_1Bottom1.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model3\tank_ver_1Front1.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model3\tank_ver_1Left1.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\tank\model\model3\tank_ver_1Right1.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\upgrade\model\upgradeTank.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\water\model\water1.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\water\model\water2.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\water\model\water3.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\water\model\water4.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\water\model\water5.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\block\water\model\water6.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\upgrade\model\youUnderestimateMyPower.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\land\model\land.tga">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FrameworkRelease_x64.dll" />
+    <None Include="data\block\brick\BLK.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="land.ini">
-      <Filter>Resource Files\IniFile</Filter>
+    <None Include="data\block\brick\block.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="Hero_model_ver1.ini">
-      <Filter>Resource Files\IniFile</Filter>
+    <None Include="data\bullet\bullet.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="Hero_model.ini">
-      <Filter>Resource Files\IniFile</Filter>
+    <None Include="data\upgrade\darkSidePower.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="block.ini">
-      <Filter>Resource Files\IniFile</Filter>
+    <None Include="data\tank\preset\Enemy_preset1.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="water.ini">
-      <Filter>Resource Files\IniFile</Filter>
+    <None Include="data\tank\init\Hero_model.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="steel.ini">
-      <Filter>Resource Files\IniFile</Filter>
+    <None Include="data\tank\init\Hero_model_ver1.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="leafs.ini">
-      <Filter>Resource Files\IniFile</Filter>
+    <None Include="data\tank\preset\Hero_preset1.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="monument.ini">
-      <Filter>Resource Files\IniFile</Filter>
+    <None Include="data\tank\preset\Hero_preset2.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="tank2.ini">
-      <Filter>Resource Files\IniFile</Filter>
+    <None Include="data\land\land.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="upgradeArrow.ini">
-      <Filter>Resource Files\Preset file\Upgrade</Filter>
+    <None Include="data\block\leafs\leafs.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="upgradeBonusGear.ini">
-      <Filter>Resource Files\Preset file\Upgrade</Filter>
+    <None Include="data\map\Map.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="upgradeRockIt.ini">
-      <Filter>Resource Files\Preset file\Upgrade</Filter>
+    <None Include="data\map\Map2.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="Enemy_preset1.ini">
-      <Filter>Resource Files\Preset file\Tank</Filter>
+    <None Include="data\block\monument\monument.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="WidthTank.ini">
-      <Filter>Resource Files\Preset file\Tank</Filter>
+    <None Include="data\block\steel\SBL.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="Hero_preset2.ini">
-      <Filter>Resource Files\Preset file\Tank</Filter>
+    <None Include="data\block\steel\steel.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="Hero_preset1.ini">
-      <Filter>Resource Files\Preset file\Tank</Filter>
+    <None Include="data\tank\init\tank2.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="darkSidePower.ini">
-      <Filter>Resource Files\Preset file\Upgrade</Filter>
+    <None Include="data\map\TemplateMap.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="BLK.ini">
-      <Filter>Resource Files\IniFile</Filter>
+    <None Include="data\upgrade\upgradeArrow.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="SBL.ini">
-      <Filter>Resource Files\IniFile</Filter>
+    <None Include="data\upgrade\upgradeBonusGear.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="Map2.ini">
-      <Filter>Resource Files\Map</Filter>
+    <None Include="data\upgrade\upgradeRockIt.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="Map.ini">
-      <Filter>Resource Files\Map</Filter>
+    <None Include="data\block\water\water.ini">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="TemplateMap.ini">
-      <Filter>Resource Files\Map</Filter>
+    <None Include="data\tank\preset\WidthTank.ini">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="FrontAnimaiot1.tga">
-      <Filter>Resource Files\tank\general tank</Filter>
-    </Image>
-    <Image Include="FrontAnimaiot2.tga">
-      <Filter>Resource Files\tank\general tank</Filter>
-    </Image>
-    <Image Include="Leftside1.tga">
-      <Filter>Resource Files\tank\general tank</Filter>
-    </Image>
-    <Image Include="Leftside2.tga">
-      <Filter>Resource Files\tank\general tank</Filter>
-    </Image>
-    <Image Include="RightSde1.tga">
-      <Filter>Resource Files\tank\general tank</Filter>
-    </Image>
-    <Image Include="RightSde2.tga">
-      <Filter>Resource Files\tank\general tank</Filter>
-    </Image>
-    <Image Include="BottomSide1.tga">
-      <Filter>Resource Files\tank\general tank</Filter>
-    </Image>
-    <Image Include="BottomSide2.tga">
-      <Filter>Resource Files\tank\general tank</Filter>
-    </Image>
-    <Image Include="Tank_Botton1.tga">
-      <Filter>Resource Files\tank\tank ver1</Filter>
-    </Image>
-    <Image Include="Tank_Botton2.tga">
-      <Filter>Resource Files\tank\tank ver1</Filter>
-    </Image>
-    <Image Include="Tank_Botton3.tga">
-      <Filter>Resource Files\tank\tank ver1</Filter>
-    </Image>
-    <Image Include="Tank_Front1.tga">
-      <Filter>Resource Files\tank\tank ver1</Filter>
-    </Image>
-    <Image Include="Tank_Front2.tga">
-      <Filter>Resource Files\tank\tank ver1</Filter>
-    </Image>
-    <Image Include="Tank_Front3.tga">
-      <Filter>Resource Files\tank\tank ver1</Filter>
-    </Image>
-    <Image Include="Tank_Left1.tga">
-      <Filter>Resource Files\tank\tank ver1</Filter>
-    </Image>
-    <Image Include="Tank_Left2.tga">
-      <Filter>Resource Files\tank\tank ver1</Filter>
-    </Image>
-    <Image Include="Tank_Left3.tga">
-      <Filter>Resource Files\tank\tank ver1</Filter>
-    </Image>
-    <Image Include="Tank_Right1.tga">
-      <Filter>Resource Files\tank\tank ver1</Filter>
-    </Image>
-    <Image Include="Tank_Right2.tga">
-      <Filter>Resource Files\tank\tank ver1</Filter>
-    </Image>
-    <Image Include="Tank_Right3.tga">
-      <Filter>Resource Files\tank\tank ver1</Filter>
-    </Image>
-    <Image Include="BottomSide3.tga">
-      <Filter>Resource Files\tank\general tank</Filter>
-    </Image>
-    <Image Include="FrontAnimaiot3.tga">
-      <Filter>Resource Files\tank\general tank</Filter>
-    </Image>
-    <Image Include="Leftside3.tga">
-      <Filter>Resource Files\tank\general tank</Filter>
-    </Image>
-    <Image Include="RightSde3.tga">
-      <Filter>Resource Files\tank\general tank</Filter>
-    </Image>
-    <Image Include="Land.tga">
-      <Filter>Resource Files\texture</Filter>
-    </Image>
-    <Image Include="bullet1.tga">
-      <Filter>Resource Files\bullet</Filter>
-    </Image>
-    <Image Include="bullet2.tga">
-      <Filter>Resource Files\bullet</Filter>
-    </Image>
-    <Image Include="bullet3.tga">
-      <Filter>Resource Files\bullet</Filter>
-    </Image>
-    <Image Include="bullet4.tga">
-      <Filter>Resource Files\bullet</Filter>
-    </Image>
-    <Image Include="bullet5.tga">
-      <Filter>Resource Files\bullet</Filter>
-    </Image>
-    <Image Include="bullet6.tga">
-      <Filter>Resource Files\bullet</Filter>
-    </Image>
-    <Image Include="Tank_Botton4.tga">
-      <Filter>Resource Files\tank\tank ver1</Filter>
-    </Image>
-    <Image Include="Tank_Right4.tga">
-      <Filter>Resource Files\tank\tank ver1</Filter>
-    </Image>
-    <Image Include="Tank_Left4.tga">
-      <Filter>Resource Files\tank\tank ver1</Filter>
-    </Image>
-    <Image Include="Tank_Front4.tga">
-      <Filter>Resource Files\tank\tank ver1</Filter>
-    </Image>
-    <Image Include="water1.tga">
-      <Filter>Resource Files\block\water</Filter>
-    </Image>
-    <Image Include="water2.tga">
-      <Filter>Resource Files\block\water</Filter>
-    </Image>
-    <Image Include="water3.tga">
-      <Filter>Resource Files\block\water</Filter>
-    </Image>
-    <Image Include="water4.tga">
-      <Filter>Resource Files\block\water</Filter>
-    </Image>
-    <Image Include="water5.tga">
-      <Filter>Resource Files\block\water</Filter>
-    </Image>
-    <Image Include="water6.tga">
-      <Filter>Resource Files\block\water</Filter>
-    </Image>
-    <Image Include="leafsBlock.tga">
-      <Filter>Resource Files\block\leafs</Filter>
-    </Image>
-    <Image Include="monumentBlock.tga">
-      <Filter>Resource Files\monument</Filter>
-    </Image>
-    <Image Include="tank_ver_1Front1.tga">
-      <Filter>Resource Files\tank\enemy\ver1</Filter>
-    </Image>
-    <Image Include="tank_ver_1Bottom1.tga">
-      <Filter>Resource Files\tank\enemy\ver1</Filter>
-    </Image>
-    <Image Include="tank_ver_1Right1.tga">
-      <Filter>Resource Files\tank\enemy\ver1</Filter>
-    </Image>
-    <Image Include="tank_ver_1Left1.tga">
-      <Filter>Resource Files\tank\enemy\ver1</Filter>
-    </Image>
-    <Image Include="extraLife.tga">
-      <Filter>Resource Files\upgrade</Filter>
-    </Image>
-    <Image Include="upgradeTank.tga">
-      <Filter>Resource Files\upgrade</Filter>
-    </Image>
-    <Image Include="rockIt.tga">
-      <Filter>Resource Files\upgrade</Filter>
-    </Image>
-    <Image Include="bonusGear.tga">
-      <Filter>Resource Files\upgrade</Filter>
-    </Image>
-    <Image Include="youUnderestimateMyPower.tga">
-      <Filter>Resource Files\upgrade</Filter>
-    </Image>
-    <Image Include="brick.tga">
-      <Filter>Resource Files\block\brick\Old</Filter>
-    </Image>
-    <Image Include="brickLeft.tga">
-      <Filter>Resource Files\block\brick\Old</Filter>
-    </Image>
-    <Image Include="brickFront.tga">
-      <Filter>Resource Files\block\brick\Old</Filter>
-    </Image>
-    <Image Include="brickBottom.tga">
-      <Filter>Resource Files\block\brick\Old</Filter>
-    </Image>
-    <Image Include="brickRigth.tga">
-      <Filter>Resource Files\block\brick\Old</Filter>
-    </Image>
-    <Image Include="oneUnit.tga">
-      <Filter>Resource Files\block\brick</Filter>
-    </Image>
-    <Image Include="steelBlockBottom.tga">
-      <Filter>Resource Files\block\steel\Old</Filter>
-    </Image>
-    <Image Include="steelBlockFront.tga">
-      <Filter>Resource Files\block\steel\Old</Filter>
-    </Image>
-    <Image Include="steelBlockLeft.tga">
-      <Filter>Resource Files\block\steel\Old</Filter>
-    </Image>
-    <Image Include="steelBlockRight.tga">
-      <Filter>Resource Files\block\steel\Old</Filter>
-    </Image>
-    <Image Include="steelBlock.tga">
-      <Filter>Resource Files\block\steel\Old</Filter>
-    </Image>
-    <Image Include="stellUnit.tga">
-      <Filter>Resource Files\block\steel</Filter>
-    </Image>
+    <Library Include="FrameworkRelease_x64.lib" />
   </ItemGroup>
 </Project>

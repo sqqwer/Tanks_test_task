@@ -49,10 +49,10 @@ public:
 	void FreeSprite();
 	bool LoadPreset(const char* name);
 	// Get Poss
-	float GetPosX() const {
+	float GetAnimPosX() const {
 		return posX;
 	};
-	float GetPosY() const {
+	float GetAnimPosY() const {
 		return posY;
 	};
 	bool GetWorkUnit() const {

@@ -105,16 +105,16 @@ void Enemy::UpdateBullet(
 								(int)Type::LEAAFS != map.map[k][j].GetType()))
 						{
 							if (bull[i].GetX() + bull[i].GetSpW() <=
-								(float)map.map[k][j].unit[l].GetPosX() +
+								(float)map.map[k][j].unit[l].GetAnimPosX() +
 								(float)map.map[k][j].GetSpW() + 2.0f &&
 								bull[i].GetX() >=
-								(float)map.map[k][j].unit[l].GetPosX() - 2.0f)
+								(float)map.map[k][j].unit[l].GetAnimPosX() - 2.0f)
 							{
 								if (bull[i].GetY() + bull[i].GetSpH() <=
-									(float)map.map[k][j].unit[l].GetPosY() +
+									(float)map.map[k][j].unit[l].GetAnimPosY() +
 									(float)map.map[k][j].GetSpH() + 2.0f &&
 									bull[i].GetY() >=
-									(float)map.map[k][j].unit[l].GetPosY() - 2.0f)
+									(float)map.map[k][j].unit[l].GetAnimPosY() - 2.0f)
 								{
 									bull[i].SetWork(false);
 									if ((int)Type::STEEL != map.map[k][j].GetType())

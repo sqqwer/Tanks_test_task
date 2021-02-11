@@ -80,7 +80,7 @@ void Map::LoadMap(const char* name, void (*draw)(Sprite*, int, int))
 					break;
 				case (int)Type::BRICK:
 					map[i][j].SetStatus(side::COUNT);
-					map[i][j] = Block("BLK.ini",
+					map[i][j] = Block("./data/block/brick/BLK.ini",
 						(float)((j + 1) * 30),
 						(float)((i + 1) * 30),
 						(int)Type::BRICK, true
@@ -89,7 +89,7 @@ void Map::LoadMap(const char* name, void (*draw)(Sprite*, int, int))
 					break;
 				case (int)Type::STEEL:
 					map[i][j].SetStatus(side::COUNT);
-					map[i][j] = Block("SBL.ini",
+					map[i][j] = Block("./data/block/steel/SBL.ini",
 						(float)((j + 1) * 30),
 						(float)((i + 1) * 30),
 						(int)Type::STEEL, true
@@ -98,7 +98,7 @@ void Map::LoadMap(const char* name, void (*draw)(Sprite*, int, int))
 					break;
 				case (int)Type::WATER:
 					map[i][j].SetStatus(side::COUNT);
-					map[i][j] = Block("water.ini",
+					map[i][j] = Block("./data/block/water/water.ini",
 						(float)((j + 1) * 30),
 						(float)((i + 1) * 30),
 						(int)Type::WATER, false
@@ -107,7 +107,7 @@ void Map::LoadMap(const char* name, void (*draw)(Sprite*, int, int))
 					break;
 				case (int)Type::LEAAFS:
 					map[i][j].SetStatus(side::COUNT);
-					map[i][j] = Block("leafs.ini",
+					map[i][j] = Block("./data/block/leafs/leafs.ini",
 						(float)((j + 1) * 30),
 						(float)((i + 1) * 30), 
 						(int)Type::LEAAFS, false
@@ -116,7 +116,7 @@ void Map::LoadMap(const char* name, void (*draw)(Sprite*, int, int))
 					break;
 				case (int)Type::MONUMENT:
 					map[i][j].SetStatus(side::COUNT);
-					map[i][j] = Block("monument.ini",
+					map[i][j] = Block("./data/block/monument/monument.ini",
 						(float)((j + 1) * 30),
 						(float)((i + 1) * 30),
 						(int)Type::MONUMENT, false
@@ -180,14 +180,14 @@ void Map::DrawMap(float& mark)
 						)
 					{
 						drawSprite(map[i][j].unit[k].DrawPresset(mark, animationMark),
-							map[i][j].unit[k].GetPosX(), map[i][j].unit[k].GetPosY());
+							(int)map[i][j].unit[k].GetAnimPosX(), (int)map[i][j].unit[k].GetAnimPosY());
 					}
 					else if (
 						(int)Type::BRICK == map[i][j].GetType() ||
 						(int)Type::STEEL == map[i][j].GetType())
 					{
 						drawSprite(map[i][j].unit[k].GetSprite(), 
-							map[i][j].unit[k].GetPosX(), map[i][j].unit[k].GetPosY());
+							(int)map[i][j].unit[k].GetAnimPosX(), (int)map[i][j].unit[k].GetAnimPosY());
 					}
 				}
 			}

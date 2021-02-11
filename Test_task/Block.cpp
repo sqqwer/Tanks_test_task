@@ -52,6 +52,6 @@ void Block::DrawBrick()
 {
 	for (int i = 0; i < unit.size(); i++)
 	{
-		drawSprite(unit[i].GetSprite(), unit[i].GetPosX(), unit[i].GetPosY());
+		drawSprite(unit[i].GetSprite(), unit[i].GetAnimPosX(), unit[i].GetAnimPosY());
 	}
 };

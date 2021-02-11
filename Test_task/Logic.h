@@ -16,6 +16,8 @@ class Logic
 public:
 	Logic();
 
+	// Check spawn enemy
+	void CheckSpawnEnemy();
 	// Init fuction
 	bool InitSpriteSize();
 	void LoadNewMap(const char* nameOfMap);
@@ -40,6 +42,8 @@ private:
 	void WallHeroColisium();
 	bool CheackInitConstructor();
 private:
+	unsigned int possition{ 0 };
+	unsigned int enemyCount{ 20 };
 	float mark{0.0f};
 	Map map{};
 	Time tm{};

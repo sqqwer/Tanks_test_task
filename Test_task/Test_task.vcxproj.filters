@@ -67,6 +67,15 @@
     <Filter Include="Resource Files\Preset file\Tank">
       <UniqueIdentifier>{b57f8a9a-1520-4e6c-8859-2232a07c1638}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\block\brick\Old">
+      <UniqueIdentifier>{8403a9a4-4f53-4430-bd37-ff0cac84890b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\block\steel\Old">
+      <UniqueIdentifier>{9fe96f89-8773-4000-bea1-4f5c3c16d89e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Map">
+      <UniqueIdentifier>{05ee2242-878a-49e9-a7a3-66910d81be7d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
@@ -166,12 +175,6 @@
     <None Include="block.ini">
       <Filter>Resource Files\IniFile</Filter>
     </None>
-    <None Include="Map.ini">
-      <Filter>Resource Files\IniFile</Filter>
-    </None>
-    <None Include="TemplateMap.ini">
-      <Filter>Resource Files\IniFile</Filter>
-    </None>
     <None Include="water.ini">
       <Filter>Resource Files\IniFile</Filter>
     </None>
@@ -185,9 +188,6 @@
       <Filter>Resource Files\IniFile</Filter>
     </None>
     <None Include="tank2.ini">
-      <Filter>Resource Files\IniFile</Filter>
-    </None>
-    <None Include="Map2.ini">
       <Filter>Resource Files\IniFile</Filter>
     </None>
     <None Include="upgradeArrow.ini">
@@ -213,6 +213,21 @@
     </None>
     <None Include="darkSidePower.ini">
       <Filter>Resource Files\Preset file\Upgrade</Filter>
+    </None>
+    <None Include="BLK.ini">
+      <Filter>Resource Files\IniFile</Filter>
+    </None>
+    <None Include="SBL.ini">
+      <Filter>Resource Files\IniFile</Filter>
+    </None>
+    <None Include="Map2.ini">
+      <Filter>Resource Files\Map</Filter>
+    </None>
+    <None Include="Map.ini">
+      <Filter>Resource Files\Map</Filter>
+    </None>
+    <None Include="TemplateMap.ini">
+      <Filter>Resource Files\Map</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -339,41 +354,11 @@
     <Image Include="water6.tga">
       <Filter>Resource Files\block\water</Filter>
     </Image>
-    <Image Include="brick.tga">
-      <Filter>Resource Files\block\brick</Filter>
-    </Image>
-    <Image Include="steelBlock.tga">
-      <Filter>Resource Files\block\steel</Filter>
-    </Image>
     <Image Include="leafsBlock.tga">
       <Filter>Resource Files\block\leafs</Filter>
     </Image>
     <Image Include="monumentBlock.tga">
       <Filter>Resource Files\monument</Filter>
-    </Image>
-    <Image Include="brickFront.tga">
-      <Filter>Resource Files\block\brick</Filter>
-    </Image>
-    <Image Include="brickBottom.tga">
-      <Filter>Resource Files\block\brick</Filter>
-    </Image>
-    <Image Include="brickLeft.tga">
-      <Filter>Resource Files\block\brick</Filter>
-    </Image>
-    <Image Include="brickRigth.tga">
-      <Filter>Resource Files\block\brick</Filter>
-    </Image>
-    <Image Include="steelBlockFront.tga">
-      <Filter>Resource Files\block\steel</Filter>
-    </Image>
-    <Image Include="steelBlockLeft.tga">
-      <Filter>Resource Files\block\steel</Filter>
-    </Image>
-    <Image Include="steelBlockRight.tga">
-      <Filter>Resource Files\block\steel</Filter>
-    </Image>
-    <Image Include="steelBlockBottom.tga">
-      <Filter>Resource Files\block\steel</Filter>
     </Image>
     <Image Include="tank_ver_1Front1.tga">
       <Filter>Resource Files\tank\enemy\ver1</Filter>
@@ -402,8 +387,41 @@
     <Image Include="youUnderestimateMyPower.tga">
       <Filter>Resource Files\upgrade</Filter>
     </Image>
-    <Image Include="Image.tga">
+    <Image Include="brick.tga">
+      <Filter>Resource Files\block\brick\Old</Filter>
+    </Image>
+    <Image Include="brickLeft.tga">
+      <Filter>Resource Files\block\brick\Old</Filter>
+    </Image>
+    <Image Include="brickFront.tga">
+      <Filter>Resource Files\block\brick\Old</Filter>
+    </Image>
+    <Image Include="brickBottom.tga">
+      <Filter>Resource Files\block\brick\Old</Filter>
+    </Image>
+    <Image Include="brickRigth.tga">
+      <Filter>Resource Files\block\brick\Old</Filter>
+    </Image>
+    <Image Include="oneUnit.tga">
       <Filter>Resource Files\block\brick</Filter>
+    </Image>
+    <Image Include="steelBlockBottom.tga">
+      <Filter>Resource Files\block\steel\Old</Filter>
+    </Image>
+    <Image Include="steelBlockFront.tga">
+      <Filter>Resource Files\block\steel\Old</Filter>
+    </Image>
+    <Image Include="steelBlockLeft.tga">
+      <Filter>Resource Files\block\steel\Old</Filter>
+    </Image>
+    <Image Include="steelBlockRight.tga">
+      <Filter>Resource Files\block\steel\Old</Filter>
+    </Image>
+    <Image Include="steelBlock.tga">
+      <Filter>Resource Files\block\steel\Old</Filter>
+    </Image>
+    <Image Include="stellUnit.tga">
+      <Filter>Resource Files\block\steel</Filter>
     </Image>
   </ItemGroup>
 </Project>

@@ -25,6 +25,19 @@ Animation::Animation(
 	}
 };
 
+Animation::Animation(
+	const char* name, void (*draw)(Sprite*, int, int),
+	const float posX, const float posY, bool work
+)
+	:
+	posX(posX), posY(posY), work(work)
+{
+	if (!LoadPreset(name))
+	{
+		return;
+	}
+};
+
 int Animation::ShootSide()
 {
 	return (
@@ -43,6 +56,7 @@ bool Animation::LoadPreset(const char* name)
 {
 	if (obj.size())	FreeSprite();
 	int i = 0;
+	wichOne = 0;
 	std::string tmp;
 	std::ifstream file;
 	file.open(name);
@@ -123,4 +137,9 @@ Sprite* Animation::DrawPresset(const float mark, const float animationMark)
 	if (mark > animationMark) wichOne++;
 	if (wichOne >= obj.size()) wichOne = 0;
 	return obj[wichOne];
+};
+
+void Animation::Draw()
+{
+	draw(GetSprite(), posX, posY);
 };

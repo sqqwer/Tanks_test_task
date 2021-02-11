@@ -177,9 +177,11 @@
     <ClInclude Include="Upgrade.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BLK.ini" />
     <None Include="block.ini" />
     <None Include="Hero_preset2.ini" />
     <None Include="darkSidePower.ini" />
+    <None Include="SBL.ini" />
     <None Include="upgradeBonusGear.ini" />
     <None Include="bullet.ini" />
     <None Include="Enemy_preset1.ini" />
@@ -216,7 +218,8 @@
     <Image Include="brickRigth.tga" />
     <Image Include="brickLeft.tga" />
     <Image Include="extraLife.tga" />
-    <Image Include="Image.tga" />
+    <Image Include="stellUnit.tga" />
+    <Image Include="oneUnit.tga" />
     <Image Include="youUnderestimateMyPower.tga" />
     <Image Include="rockIt.tga" />
     <Image Include="tank_ver_1Right1.tga" />

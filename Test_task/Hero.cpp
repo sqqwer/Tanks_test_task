@@ -53,7 +53,7 @@ void Hero::TankColisium(Enemy& en, const float mark)
 		{
 			if (en.isAlive())
 			{
-				if (pres.GetTankType() == tankPreset::WIDTHTANK)
+				if (GetTankPreset() >= tankPreset::HEROTANK3) // FIX IT
 				{
 					en.SetLive(false);
 					en.BackX(en.GetvellX(), mark);
@@ -170,62 +170,108 @@ void Hero::UpdateBullet(
 			{
 				for (int j = 0; j < map.GetW(); j++)
 				{
-					if (map.map[k][j].GetLiveBlock() &&
-						((int)Type::WATER != map.map[k][j].GetType() &&
-						 ((int)Type::LEAAFS) != map.map[k][j].GetType()))
+					for (int l = 0; l < map.map[k][j].unit.size(); l++)
 					{
-						if (bull[i].GetX() + bull[i].GetSpW() <=
-							(float)map.map[k][j].GetX() +
-							(float)map.map[k][j].GetSpW() + 2.0f &&
-							bull[i].GetX() >=
-							(float)map.map[k][j].GetX() - 2.0f)
+						if (map.map[k][j].unit[l].GetWorkUnit() &&
+							((int)Type::WATER != map.map[k][j].GetType() &&
+								(int)Type::LEAAFS != map.map[k][j].GetType()))
 						{
-							if (bull[i].GetY() + bull[i].GetSpH() <=
-								(float)map.map[k][j].GetY() +
-								(float)map.map[k][j].GetSpH() + 2.0f &&
-								bull[i].GetY() >=
-								(float)map.map[k][j].GetY() - 2.0f)
+							if (bull[i].GetX() + bull[i].GetSpW() <=
+								(float)map.map[k][j].unit[l].GetPosX() +
+								(float)map.map[k][j].GetSpW() + 2.0f &&
+								bull[i].GetX() >=
+								(float)map.map[k][j].unit[l].GetPosX() - 2.0f)
 							{
-								bull[i].SetWork(false);
-								if ((int)Type::MONUMENT != map.map[k][j].GetType())
+								if (bull[i].GetY() + bull[i].GetSpH() <=
+									(float)map.map[k][j].unit[l].GetPosY() +
+									(float)map.map[k][j].GetSpH() + 2.0f &&
+									bull[i].GetY() >=
+									(float)map.map[k][j].unit[l].GetPosY() - 2.0f)
 								{
-									if ((int)Type::STEEL == map.map[k][j].GetType() &&
-										nowTank == tankPreset::HEROTANK1 && !GetPower())
+									bull[i].SetWork(false);
+									if ((int)Type::MONUMENT != map.map[k][j].GetType())
+									{
+
+										if ((int)Type::STEEL == map.map[k][j].GetType() &&
+											nowTank <= tankPreset::HEROTANK3 && !GetPower())
 											continue;
-									if (map.map[k][j].GetStatus() == side::COUNT && !GetPower())
-									{
-										side sd = 
-											(bull[i].GetvellX() < 0) ? side::RIGHT :
-											(bull[i].GetvellX() > 0) ? side::LEFT :
-											(bull[i].GetvellY() < 0) ? side::BOTTOM :
-											(bull[i].GetvellY() > 0) ? side::FRONT : side::COUNT;
-										map.map[k][j].SetStatus(sd);
-										if (sd != side::COUNT)
+
+										if (GetPower())
 										{
-											getSpriteSize(
-												map.map[k][j].GetWallPoss(),
-												map.map[k][j].GetRefSizeW(),
-												map.map[k][j].GetRefSizeH()
-											);
+											map.map[k][j].unit[0].SetWorkUnit(false);
+											map.map[k][j].unit[1].SetWorkUnit(false);
+											map.map[k][j].unit[2].SetWorkUnit(false);
+											map.map[k][j].unit[3].SetWorkUnit(false);
 										}
-										map.map[k][j].SetPossX(
-											(sd == side::LEFT) ? 
-											((int)map.map[k][j].GetSpW()) : 0.0f
-										);
-										map.map[k][j].SetPossY(
-											(sd == side::FRONT) ? 
-											((int)map.map[k][j].GetSpH()) : 0.f
-										);
-									}
-									else
-									{
-										map.map[k][j].SetLiveBlock(false);
-										map.map[k][j].ClearBlock();
+										if (nowTank >= tankPreset::HEROTANK3)
+										{
+											if (bull[i].GetvellX() > 0)
+											{
+												if (map.map[k][j].unit[0].GetWorkUnit() ||
+													map.map[k][j].unit[2].GetWorkUnit())
+												{
+													map.map[k][j].unit[0].SetWorkUnit(false);
+													map.map[k][j].unit[2].SetWorkUnit(false);
+												}
+												else
+												{
+													map.map[k][j].unit[1].SetWorkUnit(false);
+													map.map[k][j].unit[3].SetWorkUnit(false);
+												}
+											}
+											if (bull[i].GetvellX() < 0)
+											{
+												if (map.map[k][j].unit[1].GetWorkUnit() ||
+													map.map[k][j].unit[3].GetWorkUnit())
+												{
+													map.map[k][j].unit[1].SetWorkUnit(false);
+													map.map[k][j].unit[3].SetWorkUnit(false);
+												}
+												else
+												{
+													map.map[k][j].unit[0].SetWorkUnit(false);
+													map.map[k][j].unit[2].SetWorkUnit(false);
+												}
+											}
+											if (bull[i].GetvellY() > 0)
+											{
+												if (map.map[k][j].unit[0].GetWorkUnit() ||
+													map.map[k][j].unit[1].GetWorkUnit())
+												{
+													map.map[k][j].unit[0].SetWorkUnit(false);
+													map.map[k][j].unit[1].SetWorkUnit(false);
+												}
+												else
+												{
+													map.map[k][j].unit[2].SetWorkUnit(false);
+													map.map[k][j].unit[3].SetWorkUnit(false);
+												}
+											}
+											if (bull[i].GetvellY() < 0)
+											{
+												if (map.map[k][j].unit[2].GetWorkUnit() ||
+													map.map[k][j].unit[3].GetWorkUnit())
+												{
+													map.map[k][j].unit[2].SetWorkUnit(false);
+													map.map[k][j].unit[3].SetWorkUnit(false);
+												}
+												else
+												{
+													map.map[k][j].unit[0].SetWorkUnit(false);
+													map.map[k][j].unit[1].SetWorkUnit(false);
+												}
+											}
+										}
+										else
+										{
+											map.map[k][j].unit[l].SetWorkUnit(false);
+										}
 									}
 								}
 							}
 						}
 					}
+
 				}
 			}
 		}

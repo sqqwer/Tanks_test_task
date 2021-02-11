@@ -10,7 +10,7 @@ Upgrade::Upgrade(
 	void (*draw)(Sprite*, int, int), const powerUps type
 )
 	:
-	Block(name, possX, possY, draw), powerType(type)
+	Block(name, possX, possY, 0, false), powerType(type)
 {
 	SetLiveBlock(true);
 };
@@ -36,6 +36,7 @@ void Upgrade::PowerUpsColisium(Hero& hero)
 				getSpriteSize(hero.GetSprite(), hero.GetRefSizeW(), hero.GetRefSizeH());
 				hero.GetInfo();
 				SetLiveBlock(false);
+				
 			}
 			if (GetPowerType() == powerUps::MOREPOWER)
 			{
@@ -49,18 +50,21 @@ void Upgrade::PowerUpsColisium(Hero& hero)
 
 void Upgrade::Draw()
 {
-	if (GetLiveBlock())
+	for (int i = 0; i < unit.size(); i++)
 	{
-		if (GetMark() <= GetConstTime())
+		if (GetLiveBlock())
 		{
-			draw(GetSprite(), GetX(), GetY());
-		}
-		else
-		{
-			if (GetMark() >= GetConstTime() + lifeTime)
+			if (GetMark() <= GetConstTime())
 			{
-				ClearMark();
-				//upgrade.reloadTime -= 0.01f;
+				drawSprite(unit[i].GetSprite(), GetX(), GetY());
+			}
+			else
+			{
+				if (GetMark() >= GetConstTime() + lifeTime)
+				{
+					ClearMark();
+					//upgrade.reloadTime -= 0.01f;
+				}
 			}
 		}
 	}

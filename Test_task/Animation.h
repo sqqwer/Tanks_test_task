@@ -14,8 +14,7 @@
 	(vellX > 0) ? (wichOne >= sideC[(int)side::RIGHT] && wichOne < sideC[(int)side::BOTTOM])\
 		? wichOne : sideC[(int)side::RIGHT] : wichOne;
 
-enum class side
-{
+enum class side {
 	FRONT = 0,
 	LEFT = 1,
 	RIGHT = 2,
@@ -27,11 +26,12 @@ class Animation
 {
 public:
 	Animation();
-	Animation(
-		const char* name,
-		void (*draw)(Sprite*, int, int)
-	);
-	Sprite* DrawPresset(float& mark);
+	Animation(void (*draw)(Sprite*, int, int));
+	Animation(const char* name, void (*draw)(Sprite*, int, int));
+
+	virtual void Draw() = 0;
+
+	Sprite* DrawPresset(const float mark, const float animationMark);
 	Sprite* GetSprite() {
 		return obj[wichOne];
 	};
@@ -40,7 +40,6 @@ public:
 	};
 	int ShootSide();
 	void FreeSprite();
-	virtual void Draw() = 0;
 	bool LoadPreset(const char* name);
 	Sprite* Choice(float vellX, float vellY);
 protected:
@@ -52,7 +51,7 @@ protected:
 	unsigned int range{0};
 	int size_of_animation{};
 protected:
-	void (*draw)(Sprite*, int, int){};
 	std::map<int, Sprite*> obj{};
+	void (*draw)(Sprite*, int, int){0};
 };
 

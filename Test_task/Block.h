@@ -10,6 +10,11 @@ public:
 	Block(
 		const char* name_ini,
 		const float possX, const float possY,
+		void (*draw)(Sprite*, int, int)
+	);
+	Block(
+		const char* name_ini,
+		const float possX, const float possY,
 		void (*draw)(Sprite*, int, int), const int type
 	);
 	int GetType() const {
@@ -19,7 +24,7 @@ public:
 		wichOne = wich;
 	};
 	void Draw();
-	void Draw(float& mark);
+	void Draw(const float mark, const float animationMark);
 	void SetStatus(const side status) {
 		this->status = status;
 	};
@@ -42,12 +47,20 @@ public:
 		STEEL,
 		COUNT
 	};
-	bool work{false};
+	// work with work block
+	bool GetLiveBlock() const {
+		return blockLive;
+	};
+	void SetLiveBlock(const bool blockLive) {
+		this->blockLive = blockLive;
+	}
 private:
-	int type{0};
-	side status{side::COUNT};
 	// initialization virtual function
 	void ReleasedKey() {};
 	void PressKey(FRKey k) {};
+private:
+	int type{0};
+	bool blockLive{ false };
+	side status{side::COUNT};
 };
 

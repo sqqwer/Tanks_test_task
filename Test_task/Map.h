@@ -27,25 +27,29 @@ public:
 	int GetH() const {
 		return map_size_h;
 	};
-	void Draw();
-	void LoadMap(
-		const char* name, void (*draw)(Sprite*, int, int),
-		void (*getSize)(Sprite*, int&, int&)
-	);
 	float GetHszX() const {
 		return hsz_x;
 	};
 	float GetHszY() const {
 		return hsz_y;
 	};
+	bool GetStatus() const {
+		return isOpen;
+	}
+	void LoadMap(const char* name, void (*draw)(Sprite*, int, int));
+	void DrawMap(float& mark);
+private:
+	void Draw();
 
 public:
 	Block** map;
 	float mark{0};
 private:
+	bool isOpen{false};
 	float hsz_x{0};
 	float hsz_y{0};
 	int map_size_w;
 	int map_size_h;
+	const float animationMark = 0.15f;
 };
 

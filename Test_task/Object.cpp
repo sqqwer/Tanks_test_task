@@ -44,13 +44,13 @@ void Object::Colisium(
 )
 {
 	if (
-		possition_x + size_w - 2 >= possX &&
-		possition_x + 2 <= possX + width
+		possition_x + size_w - 1 >= possX &&
+		possition_x + 1 <= possX + width
 		)
 	{
 		if (
-			possition_y + size_h - 2 >= possY &&
-			possition_y + 2 <= possY + height
+			possition_y + size_h - 1 >= possY &&
+			possition_y + 1  <= possY + height
 			)
 		{
 			possition_x -= (velocity_x)*mark;

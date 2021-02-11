@@ -6,6 +6,15 @@ Block::Block()
 Block::Block(
 	const char* name_ini,
 	const float possX, const float possY,
+	void (*draw)(Sprite*, int, int)
+)
+	:
+	Animation(name_ini, draw), Object(possX, possY)
+{};
+
+Block::Block(
+	const char* name_ini,
+	const float possX, const float possY,
 	void (*draw)(Sprite*, int, int), const int  type
 )
 	:
@@ -17,7 +26,7 @@ void Block::Draw()
 	draw(GetWallPoss(), GetX(), GetY());
 };
 
-void Block::Draw(float& mark)
+void Block::Draw(const float mark, const float animationMark)
 {
-	draw(DrawPresset(mark), GetX(), GetY());
+	draw(DrawPresset(mark, animationMark), GetX(), GetY());
 };

@@ -1,24 +1,22 @@
 #include "Hero.h"
-#include "Framework.h"
 
 Hero::Hero()
 	:
-	Animation(), Object(), alives(0), live(true)
+	Animation(), Object(), health(0), live(true)
 {};
 
-Hero::Hero(
-	const char* name_ini, const char* bull_preset,
-	int lives, const float poss_x, const float poss_y,
+Hero::Hero(tankPreset type,
+	const float poss_x, const float poss_y,
 	void (*draw)(Sprite*, int, int)
 )
 	:
-	Animation(name_ini, draw), bull_preset(bull_preset),
-	Object(poss_x, poss_y), alives(lives)
-{};
+	Animation(draw), Object(poss_x, poss_y)
+{
+	Hero::Load(type);
+};
 // Function update possiition of object
 void Hero::PressKey(FRKey k)
 {
-	const float speed = 70.0f;
 	if (k == FRKey::RIGHT)
 	{
 		velocity_x = speed;
@@ -53,19 +51,33 @@ void Hero::TankColisium(Enemy& en, const float mark)
 			possition_y <= en.GetY() + en.GetSpH()
 			)
 		{
-			en.BackX(en.GetvellX(), mark);
-			en.BackY(en.GetvellY(), mark);
-			en.SetVellX(0.0f);
-			en.SetVellY(0.0f);
+			if (en.isAlive())
+			{
+				if (pres.GetTankType() == tankPreset::WIDTHTANK)
+				{
+					en.SetLive(false);
+					en.BackX(en.GetvellX(), mark);
+					en.BackY(en.GetvellY(), mark);
+					en.SetVellX(0.0f);
+					en.SetVellY(0.0f);
+				}
+				else
+				{
+					en.BackX(en.GetvellX(), mark);
+					en.BackY(en.GetvellY(), mark);
+					en.SetVellX(0.0f);
+					en.SetVellY(0.0f);
 
 
-			if (!velocity_y)
-			{
-				BackX(velocity_x, mark);
-			}
-			else if (!velocity_x)
-			{
-				BackY(velocity_y, mark);
+					if (!velocity_y)
+					{
+						BackX(velocity_x, mark);
+					}
+					else if (!velocity_x)
+					{
+						BackY(velocity_y, mark);
+					}
+				}
 			}
 		}
 	}
@@ -81,10 +93,11 @@ void Hero::Shoot()
 {
 	sd = (side)ShootSide();
 	ChioceOutShoot();
-	bull.push_back(Bullet(
-		bull_preset.c_str(),
-		(sd == side::LEFT) ? -vellB : (sd == side::RIGHT) ? vellB : 0.0f,
-		(sd == side::FRONT) ? -vellB : (sd == side::BOTTOM) ? vellB : 0.0f,
+	bull.push_back(Bullet(pres.GetBulletAnimPress(),
+		(sd == side::LEFT) ? -(vellB + (velocity_x * -1)) :
+		(sd == side::RIGHT) ? vellB + velocity_x : 0.0f,
+		(sd == side::FRONT) ? -(vellB + (velocity_y * -1)) :
+		(sd == side::BOTTOM) ? vellB + velocity_y : 0.0f,
 		out_x, out_y, true, drawSprite
 	));
 };
@@ -157,7 +170,7 @@ void Hero::UpdateBullet(
 			{
 				for (int j = 0; j < map.GetW(); j++)
 				{
-					if (map.map[k][j].work &&
+					if (map.map[k][j].GetLiveBlock() &&
 						((int)Type::WATER != map.map[k][j].GetType() &&
 						 ((int)Type::LEAAFS) != map.map[k][j].GetType()))
 					{
@@ -206,7 +219,8 @@ void Hero::UpdateBullet(
 									}
 									else
 									{
-										map.map[k][j].work = false;
+										map.map[k][j].SetLiveBlock(false);
+										map.map[k][j].FreeSprite();
 									}
 								}
 							}
@@ -226,4 +240,16 @@ void Hero::UpdateBullet(
 	{
 		bull.shrink_to_fit();
 	}
+};
+//Load Preset
+void Hero::Load(tankPreset type)
+{
+	if (obj.size())
+		FreeSprite();
+	pres.LoadPreset(type);
+	this->health = pres.GetHealth();
+	this->speed = pres.GetTankVel();
+	this->vellB = pres.GetBulletVel();
+	this->reloadTime = pres.GetBulletReload();
+	LoadPreset(pres.GetTankAnimPress());
 };

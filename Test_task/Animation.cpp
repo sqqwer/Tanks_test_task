@@ -1,6 +1,5 @@
 #include "Animation.h"
 
-#include <string>
 #include <fstream>
 #include <iostream>
 
@@ -9,6 +8,11 @@ Animation::Animation()
 	wichOne(0)
 {};
 // poot path of ini file
+Animation::Animation(void (*draw)(Sprite*, int, int)
+)
+	:
+	size_of_animation(0), wichOne(0), draw(draw)
+{};
 Animation::Animation(
 	const char* name, void (*draw)(Sprite*, int, int)
 )
@@ -49,7 +53,7 @@ bool Animation::LoadPreset(const char* name)
 		Sprite* t = createSprite(tmp.c_str());
 		obj.insert(std::pair<int, Sprite*>(i++, t));
 	}
-	else
+	if (!file.is_open() || !obj.size())
 	{
 		file.close();
 		return (isOpen = false);
@@ -57,7 +61,7 @@ bool Animation::LoadPreset(const char* name)
 	size_of_animation = i;
 	range = i / 4;
 	sideC[0] = 0;
-	for (int i = 1; i < 5; i++)
+	for (int i = 1; i < (int)side::COUNT + 1; i++)
 	{
 		sideC[i] = sideC[i - 1] + range;
 	}
@@ -108,9 +112,9 @@ void Animation::FreeSprite()
 	}
 };
 // Draw Presset
-Sprite* Animation::DrawPresset(float& mark)
+Sprite* Animation::DrawPresset(const float mark, const float animationMark)
 {
-	if (mark > 0.15f) wichOne++;
+	if (mark > animationMark) wichOne++;
 	if (wichOne >= obj.size()) wichOne = 0;
 	return obj[wichOne];
 };

@@ -154,9 +154,12 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Land.cpp" />
+    <ClCompile Include="Logic.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Preset.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Upgrade.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -166,26 +169,30 @@
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="Land.h" />
+    <ClInclude Include="Logic.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Preset.h" />
     <ClInclude Include="Time.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="FrameworkRelease_x64.lib" />
+    <ClInclude Include="Upgrade.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="block.ini" />
     <None Include="bullet.ini" />
-    <None Include="FrameworkRelease_x64.dll" />
+    <None Include="Enemy_preset1.ini" />
     <None Include="Hero_model.ini" />
     <None Include="Hero_model_ver1.ini" />
+    <None Include="Hero_preset.ini" />
     <None Include="land.ini" />
     <None Include="leafs.ini" />
     <None Include="Map.ini" />
     <None Include="monument.ini" />
     <None Include="steel.ini" />
+    <None Include="tank2.ini" />
     <None Include="TemplateMap.ini" />
+    <None Include="upgrade.ini" />
     <None Include="water.ini" />
+    <None Include="WidthTank.ini" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="BottomSide1.tga" />
@@ -198,11 +205,15 @@
     <Image Include="bullet5.tga" />
     <Image Include="bullet6.tga" />
     <Image Include="brick.tga" />
-    <Image Include="Image.bmp" />
     <Image Include="brickFront.tga" />
     <Image Include="brickBottom.tga" />
     <Image Include="brickRigth.tga" />
     <Image Include="brickLeft.tga" />
+    <Image Include="extraLife.tga" />
+    <Image Include="tank_ver_1Right1.tga" />
+    <Image Include="tank_ver_1Left1.tga" />
+    <Image Include="tank_ver_1Front1.tga" />
+    <Image Include="tank_ver_1Bottom1.tga" />
     <Image Include="steelBlockBottom.tga" />
     <Image Include="steelBlockFront.tga" />
     <Image Include="steelBlockLeft.tga" />

@@ -2,27 +2,24 @@
 
 Enemy::Enemy()
 	:
-	Animation(), Object(), alives(0), live(true),
-	out_x(0.0f), out_y(0.0f)
+	Animation(), Object(), health(0), live(true)
 {};
 
-Enemy::Enemy(
-	const char* name_ini, const char* bull_preset,
-	int lives, const float poss_x, const float poss_y,
+Enemy::Enemy(tankPreset type,
+	const float poss_x, const float poss_y,
 	void (*draw)(Sprite*, int, int)
 )
 	:
-	Animation(name_ini, draw), bull_preset(bull_preset),
-	Object(poss_x, poss_y), alives(lives), live(true),
-	out_x(0.0f), out_y(0.0f)
-{};
+	Animation(draw), Object(poss_x, poss_y)
+{
+	Load(type);
+};
 
 void Enemy::Shoot()
 {
 	sd = (side)ShootSide();
 	ChioceOutShoot();
-	bull.push_back(Bullet(
-		bull_preset.c_str(),
+	bull.push_back(Bullet(pres.GetBulletAnimPress(),
 		(sd == side::LEFT) ? -vellB : (sd == side::RIGHT) ? vellB : 0.0f,
 		(sd == side::FRONT) ? -vellB : (sd == side::BOTTOM) ? vellB : 0.0f,
 		out_x, out_y, true, drawSprite
@@ -101,7 +98,7 @@ void Enemy::UpdateBullet(
 			{
 				for (int j = 0; j < map.GetW(); j++)
 				{
-					if (map.map[k][j].work &&
+					if (map.map[k][j].GetLiveBlock() &&
 						((int)Type::WATER != map.map[k][j].GetType() &&
 							((int)Type::LEAAFS) != map.map[k][j].GetType()))
 					{
@@ -147,7 +144,8 @@ void Enemy::UpdateBullet(
 									}
 									else
 									{
-										map.map[k][j].work = false;
+										map.map[k][j].SetLiveBlock(false);
+										map.map[k][j].FreeSprite();
 									}
 								}
 							}
@@ -254,4 +252,16 @@ void Enemy::TankColisium(
 			velocity_y = 0;
 		}
 	}
+};
+//Load Preset
+void Enemy::Load(tankPreset type)
+{
+	if (obj.size())
+		FreeSprite();
+	pres.LoadPreset(type);
+	this->health = pres.GetHealth();
+	this->speed = pres.GetTankVel();
+	this->vellB = pres.GetBulletVel();
+	this->reloadTime = pres.GetBulletReload();
+	LoadPreset(pres.GetTankAnimPress());
 };

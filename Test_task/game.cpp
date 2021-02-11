@@ -14,6 +14,7 @@ public:
 
 	virtual void PreInit(int& width, int& height, bool& fullscreen)
 	{
+		screenX = screenY = 0;
 		if (*argc == 3)
 		{
 			if (!strcmp(argv[1],"-window"))
@@ -55,18 +56,9 @@ public:
 	}
 
 	virtual bool Init() {
-		logic.InitAllResources("Map.ini", "land.ini");	
+		logic.InitAllResources("./data/map/Map.ini", "./data/land/land.ini");	
 		if (!logic.InitSpriteSize())
 			return false;
-		/*float x = 10.0f;
-		float y = 50.0f;
-		for (int i = 0; i < 10; i++)
-		{
-			enemy.push_back(Enemy(tankPreset::HEROTANK1, x, y, drawSprite));
-			if (i % 2 == 0) enemy[i].SetVellX(70.0f); else enemy[i].SetVellY(100.0f);
-			getSpriteSize(enemy[i].GetSprite(), enemy[i].GetRefSizeW(), enemy[i].GetRefSizeH());
-			x += 40; y += 40;
-		}*/
 		return true;
 	}
 
@@ -79,7 +71,7 @@ public:
 	}
 
 	virtual bool Tick() {
-		logic.UpdateTank(screenX - 110, screenY - 30);
+		logic.UpdateTank(screenX - 80, screenY - 30);
 		return false;
 	}
 

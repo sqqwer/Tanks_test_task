@@ -14,6 +14,14 @@ enum class Type {
 	COUNT
 };
 
+struct possition {
+	possition(const float posX, const float posY)
+		: posX(posX), posY(posY)
+	{};
+	float posX;
+	float posY;
+};
+
 class Map
 {
 public:
@@ -40,13 +48,20 @@ public:
 	void GetMapSpriteSize();
 	void LoadMap(const char* name, void (*draw)(Sprite*, int, int));
 	void DrawMap(float& mark);
+	// Mark
+	void UpdateMark(const float mark) {
+		this->mark += mark;
+	};
+	float& GetRefMark() {
+		return mark;
+	};
 private:
 	void Draw();
-
 public:
 	Block** map = nullptr;
-	float mark{ 0 };
+	std::vector<possition> enemySpawn{};
 private:
+	float mark{ 0 };
 	bool isOpen{ false };
 	float hsz_x{ 0 };
 	float hsz_y{ 0 };

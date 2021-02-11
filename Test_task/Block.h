@@ -3,19 +3,15 @@
 #include "Object.h"
 #include "Animation.h"
 
-class Block : public Animation, public Object
+#include <vector>
+
+class Block : public Object
 {
 public:
 	Block();
 	Block(
-		const char* name_ini,
-		const float possX, const float possY,
-		void (*draw)(Sprite*, int, int)
-	);
-	Block(
-		const char* name_ini,
-		const float possX, const float possY,
-		void (*draw)(Sprite*, int, int), const int type
+		const char* name_ini, const float possX, 
+		const float possY, const int type, bool triger
 	);
 	void ClearBlock();
 	// Draw function
@@ -32,13 +28,13 @@ public:
 	side GetStatus() const {
 		return status;
 	};
-	Sprite* GetWallPoss() {
-		return obj[(int)status];
-	};
-	// Seter
-	void SetWich(const int wich) {
-		wichOne = wich;
-	};
+	//Sprite* GetWallPoss() {
+	//	return obj[(int)status];
+	//};
+	//// Seter
+	//void SetWich(const int wich) {
+	//	wichOne = wich;
+	//};
 	void SetPossX(const float addX) {
 		possition_x += addX;
 	};
@@ -60,6 +56,8 @@ public:
 	void SetLiveBlock(const bool blockLive) {
 		this->blockLive = blockLive;
 	}
+public:
+	std::vector<Animation> unit{};
 private:
 	// initialization virtual function
 	void ReleasedKey() {};
@@ -67,6 +65,7 @@ private:
 private:
 	int type{0};
 	bool blockLive{ false };
+	
 	side status{side::COUNT};
 };
 

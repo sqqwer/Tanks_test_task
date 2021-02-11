@@ -43,7 +43,7 @@ public:
 	};
 	void SetTankPreset(const tankPreset type) {
 		nowTank = type;
-	}
+	};
 	// Lives of Tank
 	void AddLives(const int health) {
 		this->health += health;

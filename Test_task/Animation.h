@@ -28,8 +28,12 @@ public:
 	Animation();
 	Animation(void (*draw)(Sprite*, int, int));
 	Animation(const char* name, void (*draw)(Sprite*, int, int));
+	Animation(
+		const char* name, void (*draw)(Sprite*, int, int),
+		const float posX, const float posY, bool work
+	);
 
-	virtual void Draw() = 0;
+	virtual void Draw();
 	// Staus of class and frame
 	bool GetStatus() const {
 		return isOpen;
@@ -44,7 +48,23 @@ public:
 	// Load Free Resource
 	void FreeSprite();
 	bool LoadPreset(const char* name);
+	// Get Poss
+	float GetAnimPosX() const {
+		return posX;
+	};
+	float GetAnimPosY() const {
+		return posY;
+	};
+	bool GetWorkUnit() const {
+		return work;
+	};
+	void SetWorkUnit(const bool work) {
+		this->work = work;
+	};
 protected:
+	bool work = false;
+	float posX{ 0 };
+	float posY{ 0 };
 	side sd{};
 	int wichOne{};
 	int sideC[5]{};

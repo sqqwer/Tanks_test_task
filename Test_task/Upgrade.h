@@ -21,7 +21,7 @@ public:
 		const char* name, const float possX, const float possY,
 		void (*draw)(Sprite*, int, int), const powerUps type
 	);
-	void Draw() override;
+	void Draw();
 	// Colisium
 	void PowerUpsColisium(Hero& hero);
 	// Markfunction

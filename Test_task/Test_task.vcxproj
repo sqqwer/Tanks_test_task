@@ -105,6 +105,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,6 +138,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -177,92 +179,100 @@
     <ClInclude Include="Upgrade.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="block.ini" />
-    <None Include="Hero_preset2.ini" />
-    <None Include="darkSidePower.ini" />
-    <None Include="upgradeBonusGear.ini" />
-    <None Include="bullet.ini" />
-    <None Include="Enemy_preset1.ini" />
-    <None Include="Hero_model.ini" />
-    <None Include="Hero_model_ver1.ini" />
-    <None Include="Hero_preset1.ini" />
-    <None Include="land.ini" />
-    <None Include="leafs.ini" />
-    <None Include="Map.ini" />
-    <None Include="Map2.ini" />
-    <None Include="monument.ini" />
-    <None Include="upgradeRockIt.ini" />
-    <None Include="steel.ini" />
-    <None Include="tank2.ini" />
-    <None Include="TemplateMap.ini" />
-    <None Include="upgradeArrow.ini" />
-    <None Include="water.ini" />
-    <None Include="WidthTank.ini" />
+    <Image Include="data\block\brick\model\new\oneUnit.tga" />
+    <Image Include="data\block\brick\model\old\brick.tga" />
+    <Image Include="data\block\brick\model\old\brickBottom.tga" />
+    <Image Include="data\block\brick\model\old\brickFront.tga" />
+    <Image Include="data\block\brick\model\old\brickLeft.tga" />
+    <Image Include="data\block\brick\model\old\brickRigth.tga" />
+    <Image Include="data\block\leafs\model\leafsBlock.tga" />
+    <Image Include="data\block\monument\model\monumentBlock.tga" />
+    <Image Include="data\block\steel\model\new\stellUnit.tga" />
+    <Image Include="data\block\steel\model\old\steelBlock.tga" />
+    <Image Include="data\block\steel\model\old\steelBlockBottom.tga" />
+    <Image Include="data\block\steel\model\old\steelBlockFront.tga" />
+    <Image Include="data\block\steel\model\old\steelBlockLeft.tga" />
+    <Image Include="data\block\steel\model\old\steelBlockRight.tga" />
+    <Image Include="data\block\water\model\water1.tga" />
+    <Image Include="data\block\water\model\water2.tga" />
+    <Image Include="data\block\water\model\water3.tga" />
+    <Image Include="data\block\water\model\water4.tga" />
+    <Image Include="data\block\water\model\water5.tga" />
+    <Image Include="data\block\water\model\water6.tga" />
+    <Image Include="data\bullet\model\bullet1.tga" />
+    <Image Include="data\bullet\model\bullet2.tga" />
+    <Image Include="data\bullet\model\bullet3.tga" />
+    <Image Include="data\bullet\model\bullet4.tga" />
+    <Image Include="data\bullet\model\bullet5.tga" />
+    <Image Include="data\bullet\model\bullet6.tga" />
+    <Image Include="data\land\model\land.tga" />
+    <Image Include="data\land\model\Land1.tga" />
+    <Image Include="data\tank\model\model1\BottomSide1.tga" />
+    <Image Include="data\tank\model\model1\BottomSide2.tga" />
+    <Image Include="data\tank\model\model1\BottomSide3.tga" />
+    <Image Include="data\tank\model\model1\FrontAnimaiot1.tga" />
+    <Image Include="data\tank\model\model1\FrontAnimaiot2.tga" />
+    <Image Include="data\tank\model\model1\FrontAnimaiot3.tga" />
+    <Image Include="data\tank\model\model1\Leftside1.tga" />
+    <Image Include="data\tank\model\model1\Leftside2.tga" />
+    <Image Include="data\tank\model\model1\Leftside3.tga" />
+    <Image Include="data\tank\model\model1\RightSde1.tga" />
+    <Image Include="data\tank\model\model1\RightSde2.tga" />
+    <Image Include="data\tank\model\model1\RightSde3.tga" />
+    <Image Include="data\tank\model\model2\Tank_Botton1.tga" />
+    <Image Include="data\tank\model\model2\Tank_Botton2.tga" />
+    <Image Include="data\tank\model\model2\Tank_Botton3.tga" />
+    <Image Include="data\tank\model\model2\Tank_Botton4.tga" />
+    <Image Include="data\tank\model\model2\Tank_Front1.tga" />
+    <Image Include="data\tank\model\model2\Tank_Front2.tga" />
+    <Image Include="data\tank\model\model2\Tank_Front3.tga" />
+    <Image Include="data\tank\model\model2\Tank_Front4.tga" />
+    <Image Include="data\tank\model\model2\Tank_Left1.tga" />
+    <Image Include="data\tank\model\model2\Tank_Left2.tga" />
+    <Image Include="data\tank\model\model2\Tank_Left3.tga" />
+    <Image Include="data\tank\model\model2\Tank_Left4.tga" />
+    <Image Include="data\tank\model\model2\Tank_Right1.tga" />
+    <Image Include="data\tank\model\model2\Tank_Right2.tga" />
+    <Image Include="data\tank\model\model2\Tank_Right3.tga" />
+    <Image Include="data\tank\model\model2\Tank_Right4.tga" />
+    <Image Include="data\tank\model\model3\tank_ver_1Bottom1.tga" />
+    <Image Include="data\tank\model\model3\tank_ver_1Front1.tga" />
+    <Image Include="data\tank\model\model3\tank_ver_1Left1.tga" />
+    <Image Include="data\tank\model\model3\tank_ver_1Right1.tga" />
+    <Image Include="data\upgrade\model\bonusGear.tga" />
+    <Image Include="data\upgrade\model\extraLife.tga" />
+    <Image Include="data\upgrade\model\rockIt.tga" />
+    <Image Include="data\upgrade\model\upgradeTank.tga" />
+    <Image Include="data\upgrade\model\youUnderestimateMyPower.tga" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bonusGear.tga" />
-    <Image Include="BottomSide1.tga" />
-    <Image Include="BottomSide2.tga" />
-    <Image Include="BottomSide3.tga" />
-    <Image Include="FrontAnimaiot3.tga" />
-    <Image Include="bullet2.tga" />
-    <Image Include="bullet3.tga" />
-    <Image Include="bullet4.tga" />
-    <Image Include="bullet5.tga" />
-    <Image Include="bullet6.tga" />
-    <Image Include="brick.tga" />
-    <Image Include="brickFront.tga" />
-    <Image Include="brickBottom.tga" />
-    <Image Include="brickRigth.tga" />
-    <Image Include="brickLeft.tga" />
-    <Image Include="extraLife.tga" />
-    <Image Include="Image.tga" />
-    <Image Include="youUnderestimateMyPower.tga" />
-    <Image Include="rockIt.tga" />
-    <Image Include="tank_ver_1Right1.tga" />
-    <Image Include="tank_ver_1Left1.tga" />
-    <Image Include="tank_ver_1Front1.tga" />
-    <Image Include="tank_ver_1Bottom1.tga" />
-    <Image Include="steelBlockBottom.tga" />
-    <Image Include="steelBlockFront.tga" />
-    <Image Include="steelBlockLeft.tga" />
-    <Image Include="steelBlockRight.tga" />
-    <Image Include="leafsBlock.tga" />
-    <Image Include="monumentBlock.tga" />
-    <Image Include="steelBlock.tga" />
-    <Image Include="upgradeTank.tga" />
-    <Image Include="water6.tga" />
-    <Image Include="water5.tga" />
-    <Image Include="water4.tga" />
-    <Image Include="water3.tga" />
-    <Image Include="water2.tga" />
-    <Image Include="Tank_Front4.tga" />
-    <Image Include="Tank_Left4.tga" />
-    <Image Include="Tank_Right4.tga" />
-    <Image Include="Tank_Botton4.tga" />
-    <Image Include="Land.tga" />
-    <Image Include="RightSde3.tga" />
-    <Image Include="Leftside3.tga" />
-    <Image Include="Tank_Right1.tga" />
-    <Image Include="Tank_Right2.tga" />
-    <Image Include="Tank_Right3.tga" />
-    <Image Include="Tank_Left3.tga" />
-    <Image Include="Tank_Left2.tga" />
-    <Image Include="Tank_Front3.tga" />
-    <Image Include="Tank_Front2.tga" />
-    <Image Include="Tank_Front1.tga" />
-    <Image Include="Tank_Botton1.tga" />
-    <Image Include="Tank_Botton2.tga" />
-    <Image Include="Tank_Botton3.tga" />
-    <Image Include="RightSde1.tga" />
-    <Image Include="RightSde2.tga" />
-    <Image Include="Leftside2.tga" />
-    <Image Include="Leftside1.tga" />
-    <Image Include="bullet1.tga" />
-    <Image Include="FrontAnimaiot1.tga" />
-    <Image Include="FrontAnimaiot2.tga" />
-    <Image Include="Tank_Left1.tga" />
-    <Image Include="water1.tga" />
+    <None Include="data\block\brick\BLK.ini" />
+    <None Include="data\block\brick\block.ini" />
+    <None Include="data\block\leafs\leafs.ini" />
+    <None Include="data\block\monument\monument.ini" />
+    <None Include="data\block\steel\SBL.ini" />
+    <None Include="data\block\steel\steel.ini" />
+    <None Include="data\block\water\water.ini" />
+    <None Include="data\bullet\bullet.ini" />
+    <None Include="data\land\land.ini" />
+    <None Include="data\map\Map.ini" />
+    <None Include="data\map\Map2.ini" />
+    <None Include="data\map\TemplateMap.ini" />
+    <None Include="data\tank\init\Hero_model.ini" />
+    <None Include="data\tank\init\Hero_model_ver1.ini" />
+    <None Include="data\tank\init\tank2.ini" />
+    <None Include="data\tank\preset\Enemy_preset1.ini" />
+    <None Include="data\tank\preset\Hero_preset1.ini" />
+    <None Include="data\tank\preset\Hero_preset2.ini" />
+    <None Include="data\tank\preset\WidthTank.ini" />
+    <None Include="data\upgrade\darkSidePower.ini" />
+    <None Include="data\upgrade\upgradeArrow.ini" />
+    <None Include="data\upgrade\upgradeBonusGear.ini" />
+    <None Include="data\upgrade\upgradeRockIt.ini" />
+    <None Include="FrameworkRelease_x64.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="FrameworkRelease_x64.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

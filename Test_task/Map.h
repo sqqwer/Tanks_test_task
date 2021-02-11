@@ -5,7 +5,6 @@
 enum class Type {
 	NOTHING,
 	BRICK,
-//	HALFBRICK,
 	STEEL,
 	WATER,
 	LEAAFS,
@@ -46,11 +45,13 @@ private:
 
 public:
 	Block** map = nullptr;
-	float mark{0};
+	float mark{ 0 };
 private:
-	bool isOpen{false};
-	float hsz_x{0};
-	float hsz_y{0};
+	bool isOpen{ false };
+	float hsz_x{ 0 };
+	float hsz_y{ 0 };
+	float monument_x{ 0 };
+	float monument_y{ 0 };
 	int map_size_w;
 	int map_size_h;
 	const float animationMark = 0.15f;

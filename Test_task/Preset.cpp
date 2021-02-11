@@ -20,9 +20,10 @@ void Preset::LoadPreset(tankPreset type)
 	switch (type)
 	{
 	case tankPreset::HEROTANK1:
-		ReadFile("Hero_preset.ini");
+		ReadFile("Hero_preset1.ini");
 		break;
 	case tankPreset::HEROTANK2:
+		ReadFile("Hero_preset2.ini");
 		break;
 	case tankPreset::HEROTANK3:
 		break;

@@ -202,11 +202,17 @@
     <None Include="Enemy_preset1.ini">
       <Filter>Resource Files\Preset file\Tank</Filter>
     </None>
-    <None Include="Hero_preset.ini">
-      <Filter>Resource Files\Preset file\Tank</Filter>
-    </None>
     <None Include="WidthTank.ini">
       <Filter>Resource Files\Preset file\Tank</Filter>
+    </None>
+    <None Include="Hero_preset2.ini">
+      <Filter>Resource Files\Preset file\Tank</Filter>
+    </None>
+    <None Include="Hero_preset1.ini">
+      <Filter>Resource Files\Preset file\Tank</Filter>
+    </None>
+    <None Include="darkSidePower.ini">
+      <Filter>Resource Files\Preset file\Upgrade</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -392,6 +398,12 @@
     </Image>
     <Image Include="bonusGear.tga">
       <Filter>Resource Files\upgrade</Filter>
+    </Image>
+    <Image Include="youUnderestimateMyPower.tga">
+      <Filter>Resource Files\upgrade</Filter>
+    </Image>
+    <Image Include="Image.tga">
+      <Filter>Resource Files\block\brick</Filter>
     </Image>
   </ItemGroup>
 </Project>

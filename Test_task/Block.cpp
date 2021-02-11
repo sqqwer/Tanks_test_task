@@ -35,3 +35,8 @@ void Block::Draw(const float mark, const float animationMark)
 {
 	draw(DrawPresset(mark, animationMark), GetX(), GetY());
 };
+
+void Block::DrawBrick()
+{
+	draw(GetWallPoss(), GetX(), GetY());
+};

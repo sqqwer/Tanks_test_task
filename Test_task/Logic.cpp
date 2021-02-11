@@ -9,9 +9,9 @@ void Logic::InitAllResources(const char* nameMap, const char* nameLand)
 {
 	tm = Time(getTickCount);
 	land = Land(nameLand, drawSprite);
-	upgrade.push_back(Upgrade("upgradeArrow.ini", 150, 150, drawSprite, powerUps::UPGRAGE));
+	upgrade.push_back(Upgrade("upgradeArrow.ini", 150, 150, drawSprite, powerUps::UPGRADE));
 	upgrade.push_back(Upgrade("upgradeBonusGear.ini", 180, 150, drawSprite, powerUps::EXTRALIVE));
-	upgrade.push_back(Upgrade("upgradeRockIt.ini", 210, 150, drawSprite, powerUps::STELLWALL));
+	upgrade.push_back(Upgrade("darkSidePower.ini", 210, 150, drawSprite, powerUps::MOREPOWER));
 	map.LoadMap(nameMap, drawSprite);
 	hero = Hero(tankPreset::HEROTANK1, map.GetHszX(), map.GetHszY(), drawSprite);
 };
@@ -72,8 +72,8 @@ void Logic::Draw()
 {
 	mark = tm.Mark();
 	hero.UpdateReloadMark(mark); map.mark += mark; 
-	land.Draw(); hero.Draw(); map.DrawMap(map.mark);
-	DrawUpgrade(mark);
+	land.Draw(); map.DrawMap(map.mark); hero.TickTimer(-mark);
+	DrawUpgrade(mark); hero.Draw();
 };
 
 void Logic::PowerUpsColisium()
@@ -128,10 +128,13 @@ void Logic::UpdateHeroTank(const int screenX, const int screenY)
 	hero.UpdateBullet(screenX, screenY, mark, enemy, map);
 	hero.Update(screenX, screenY, mark);
 	PowerUpsColisium(); WallHeroColisium();
+	if (hero.GetPowerTimer() < 0)
+		hero.SetPower(false);
 	if (hero.GetX() > 450)
 	{
 		LoadNewMap("Map2.ini");
 	}
+
 };
 
 void Logic::UpdateEnemyTank(const int screenX, const int screenY)

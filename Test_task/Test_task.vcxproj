@@ -178,12 +178,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="block.ini" />
+    <None Include="Hero_preset2.ini" />
+    <None Include="darkSidePower.ini" />
     <None Include="upgradeBonusGear.ini" />
     <None Include="bullet.ini" />
     <None Include="Enemy_preset1.ini" />
     <None Include="Hero_model.ini" />
     <None Include="Hero_model_ver1.ini" />
-    <None Include="Hero_preset.ini" />
+    <None Include="Hero_preset1.ini" />
     <None Include="land.ini" />
     <None Include="leafs.ini" />
     <None Include="Map.ini" />
@@ -214,6 +216,8 @@
     <Image Include="brickRigth.tga" />
     <Image Include="brickLeft.tga" />
     <Image Include="extraLife.tga" />
+    <Image Include="Image.tga" />
+    <Image Include="youUnderestimateMyPower.tga" />
     <Image Include="rockIt.tga" />
     <Image Include="tank_ver_1Right1.tga" />
     <Image Include="tank_ver_1Left1.tga" />

@@ -147,7 +147,9 @@ void Map::Draw()
 		for (int j = 0; j < map_size_w; j++)
 		{
 			if (map[i][j].GetLiveBlock())
+			{
 				map[i][j].Draw();
+			}
 		}
 	}
 };
@@ -167,6 +169,10 @@ void Map::DrawMap(float& mark)
 					)
 				{
 					map[i][j].Block::Draw(mark, animationMark);
+				}
+				else if ((int)Type::BRICK == map[i][j].GetType())
+				{
+					map[i][j].Block::DrawBrick();
 				}
 				else
 				{

@@ -133,7 +133,7 @@ void Hero::ClerBull(const unsigned int elem)
 
 void Hero::Draw()
 {
-	draw(
+	drawSprite(
 		Choice(velocity_x, velocity_y), GetX(), GetY()
 	);
 };
@@ -187,12 +187,12 @@ void Hero::UpdateBullet(
 								(float)map.map[k][j].GetY() - 2.0f)
 							{
 								bull[i].SetWork(false);
-								if (
-									//(int)Type::STEEL != map.map[k][j].GetType() &&
-									(int)Type::MONUMENT != map.map[k][j].GetType()
-									)
+								if ((int)Type::MONUMENT != map.map[k][j].GetType())
 								{
-									if (map.map[k][j].GetStatus() == side::COUNT)
+									if ((int)Type::STEEL == map.map[k][j].GetType() &&
+										nowTank == tankPreset::HEROTANK1 && !GetPower())
+											continue;
+									if (map.map[k][j].GetStatus() == side::COUNT && !GetPower())
 									{
 										side sd = 
 											(bull[i].GetvellX() < 0) ? side::RIGHT :
@@ -244,14 +244,15 @@ void Hero::UpdateBullet(
 //Load Preset
 void Hero::Load(tankPreset type)
 {
-	if (obj.size())
-		FreeSprite();
+	ClearAllocatedMemory();
 	pres.LoadPreset(type);
-	this->health = pres.GetHealth();
+	if (GetTankPreset() == tankPreset::COUNT)
+		this->health += pres.GetHealth();
 	this->speed = pres.GetTankVel();
 	this->vellB = pres.GetBulletVel();
 	this->reloadTime = pres.GetBulletReload();
 	LoadPreset(pres.GetTankAnimPress());
+	SetTankPreset(type);
 };
 
 void Hero::ClearAllBullet()

@@ -20,6 +20,7 @@ public:
 	void ClearBlock();
 	// Draw function
 	void Draw();
+	void DrawBrick();
 	void Draw(const float mark, const float animationMark);
 	void SetStatus(const side status) {
 		this->status = status;

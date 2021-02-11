@@ -3,10 +3,13 @@
 #include "Hero.h"
 #include "Block.h"
 
+const float powerTimer = 5.0f;
+
 enum class powerUps {
-	UPGRAGE,
+	UPGRADE,
 	EXTRALIVE,
 	STELLWALL,
+	MOREPOWER,
 	COUNT
 };
 

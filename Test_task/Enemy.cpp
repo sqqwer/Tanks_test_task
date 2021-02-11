@@ -100,7 +100,7 @@ void Enemy::UpdateBullet(
 				{
 					if (map.map[k][j].GetLiveBlock() &&
 						((int)Type::WATER != map.map[k][j].GetType() &&
-							((int)Type::LEAAFS) != map.map[k][j].GetType()))
+						((int)Type::LEAAFS) != map.map[k][j].GetType()))
 					{
 						if (bull[i].GetX() + bull[i].GetSpW() <=
 							(float)map.map[k][j].GetX() +

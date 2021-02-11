@@ -145,7 +145,7 @@ void Enemy::UpdateBullet(
 									else
 									{
 										map.map[k][j].SetLiveBlock(false);
-										map.map[k][j].FreeSprite();
+										map.map[k][j].ClearBlock();
 									}
 								}
 							}

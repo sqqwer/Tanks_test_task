@@ -33,9 +33,10 @@ public:
 	void UpdateMouseClick(FRMouseButton button, bool isReleased);
 private:
 	void Draw();
-	void PowerUpsColisium();
+	void DrawUpgrade(const float mark);
 	void UpdateHeroTank(const int screenX, const int screenY);
 	void UpdateEnemyTank(const int screenX, const int screenY);
+	void PowerUpsColisium();
 	void WallHeroColisium();
 	bool CheackInitConstructor();
 private:
@@ -44,8 +45,8 @@ private:
 	Time tm{};
 	Hero  hero{};
 	Land  land{};
-	Upgrade upgrade{};
-	std::vector<Enemy> enemy;
+	std::vector<Enemy> enemy{};
 	unsigned int enemyBufeet{0};
+	std::vector<Upgrade> upgrade{};
 };
 

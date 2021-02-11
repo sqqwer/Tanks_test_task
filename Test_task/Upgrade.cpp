@@ -7,10 +7,10 @@ Upgrade::Upgrade()
 
 Upgrade::Upgrade(
 	const char* name, const float possX, const float possY,
-	void (*draw)(Sprite*, int, int)
+	void (*draw)(Sprite*, int, int), const powerUps type
 )
 	:
-	Block(name, possX, possY, draw)
+	Block(name, possX, possY, draw), powerType(type)
 {
 	SetLiveBlock(true);
 };

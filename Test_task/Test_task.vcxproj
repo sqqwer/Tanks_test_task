@@ -178,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="block.ini" />
+    <None Include="upgradeBonusGear.ini" />
     <None Include="bullet.ini" />
     <None Include="Enemy_preset1.ini" />
     <None Include="Hero_model.ini" />
@@ -188,14 +189,16 @@
     <None Include="Map.ini" />
     <None Include="Map2.ini" />
     <None Include="monument.ini" />
+    <None Include="upgradeRockIt.ini" />
     <None Include="steel.ini" />
     <None Include="tank2.ini" />
     <None Include="TemplateMap.ini" />
-    <None Include="upgrade.ini" />
+    <None Include="upgradeArrow.ini" />
     <None Include="water.ini" />
     <None Include="WidthTank.ini" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="bonusGear.tga" />
     <Image Include="BottomSide1.tga" />
     <Image Include="BottomSide2.tga" />
     <Image Include="BottomSide3.tga" />
@@ -211,6 +214,7 @@
     <Image Include="brickRigth.tga" />
     <Image Include="brickLeft.tga" />
     <Image Include="extraLife.tga" />
+    <Image Include="rockIt.tga" />
     <Image Include="tank_ver_1Right1.tga" />
     <Image Include="tank_ver_1Left1.tga" />
     <Image Include="tank_ver_1Front1.tga" />
@@ -222,6 +226,7 @@
     <Image Include="leafsBlock.tga" />
     <Image Include="monumentBlock.tga" />
     <Image Include="steelBlock.tga" />
+    <Image Include="upgradeTank.tga" />
     <Image Include="water6.tga" />
     <Image Include="water5.tga" />
     <Image Include="water4.tga" />

@@ -61,6 +61,12 @@
     <Filter Include="Resource Files\upgrade">
       <UniqueIdentifier>{35777899-89ed-4e38-93f7-2aa1ba42861a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Preset file\Upgrade">
+      <UniqueIdentifier>{a6f1d351-3ba1-44b5-bd44-32d83f33fa2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Preset file\Tank">
+      <UniqueIdentifier>{b57f8a9a-1520-4e6c-8859-2232a07c1638}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
@@ -181,20 +187,26 @@
     <None Include="tank2.ini">
       <Filter>Resource Files\IniFile</Filter>
     </None>
-    <None Include="Hero_preset.ini">
-      <Filter>Resource Files\Preset file</Filter>
-    </None>
-    <None Include="WidthTank.ini">
-      <Filter>Resource Files\Preset file</Filter>
-    </None>
-    <None Include="Enemy_preset1.ini">
-      <Filter>Resource Files\Preset file</Filter>
-    </None>
-    <None Include="upgrade.ini">
-      <Filter>Resource Files\IniFile</Filter>
-    </None>
     <None Include="Map2.ini">
       <Filter>Resource Files\IniFile</Filter>
+    </None>
+    <None Include="upgradeArrow.ini">
+      <Filter>Resource Files\Preset file\Upgrade</Filter>
+    </None>
+    <None Include="upgradeBonusGear.ini">
+      <Filter>Resource Files\Preset file\Upgrade</Filter>
+    </None>
+    <None Include="upgradeRockIt.ini">
+      <Filter>Resource Files\Preset file\Upgrade</Filter>
+    </None>
+    <None Include="Enemy_preset1.ini">
+      <Filter>Resource Files\Preset file\Tank</Filter>
+    </None>
+    <None Include="Hero_preset.ini">
+      <Filter>Resource Files\Preset file\Tank</Filter>
+    </None>
+    <None Include="WidthTank.ini">
+      <Filter>Resource Files\Preset file\Tank</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -370,6 +382,15 @@
       <Filter>Resource Files\tank\enemy\ver1</Filter>
     </Image>
     <Image Include="extraLife.tga">
+      <Filter>Resource Files\upgrade</Filter>
+    </Image>
+    <Image Include="upgradeTank.tga">
+      <Filter>Resource Files\upgrade</Filter>
+    </Image>
+    <Image Include="rockIt.tga">
+      <Filter>Resource Files\upgrade</Filter>
+    </Image>
+    <Image Include="bonusGear.tga">
       <Filter>Resource Files\upgrade</Filter>
     </Image>
   </ItemGroup>

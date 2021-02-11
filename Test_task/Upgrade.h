@@ -16,7 +16,7 @@ public:
 	Upgrade();
 	Upgrade(
 		const char* name, const float possX, const float possY,
-		void (*draw)(Sprite*, int, int)
+		void (*draw)(Sprite*, int, int), const powerUps type
 	);
 	void Draw() override;
 	// Colisium
@@ -35,10 +35,15 @@ public:
 	float GetConstTime() const {
 		return reloadTime;
 	};
+	// Get type
+	powerUps GetPowerType() const {
+		return powerType;
+	};
 private:
 	void ReleasedKey() {};
 	void PressKey(FRKey k) {};
 private:
+	powerUps powerType{};
 	float last{};
 	float lifeTime{ 0.50f };
 	float reloadTime{ 1.0f };

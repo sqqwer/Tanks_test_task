@@ -9,8 +9,9 @@ void Logic::InitAllResources(const char* nameMap, const char* nameLand)
 {
 	tm = Time(getTickCount);
 	land = Land(nameLand, drawSprite);
-	upgrade.SetStatus(side::COUNT);
-	upgrade = Upgrade("upgrade.ini", 150, 150, drawSprite);
+	upgrade.push_back(Upgrade("upgradeArrow.ini", 150, 150, drawSprite, powerUps::UPGRAGE));
+	upgrade.push_back(Upgrade("upgradeBonusGear.ini", 180, 150, drawSprite, powerUps::EXTRALIVE));
+	upgrade.push_back(Upgrade("upgradeRockIt.ini", 210, 150, drawSprite, powerUps::STELLWALL));
 	map.LoadMap(nameMap, drawSprite);
 	hero = Hero(tankPreset::HEROTANK1, map.GetHszX(), map.GetHszY(), drawSprite);
 };
@@ -32,10 +33,13 @@ bool Logic::CheackInitConstructor()
 		std::cout << "Logic : Can't load Hero preset file!" << std::endl;
 		return false;
 	}
-	if (!upgrade.Animation::GetStatus())
+	for (auto i : upgrade)
 	{
-		std::cout << "Logic : Can't load Upgrade file!" << std::endl;
-		return false;
+		if (!i.Animation::GetStatus())
+		{
+			std::cout << "Logic : Can't load Upgrade file!" << std::endl;
+			return false;
+		}
 	}
 	return true;
 };
@@ -44,7 +48,15 @@ bool Logic::InitSpriteSize()
 {
 	if (CheackInitConstructor())
 	{
-		getSpriteSize(upgrade.GetSprite(), upgrade.GetRefSizeW(), upgrade.GetRefSizeH());
+		for (int i = 0; i < upgrade.size(); i++)
+		{
+			if (upgrade[i].GetLiveBlock())
+				getSpriteSize(
+					upgrade[i].GetSprite(), 
+					upgrade[i].GetRefSizeW(), 
+					upgrade[i].GetRefSizeH()
+				);
+		}
 		getSpriteSize(land.GetSprite(), land.GetRefSizeW(), land.GetRefSizeH());
 		getSpriteSize(hero.GetSprite(), hero.GetRefSizeW(), hero.GetRefSizeH());
 		map.GetMapSpriteSize();
@@ -59,13 +71,28 @@ bool Logic::InitSpriteSize()
 void Logic::Draw()
 {
 	mark = tm.Mark();
-	hero.UpdateReloadMark(mark); map.mark += mark; upgrade.UpdateMark(mark);
-	land.Draw(); hero.Draw(); map.DrawMap(map.mark); upgrade.Upgrade::Draw();
+	hero.UpdateReloadMark(mark); map.mark += mark; 
+	land.Draw(); hero.Draw(); map.DrawMap(map.mark);
+	DrawUpgrade(mark);
 };
 
 void Logic::PowerUpsColisium()
 {
-	upgrade.PowerUpsColisium(hero);
+	for (int i = 0; i < upgrade.size(); i++) 
+		if (upgrade[i].GetLiveBlock())
+			upgrade[i].PowerUpsColisium(hero);
+}
+
+void Logic::DrawUpgrade(const float mark)
+{
+	for (int i = 0; i < upgrade.size(); i++)
+	{
+		if (upgrade[i].GetLiveBlock())
+		{
+			upgrade[i].Upgrade::Draw();
+			upgrade[i].UpdateMark(mark);
+		}
+	}
 }
 
 void Logic::WallHeroColisium()
@@ -208,7 +235,8 @@ void Logic::ClearAllEnemy()
 
 void Logic::ClearUpgrade()
 {
-	upgrade.ClearBlock();
+	for (int i = 0; i < upgrade.size(); i++)
+		upgrade[i].ClearBlock();
 };
 
 void Logic::ClearLand()

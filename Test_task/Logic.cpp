@@ -47,17 +47,7 @@ bool Logic::InitSpriteSize()
 		getSpriteSize(upgrade.GetSprite(), upgrade.GetRefSizeW(), upgrade.GetRefSizeH());
 		getSpriteSize(land.GetSprite(), land.GetRefSizeW(), land.GetRefSizeH());
 		getSpriteSize(hero.GetSprite(), hero.GetRefSizeW(), hero.GetRefSizeH());
-		for (int i = 0; i < map.GetH(); i++)
-		{
-			for (int j = 0; j < map.GetW(); j++)
-			{
-				if (map.map[i][j].GetLiveBlock()) {
-					getSpriteSize(map.map[i][j].GetWallPoss(), map.map[i][j].GetRefSizeW(),
-						map.map[i][j].GetRefSizeH()
-					);
-				}
-			}
-		}
+		map.GetMapSpriteSize();
 	}
 	else
 	{
@@ -111,6 +101,10 @@ void Logic::UpdateHeroTank(const int screenX, const int screenY)
 	hero.UpdateBullet(screenX, screenY, mark, enemy, map);
 	hero.Update(screenX, screenY, mark);
 	PowerUpsColisium(); WallHeroColisium();
+	if (hero.GetX() > 450)
+	{
+		LoadNewMap("Map2.ini");
+	}
 };
 
 void Logic::UpdateEnemyTank(const int screenX, const int screenY)
@@ -153,13 +147,13 @@ void Logic::UpdateEnemyTank(const int screenX, const int screenY)
 		else if (!enemy[i].isAlive() && !enemy[i].bull.size() &&
 			!enemy[i].bull.capacity())
 		{
-			enemy[i].FreeSprite();
+			enemy[i].ClearAllocatedMemory();
 			enemy.erase(enemy.begin() + i);
 		}
 	}
 	if (enemy.capacity() && !enemy.size())
 	{
-		enemy.shrink_to_fit();
+		ClearAllEnemy();
 	}
 };
 
@@ -184,3 +178,40 @@ void Logic::UpdateMouseClick(FRMouseButton button, bool isReleased)
 		);
 	}
 };
+
+void Logic::LoadNewMap(const char* nameOfMap)
+{
+	map.ClearMemory();
+	map.AlocateMemory();
+	map.LoadMap(nameOfMap, drawSprite);
+	map.GetMapSpriteSize();
+};
+
+void Logic::CloseProgram()
+{
+	ClearLand();
+	ClearUpgrade();
+	ClearAllEnemy();
+	map.ClearMemory();
+	hero.ClearAllocatedMemory();
+};
+
+void Logic::ClearAllEnemy()
+{
+	for (int i = 0; i < enemy.size(); i++)
+	{
+		enemy[i].ClearAllocatedMemory();
+		enemy.erase(enemy.begin() + i);
+	}
+	enemy.shrink_to_fit();
+};
+
+void Logic::ClearUpgrade()
+{
+	upgrade.ClearBlock();
+};
+
+void Logic::ClearLand()
+{
+	land.ClearLand();
+}

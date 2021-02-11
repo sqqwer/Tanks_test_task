@@ -7,6 +7,33 @@ Map::Map()
 	:
 	map_size_w(22), map_size_h(18)
 {
+	AlocateMemory();
+};
+
+Map::~Map()
+{
+	ClearMemory();
+};
+
+void Map::ClearMemory()
+{
+	for (int i = 0; i < map_size_h; i++)
+	{
+		for (int j = 0; j < map_size_w; j++)
+		{
+			if (map[i][j].Animation::GetStatus())
+				map[i][j].FreeSprite();
+		}
+	}
+	for (int i = 0; i < map_size_h; i++)
+	{
+		delete[] map[i];
+	}
+	delete[] map;
+};
+
+void Map::AlocateMemory()
+{
 	map = new Block * [map_size_h];
 	for (int i = 0; i < map_size_h; i++)
 	{
@@ -14,22 +41,18 @@ Map::Map()
 	};
 };
 
-Map::~Map()
+void Map::GetMapSpriteSize()
 {
-	if (map != nullptr)
+	for (int i = 0; i < GetH(); i++)
 	{
-		for (int i = 0; i < map_size_h; i++)
+		for (int j = 0; j < GetW(); j++)
 		{
-			for (int j = 0; j < map_size_w; j++)
-			{
-				map[i][j].FreeSprite();
+			if (map[i][j].GetLiveBlock()) {
+				getSpriteSize(map[i][j].GetWallPoss(), map[i][j].GetRefSizeW(),
+					map[i][j].GetRefSizeH()
+				);
 			}
 		}
-		for (int i = 0; i < map_size_h; i++)
-		{
-			delete[] map[i];
-		}
-		delete[] map;
 	}
 };
 

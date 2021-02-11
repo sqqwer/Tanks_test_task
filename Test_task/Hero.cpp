@@ -253,3 +253,20 @@ void Hero::Load(tankPreset type)
 	this->reloadTime = pres.GetBulletReload();
 	LoadPreset(pres.GetTankAnimPress());
 };
+
+void Hero::ClearAllBullet()
+{
+	for (int i = 0; i < bull.size(); i++)
+	{
+		bull[i].FreeSprite(); 
+		bull.erase(bull.begin() + i);
+	}
+	bull.shrink_to_fit();
+};
+
+void Hero::ClearAllocatedMemory()
+{
+	if (bull.size())
+		ClearAllBullet();
+	FreeSprite();
+}

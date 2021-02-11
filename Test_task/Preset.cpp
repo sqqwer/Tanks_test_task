@@ -6,12 +6,17 @@
 Preset::Preset()
 {};
 
+Preset::~Preset()
+{
+	animationTankPreset.clear();
+	animationBulletPreset.clear();
+	animationTankPreset.shrink_to_fit();
+	animationBulletPreset.shrink_to_fit();
+};
 
 void Preset::LoadPreset(tankPreset type)
 {
-	std::ifstream file;
 	this->type = type;
-
 	switch (type)
 	{
 	case tankPreset::HEROTANK1:

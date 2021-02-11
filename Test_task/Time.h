@@ -6,9 +6,10 @@ class Time
 {
 public:
 	Time();
+	~Time() { GetTime = nullptr; };
 	Time(unsigned int (*GetTime)(void));
 	float Mark();
 private:
-	unsigned int (*GetTime)(void);
 	float last{};
+	unsigned int (*GetTime)(void);
 };

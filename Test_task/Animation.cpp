@@ -53,6 +53,7 @@ bool Animation::LoadPreset(const char* name)
 		Sprite* t = createSprite(tmp.c_str());
 		obj.insert(std::pair<int, Sprite*>(i++, t));
 	}
+	tmp.shrink_to_fit();
 	if (!file.is_open() || !obj.size())
 	{
 		file.close();
@@ -103,13 +104,18 @@ void Animation::FreeSprite()
 {
 	if (!obj.empty())
 	{
-		for (int i = 0; i < size_of_animation; i++)
+		for (int i = 0; i < obj.size(); i++)
 		{
 			destroySprite(obj[i]);
+		}
+		for (int i = 0; i < obj.size(); i++)
+		{
 			obj.erase(i);
 		}
-		std::map<int, Sprite*>().swap(obj);
 	}
+	obj.clear();
+	std::map<int, Sprite*>().swap(obj);
+	draw = nullptr;
 };
 // Draw Presset
 Sprite* Animation::DrawPresset(const float mark, const float animationMark)

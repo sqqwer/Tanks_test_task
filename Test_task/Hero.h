@@ -21,21 +21,22 @@ public:
 		const float poss_x, const float poss_y,
 		void (*draw)(Sprite*, int, int)
 	);
+
+	void Draw() override;
+	void Load(tankPreset type);
+	void ClearAllocatedMemory();
+	// Colisium
+	void TankColisium(Enemy& en, const float mark);
+	// Controll
+	void ReleasedKey() override;
+	void PressKey(FRKey k) override;
+	// Shoot funciotn	
 	void Shoot();
-	void ClerBull(const unsigned int elem);
 	void UpdateBullet(
 		int screenX, int screenY, float mark,
-		std::vector<Enemy> &en, Map& map
-	);
-	void TankColisium(
-		Enemy& en, const float mark
-	);
-	void Draw() override;
-	void PressKey(FRKey k) override;
-	void ReleasedKey() override;
+		std::vector<Enemy>& en, Map& map
+	);	
 	void ChioceOutShoot();
-	
-	void Load(tankPreset type);
 	// Lives of Tank
 	void AddLives(const int health) {
 		this->health += health;
@@ -56,6 +57,9 @@ public:
 	float GetReloadConstTime() const {
 		return reloadTime;
 	};
+private:
+	void ClearAllBullet();
+	void ClerBull(const unsigned int elem);
 public:
 	std::vector<Bullet> bull{};
 private:

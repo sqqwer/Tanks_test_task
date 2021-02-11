@@ -186,6 +186,7 @@
     <None Include="land.ini" />
     <None Include="leafs.ini" />
     <None Include="Map.ini" />
+    <None Include="Map2.ini" />
     <None Include="monument.ini" />
     <None Include="steel.ini" />
     <None Include="tank2.ini" />

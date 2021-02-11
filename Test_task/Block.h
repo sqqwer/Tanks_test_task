@@ -17,19 +17,26 @@ public:
 		const float possX, const float possY,
 		void (*draw)(Sprite*, int, int), const int type
 	);
-	int GetType() const {
-		return type;
-	};
-	void SetWich(const int wich) {
-		wichOne = wich;
-	};
+	void ClearBlock();
+	// Draw function
 	void Draw();
 	void Draw(const float mark, const float animationMark);
 	void SetStatus(const side status) {
 		this->status = status;
 	};
+	// Geter
+	int GetType() const {
+		return type;
+	};
 	side GetStatus() const {
 		return status;
+	};
+	Sprite* GetWallPoss() {
+		return obj[(int)status];
+	};
+	// Seter
+	void SetWich(const int wich) {
+		wichOne = wich;
 	};
 	void SetPossX(const float addX) {
 		possition_x += addX;
@@ -37,9 +44,7 @@ public:
 	void SetPossY(const float addY) {
 		possition_y += addY;
 	};
-	Sprite* GetWallPoss() {
-		return obj[(int)status];
-	};
+	// Enum constant
 	enum class type
 	{
 		BRICK,

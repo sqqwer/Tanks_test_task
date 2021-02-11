@@ -1,8 +1,8 @@
 #include "Enemy.h"
 
 Enemy::Enemy()
-	:
-	Animation(), Object(), health(0), live(true)
+	:	
+Animation(), Object(), health(0), live(true)
 {};
 
 Enemy::Enemy(tankPreset type,
@@ -265,3 +265,20 @@ void Enemy::Load(tankPreset type)
 	this->reloadTime = pres.GetBulletReload();
 	LoadPreset(pres.GetTankAnimPress());
 };
+
+void Enemy::ClearAllBullet()
+{
+	for (int i = 0; i < bull.size(); i++)
+	{
+		bull[i].FreeSprite();
+		bull.erase(bull.begin() + i);
+	}
+	bull.shrink_to_fit();
+};
+
+void Enemy::ClearAllocatedMemory()
+{
+	if (bull.size())
+		ClearAllBullet();
+	Animation::FreeSprite();
+}

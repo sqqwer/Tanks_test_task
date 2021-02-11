@@ -18,7 +18,10 @@ class Preset
 {
 public:
 	Preset();
+	~Preset();
+	// load data
 	void LoadPreset(tankPreset type);
+	// returned init date
 	unsigned int GetHealth() const {
 		return health;
 	};

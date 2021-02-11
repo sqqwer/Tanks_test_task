@@ -12,14 +12,17 @@ public:
 		const float possX, const float possY, bool live,
 		void (*draw)(Sprite*, int, int)
 	);
+
 	void Draw() override;
-	void Update(int w, int h, float spec) override;
-	void SetWork(const bool w) {
-		isWork = w;
-	};
+	// Work of class
 	bool Work() const {
 		return isWork;
 	};
+	void SetWork(const bool w) {
+		isWork = w;
+	};
+	// Update function
+	void Update(int w, int h, float spec) override;
 private:
 	bool isWork{false};
 private:

@@ -193,6 +193,9 @@
     <None Include="upgrade.ini">
       <Filter>Resource Files\IniFile</Filter>
     </None>
+    <None Include="Map2.ini">
+      <Filter>Resource Files\IniFile</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="FrontAnimaiot1.tga">

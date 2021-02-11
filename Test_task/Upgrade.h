@@ -18,11 +18,14 @@ public:
 		const char* name, const float possX, const float possY,
 		void (*draw)(Sprite*, int, int)
 	);
+	void Draw() override;
+	// Colisium
 	void PowerUpsColisium(Hero& hero);
 	// Markfunction
 	void ClearMark() {
 		last = 0;
 	};
+	// work with mark
 	float GetMark() const {
 		return last;
 	};
@@ -32,8 +35,6 @@ public:
 	float GetConstTime() const {
 		return reloadTime;
 	};
-	void Draw() override;
-
 private:
 	void ReleasedKey() {};
 	void PressKey(FRKey k) {};

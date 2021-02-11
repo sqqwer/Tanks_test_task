@@ -30,18 +30,20 @@ public:
 	Animation(const char* name, void (*draw)(Sprite*, int, int));
 
 	virtual void Draw() = 0;
-
-	Sprite* DrawPresset(const float mark, const float animationMark);
-	Sprite* GetSprite() {
-		return obj[wichOne];
-	};
+	// Staus of class and frame
 	bool GetStatus() const {
 		return isOpen;
 	};
+	// Function to choose out frame
 	int ShootSide();
+	Sprite* GetSprite() {
+		return obj[wichOne];
+	};
+	Sprite* Choice(float vellX, float vellY);
+	Sprite* DrawPresset(const float mark, const float animationMark);
+	// Load Free Resource
 	void FreeSprite();
 	bool LoadPreset(const char* name);
-	Sprite* Choice(float vellX, float vellY);
 protected:
 	side sd{};
 	int wichOne{};

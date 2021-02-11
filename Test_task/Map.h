@@ -36,13 +36,16 @@ public:
 	bool GetStatus() const {
 		return isOpen;
 	}
+	void ClearMemory();
+	void AlocateMemory();
+	void GetMapSpriteSize();
 	void LoadMap(const char* name, void (*draw)(Sprite*, int, int));
 	void DrawMap(float& mark);
 private:
 	void Draw();
 
 public:
-	Block** map;
+	Block** map = nullptr;
 	float mark{0};
 private:
 	bool isOpen{false};

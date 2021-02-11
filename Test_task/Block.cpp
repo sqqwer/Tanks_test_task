@@ -26,6 +26,11 @@ void Block::Draw()
 	draw(GetWallPoss(), GetX(), GetY());
 };
 
+void Block::ClearBlock()
+{
+	Animation::FreeSprite();
+};
+
 void Block::Draw(const float mark, const float animationMark)
 {
 	draw(DrawPresset(mark, animationMark), GetX(), GetY());

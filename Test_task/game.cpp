@@ -58,8 +58,7 @@ public:
 		logic.InitAllResources("Map.ini", "land.ini");	
 		if (!logic.InitSpriteSize())
 			return false;
-		/*
-		float x = 10.0f;
+		/*float x = 10.0f;
 		float y = 50.0f;
 		for (int i = 0; i < 10; i++)
 		{
@@ -67,17 +66,16 @@ public:
 			if (i % 2 == 0) enemy[i].SetVellX(70.0f); else enemy[i].SetVellY(100.0f);
 			getSpriteSize(enemy[i].GetSprite(), enemy[i].GetRefSizeW(), enemy[i].GetRefSizeH());
 			x += 40; y += 40;
-		}
-		if (!land.GetStatus() || !hero.GetStatus())
-		{
-			std::cout << "Can't load hero_preset or Land" << std::endl;
-			return false;
 		}*/
 		return true;
 	}
 
 	virtual void Close() {
-		_CrtDumpMemoryLeaks();
+		logic.CloseProgram();
+		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+		_CrtSetBreakAlloc(9554);
+		_CrtSetBreakAlloc(9553);
+		_CrtSetBreakAlloc(9552);
 	}
 
 	virtual bool Tick() {

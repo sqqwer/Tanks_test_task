@@ -12,3 +12,8 @@ void Land::Draw()
 {
 	draw(GetSprite(), GetX(), GetY());
 };
+
+void Land::ClearLand()
+{
+	Animation::FreeSprite();
+};

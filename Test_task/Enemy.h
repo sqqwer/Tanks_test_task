@@ -22,6 +22,9 @@ public:
 		void (*draw)(Sprite*, int, int)
 	);
 	void Draw() override;
+	void Load(tankPreset type);
+	void ClearAllocatedMemory();
+	// Colisium function
 	void Colisium(
 		const float possX, const float possY,
 		const float width, const float height,
@@ -32,23 +35,23 @@ public:
 		const float width, const float height,
 		const float mark
 	) override;
+	// Shoot Function
 	void Shoot();
 	void UpdateBullet(
 		int screenX, int screenY, float mark,
 		std::vector<Enemy>& en,
-		Map& map,
-		const int wich
+		Map& map, const int wich
 	);
-	void Update(int w, int h, float spec) override;
 	void ChioceOutShoot();
-
+	// Update possition
+	void Update(int w, int h, float spec) override;
+	// Lives
 	bool isAlive() const {
 		return live;
 	};
 	void SetLive(const bool l) {
 		live = l;
 	};
-	void Load(tankPreset type);
 	// Markfunction
 	void ClearReloadMark() {
 		last = 0;
@@ -63,9 +66,11 @@ public:
 		return reloadTime;
 	};
 private:
+	void ClearAllBullet();
+	void ClerBull(const unsigned int elem);
+	// Not used virtual function
 	void ReleasedKey() {};
 	void PressKey(FRKey k) {};
-	void ClerBull(const unsigned int elem);
 public:
 	std::vector<Bullet> bull{};
 private:

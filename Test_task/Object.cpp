@@ -12,29 +12,37 @@ Object::Object(const float poss_x, const float poss_y)
 	possition_x(poss_x), possition_y(poss_y),
 	velocity_x(0.0f), velocity_y(0.0f), size_w(0), size_h(0)
 {};
+
+Object::Object(const float poss_x, const float poss_y,
+	const int outOfScreenX, const int outOfScreenY
+)
+	:
+	possition_x(poss_x), possition_y(poss_y),
+	velocity_x(0.0f), velocity_y(0.0f), size_w(0), size_h(0),
+	outOfScreenX(outOfScreenX), outOfScreenY(outOfScreenY)
+{};
 // Update possition
 void Object::Update(int w, int h, float spec)
 {
-	const int out = 30;
 	possition_x += velocity_x * (spec);
 	possition_y += velocity_y * (spec);
-	const int right = static_cast<int>(possition_x) + size_w;
-	if (possition_x < out)
+	const int right = (float)(possition_x) + size_w;
+	if (possition_x < outOfScreenX)
 	{
-		possition_x = static_cast<float>(out);
+		possition_x = (float)(outOfScreenX);
 	}
 	else if (right >= w)
 	{
-		possition_x = static_cast<float>(w) - size_w;
+		possition_x = (float)(w) - size_w;
 	}
-	const int bottom = static_cast<int>(possition_y) + size_h;
-	if (possition_y < out)
+	const int bottom = (float)(possition_y) + size_h;
+	if (possition_y < outOfScreenY)
 	{
-		possition_y = static_cast<float>(out);
+		possition_y = (float)(outOfScreenY);
 	}
 	else if (bottom >= h)
 	{
-		possition_y = static_cast<float>(h) - size_h;
+		possition_y = (float)(h) - size_h;
 	}
 };
 

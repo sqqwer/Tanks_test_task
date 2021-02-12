@@ -26,14 +26,14 @@ public:
 	void PowerUpsColisium(Hero& hero);
 	// Markfunction
 	void ClearMark() {
-		last = 0;
+		lastMark = 0;
 	};
 	// work with mark
 	float GetMark() const {
-		return last;
+		return lastMark;
 	};
 	void UpdateMark(const float mark) {
-		last += mark;
+		lastMark += mark;
 	};
 	float GetConstTime() const {
 		return reloadTime;
@@ -47,7 +47,7 @@ private:
 	void PressKey(FRKey k) {};
 private:
 	powerUps powerType{};
-	float last{};
+	float lastMark{};
 	float lifeTime{ 0.50f };
 	float reloadTime{ 1.0f };
 };

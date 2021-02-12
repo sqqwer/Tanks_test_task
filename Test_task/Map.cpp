@@ -17,6 +17,7 @@ Map::~Map()
 
 void Map::ClearMemory()
 {
+	enemySpawn.clear();
 	for (int i = 0; i < map_size_h; i++)
 	{
 		for (int j = 0; j < map_size_w; j++)
@@ -62,7 +63,9 @@ void Map::GetMapSpriteSize()
 	}
 };
 
-void Map::LoadMap(const char* name, void (*draw)(Sprite*, int, int))
+void Map::LoadMap(const char* name, void (*draw)(Sprite*, int, int),
+	const int screenShiftX, const int screenShiftY
+)
 {
 	std::ifstream file;
 	file.open(name);
@@ -81,8 +84,8 @@ void Map::LoadMap(const char* name, void (*draw)(Sprite*, int, int))
 				case (int)Type::BRICK:
 					map[i][j].SetStatus(side::COUNT);
 					map[i][j] = Block("./data/block/brick/BLK.ini",
-						(float)((j + 1) * 30),
-						(float)((i + 1) * 30),
+						(float)(screenShiftX + (j) * 30),
+						(float)(screenShiftY + (i) * 30),
 						(int)Type::BRICK, true
 					);
 					map[i][j].SetLiveBlock(true);
@@ -90,8 +93,8 @@ void Map::LoadMap(const char* name, void (*draw)(Sprite*, int, int))
 				case (int)Type::STEEL:
 					map[i][j].SetStatus(side::COUNT);
 					map[i][j] = Block("./data/block/steel/SBL.ini",
-						(float)((j + 1) * 30),
-						(float)((i + 1) * 30),
+						(float)(screenShiftX + (j) * 30),
+						(float)(screenShiftY + (i) * 30),
 						(int)Type::STEEL, true
 					);
 					map[i][j].SetLiveBlock(true);
@@ -99,8 +102,8 @@ void Map::LoadMap(const char* name, void (*draw)(Sprite*, int, int))
 				case (int)Type::WATER:
 					map[i][j].SetStatus(side::COUNT);
 					map[i][j] = Block("./data/block/water/water.ini",
-						(float)((j + 1) * 30),
-						(float)((i + 1) * 30),
+						(float)(screenShiftX + (j) * 30),
+						(float)(screenShiftY + (i) * 30),
 						(int)Type::WATER, false
 					);
 					map[i][j].SetLiveBlock(true);
@@ -108,8 +111,8 @@ void Map::LoadMap(const char* name, void (*draw)(Sprite*, int, int))
 				case (int)Type::LEAAFS:
 					map[i][j].SetStatus(side::COUNT);
 					map[i][j] = Block("./data/block/leafs/leafs.ini",
-						(float)((j + 1) * 30),
-						(float)((i + 1) * 30), 
+						(float)(screenShiftX + (j) * 30),
+						(float)(screenShiftY + (i) * 30),
 						(int)Type::LEAAFS, false
 					);
 					map[i][j].SetLiveBlock(true);
@@ -117,22 +120,26 @@ void Map::LoadMap(const char* name, void (*draw)(Sprite*, int, int))
 				case (int)Type::MONUMENT:
 					map[i][j].SetStatus(side::COUNT);
 					map[i][j] = Block("./data/block/monument/monument.ini",
-						(float)((j + 1) * 30),
-						(float)((i + 1) * 30),
+						(float)(screenShiftX + (j) * 30),
+						(float)(screenShiftY + (i) * 30),
 						(int)Type::MONUMENT, false
 					);
+					monument_x = (float)(screenShiftX + (j) * 30);
+					monument_y = (float)(screenShiftY + (i) * 30);
 					map[i][j].SetLiveBlock(true);
 					break;
 				case (int)Type::HSZ:
 					map[i][j].SetStatus(side::COUNT);
-					hsz_x = (float)((j + 1) * 30);
-					hsz_y = (float)((i + 1) * 30);
+					hsz_x = (float)(screenShiftX + (j) * 30);
+					hsz_y = (float)(screenShiftY + (i) * 30);
 					map[i][j].SetLiveBlock(false);
 					break;
 				case (int)Type::ESZ:
 					map[i][j].SetLiveBlock(false);
 					enemySpawn.push_back(
-						possition((float)((j + 1) * 30), (float)((i + 1) * 30))
+						possition(
+							(float)(screenShiftX + (j) * 30),
+							(float)(screenShiftY + (i) * 30))
 					);
 					break;
 				default:

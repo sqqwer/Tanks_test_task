@@ -47,16 +47,23 @@ public:
 				delete[] str_height;
 			}
 		}
-		if ((screenX <= 0 || screenY <= 0))
+		if (screenY <= 0 || screenY < 600)
 		{
-			width = 800;
-			height = 600;
+			screenY = height = 600;
 		}
+		if (screenX <= 0 || screenY < 800)
+		{
+			screenX = width = 800;
+		}
+
 		fullscreen = false;
 	}
 
 	virtual bool Init() {
-		logic.InitAllResources("./data/map/Map.ini", "./data/land/land.ini");	
+		logic.InitAllResources(
+			"./data/map/allMap.ini", "./data/land/land.ini",
+			screenX, screenY
+		);	
 		if (!logic.InitSpriteSize())
 			return false;
 		return true;
@@ -71,7 +78,7 @@ public:
 	}
 
 	virtual bool Tick() {
-		logic.UpdateTank(screenX - 80, screenY - 30);
+		logic.UpdateTank();
 		return false;
 	}
 

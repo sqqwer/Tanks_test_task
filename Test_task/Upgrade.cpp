@@ -30,13 +30,14 @@ void Upgrade::PowerUpsColisium(Hero& hero)
 			}
 			if (GetPowerType() == powerUps::UPGRADE)
 			{
-				hero.Load(
-					(tankPreset)((int)hero.GetTankPreset() + 1)
-				);
-				getSpriteSize(hero.GetSprite(), hero.GetRefSizeW(), hero.GetRefSizeH());
-				hero.GetInfo();
+				if (hero.GetTankPreset() >= tankPreset::HEROTANK1 && 
+					hero.GetTankPreset() < tankPreset::HEROTANK3)
+				{
+					hero.Load((tankPreset)((int)hero.GetTankPreset() + 1));
+					getSpriteSize(hero.GetSprite(), hero.GetRefSizeW(), hero.GetRefSizeH());
+					hero.GetInfo();
+				}
 				SetLiveBlock(false);
-				
 			}
 			if (GetPowerType() == powerUps::MOREPOWER)
 			{
@@ -63,7 +64,7 @@ void Upgrade::Draw()
 				if (GetMark() >= GetConstTime() + lifeTime)
 				{
 					ClearMark();
-					//upgrade.reloadTime -= 0.01f;
+					reloadTime -= 0.05f;
 				}
 			}
 		}

@@ -7,10 +7,12 @@ Hero::Hero()
 
 Hero::Hero(tankPreset type,
 	const float poss_x, const float poss_y,
-	void (*draw)(Sprite*, int, int)
+	void (*draw)(Sprite*, int, int),
+	const int outOfScreenX, const int outOfScreenY
 )
 	:
-	Animation(draw), Object(poss_x, poss_y)
+	Animation(draw), 
+	Object(poss_x, poss_y, outOfScreenX, outOfScreenY)
 {
 	Hero::Load(type);
 };
@@ -53,7 +55,7 @@ void Hero::TankColisium(Enemy& en, const float mark)
 		{
 			if (en.isAlive())
 			{
-				if (GetTankPreset() >= tankPreset::HEROTANK3) // FIX IT
+				/*if (GetTankPreset() >= tankPreset::HEROTANK3) // FIX IT
 				{
 					en.SetLive(false);
 					en.BackX(en.GetvellX(), mark);
@@ -61,7 +63,7 @@ void Hero::TankColisium(Enemy& en, const float mark)
 					en.SetVellX(0.0f);
 					en.SetVellY(0.0f);
 				}
-				else
+				else*/
 				{
 					en.BackX(en.GetvellX(), mark);
 					en.BackY(en.GetvellY(), mark);
@@ -89,7 +91,7 @@ void Hero::ReleasedKey()
 	velocity_y = 0;
 };
 
-void Hero::Shoot()
+void Hero::Shoot(const int outOfScreenX, const int outOfScreenY)
 {
 	sd = (side)ShootSide();
 	ChioceOutShoot();
@@ -98,7 +100,8 @@ void Hero::Shoot()
 		(sd == side::RIGHT) ? vellB + velocity_x : 0.0f,
 		(sd == side::FRONT) ? -(vellB + (velocity_y * -1)) :
 		(sd == side::BOTTOM) ? vellB + velocity_y : 0.0f,
-		out_x, out_y, true, drawSprite
+		out_x, out_y, true, drawSprite,
+		outOfScreenX, outOfScreenY
 	));
 };
 
@@ -140,12 +143,13 @@ void Hero::Draw()
 
 void Hero::UpdateBullet(
 	int screenX, int screenY, float mark,
-	std::vector<Enemy>& en, Map& map
+	std::vector<Enemy>& en, Map& map,
+	const int outOfScreenX, const int outOfScreenY
 )
 {
 	for (int i = 0; i < bull.size(); i++)
 	{
-		bull[i].Update(screenX, screenY, mark);
+		bull[i].Update(screenX, screenY, mark, outOfScreenX, outOfScreenY);
 		if (bull[i].Work()) for (int j = 0; j < en.size(); j++) if (en[j].isAlive())
 		{
 			if (bull[i].GetX() + bull[i].GetSpW() <=
@@ -157,6 +161,7 @@ void Hero::UpdateBullet(
 					bull[i].GetY() >= en[j].GetY())
 				{
 					bull[i].SetWork(false);
+					UpdateKillCount(1);
 					en[j].SetLive(false);
 					en[j].FreeSprite();
 					en[j].SetVellY(0.0f);

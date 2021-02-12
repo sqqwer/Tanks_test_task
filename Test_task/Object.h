@@ -7,6 +7,9 @@ class Object
 public:
 	Object();
 	Object(const float poss_x, const float poss_y);
+	Object(const float poss_x, const float poss_y,
+		const int outOfScreenX, const int outOfScreenY
+	);
 
 	virtual void Colisium(
 		const float possX, const float possY,
@@ -59,7 +62,17 @@ public:
 	float GetvellY() const {
 		return velocity_y;
 	};
+	// Seter x, y
+	void SetPossitionX(const float posX) {
+		possition_x = posX;
+	};
+	void SetPossitionY(const float posY) {
+		possition_y = posY;
+	};
 protected:
+	//
+	int outOfScreenX{ 0 };
+	int outOfScreenY{ 0 };
 	// velocity of object
 	float velocity_x;
 	float velocity_y;

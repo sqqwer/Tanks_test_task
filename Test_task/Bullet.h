@@ -10,7 +10,8 @@ public:
 	Bullet(const char* name,
 		const float vellX, const float vellY,
 		const float possX, const float possY, bool live,
-		void (*draw)(Sprite*, int, int)
+		void (*draw)(Sprite*, int, int),
+		const int outOfScreenX, const int outOfScreenY
 	);
 
 	void Draw() override;
@@ -22,7 +23,8 @@ public:
 		isWork = w;
 	};
 	// Update function
-	void Update(int w, int h, float spec) override;
+	void Update(int w, int h, float spec,
+		const int outOfScreenX, const int outOfScreenY);
 private:
 	bool isWork{false};
 private:

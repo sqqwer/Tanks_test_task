@@ -20,7 +20,8 @@ public:
 	Hero();
 	Hero(tankPreset type,
 		const float poss_x, const float poss_y,
-		void (*draw)(Sprite*, int, int)
+		void (*draw)(Sprite*, int, int),
+		const int outOfScreenX, const int outOfScreenY
 	);
 	void Draw() override;
 	void Load(tankPreset type);
@@ -31,10 +32,11 @@ public:
 	void ReleasedKey() override;
 	void PressKey(FRKey k) override;
 	// Shoot funciotn	
-	void Shoot();
+	void Shoot(const int outOfScreenX, const int outOfScreenY);
 	void UpdateBullet(
 		int screenX, int screenY, float mark,
-		std::vector<Enemy>& en, Map& map
+		std::vector<Enemy>& en, Map& map,
+		const int outOfScreenX, const int outOfScreenY
 	);
 	void ChioceOutShoot();
 	// Tank Preset
@@ -101,6 +103,13 @@ public:
 	void TickTimer(const float mark) {
 		timer += mark;
 	};
+	// work with killCount
+	void UpdateKillCount(const int iter) {
+		killCount += iter;
+	}
+	int GetKillCount() const {
+		return killCount;
+	};
 private:
 	void ClearAllBullet();
 	void ClerBull(const unsigned int elem);
@@ -109,6 +118,7 @@ public:
 private:
 	Preset pres;
 	tankPreset nowTank{ tankPreset::COUNT };
+	int killCount{ 0 };
 	bool  darkSidePower{ false };
 	float timer{ 0 };
 	float last{ 0.0f };

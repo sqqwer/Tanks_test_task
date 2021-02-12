@@ -15,9 +15,16 @@ enum class Type {
 };
 
 struct possition {
+	possition()  : posX(0.0f), posY(0.0f) {};
 	possition(const float posX, const float posY)
-		: posX(posX), posY(posY)
-	{};
+		: posX(posX), posY(posY) {};
+	bool operator!=(struct possition elem)
+	{
+		if (posX == elem.posX && posY == elem.posY)
+			return false;
+		else
+			return true;
+	};
 	float posX;
 	float posY;
 };
@@ -46,7 +53,10 @@ public:
 	void ClearMemory();
 	void AlocateMemory();
 	void GetMapSpriteSize();
-	void LoadMap(const char* name, void (*draw)(Sprite*, int, int));
+	void LoadMap(
+		const char* name, void (*draw)(Sprite*, int, int),
+		const int screenShiftX, const int screenShiftY
+	);
 	void DrawMap(float& mark);
 	// Mark
 	void UpdateMark(const float mark) {
@@ -54,6 +64,13 @@ public:
 	};
 	float& GetRefMark() {
 		return mark;
+	};
+	// Get monument
+	float GetMonumentX() const {
+		return monument_x;
+	};
+	float GetMonumentY() const {
+		return monument_y;
 	};
 private:
 	void Draw();

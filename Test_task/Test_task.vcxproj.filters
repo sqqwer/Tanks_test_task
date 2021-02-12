@@ -292,6 +292,78 @@
     <Image Include="data\land\model\land.tga">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\tank\model\modelEnemy2\Tank_Botton1.tga" />
+    <Image Include="data\tank\model\modelEnemy2\Tank_Botton2.tga" />
+    <Image Include="data\tank\model\modelEnemy2\Tank_Botton3.tga" />
+    <Image Include="data\tank\model\modelEnemy2\Tank_Botton4.tga" />
+    <Image Include="data\tank\model\modelEnemy2\Tank_Front1.tga" />
+    <Image Include="data\tank\model\modelEnemy2\Tank_Front2.tga" />
+    <Image Include="data\tank\model\modelEnemy2\Tank_Front3.tga" />
+    <Image Include="data\tank\model\modelEnemy2\Tank_Front4.tga" />
+    <Image Include="data\tank\model\modelEnemy2\Tank_Left1.tga" />
+    <Image Include="data\tank\model\modelEnemy2\Tank_Left2.tga" />
+    <Image Include="data\tank\model\modelEnemy2\Tank_Left3.tga" />
+    <Image Include="data\tank\model\modelEnemy2\Tank_Left4.tga" />
+    <Image Include="data\tank\model\modelEnemy2\Tank_Right1.tga" />
+    <Image Include="data\tank\model\modelEnemy2\Tank_Right2.tga" />
+    <Image Include="data\tank\model\modelEnemy2\Tank_Right3.tga" />
+    <Image Include="data\tank\model\modelEnemy2\Tank_Right4.tga" />
+    <Image Include="data\tank\model\modelEnemyFast\Tank_Fast_Botton1.tga" />
+    <Image Include="data\tank\model\modelEnemyFast\Tank_Fast_Botton2.tga" />
+    <Image Include="data\tank\model\modelEnemyFast\Tank_Fast_Botton3.tga" />
+    <Image Include="data\tank\model\modelEnemyFast\Tank_Fast_Botton4.tga" />
+    <Image Include="data\tank\model\modelEnemyFast\Tank_Fast_Front1.tga" />
+    <Image Include="data\tank\model\modelEnemyFast\Tank_Fast_Front2.tga" />
+    <Image Include="data\tank\model\modelEnemyFast\Tank_Fast_Front3.tga" />
+    <Image Include="data\tank\model\modelEnemyFast\Tank_Fast_Front4.tga" />
+    <Image Include="data\tank\model\modelEnemyFast\Tank_Fast_Left1.tga" />
+    <Image Include="data\tank\model\modelEnemyFast\Tank_Fast_Left2.tga" />
+    <Image Include="data\tank\model\modelEnemyFast\Tank_Fast_Left3.tga" />
+    <Image Include="data\tank\model\modelEnemyFast\Tank_Fast_Left4.tga" />
+    <Image Include="data\tank\model\modelEnemyFast\Tank_Fast_Right1.tga" />
+    <Image Include="data\tank\model\modelEnemyFast\Tank_Fast_Right2.tga" />
+    <Image Include="data\tank\model\modelEnemyFast\Tank_Fast_Right3.tga" />
+    <Image Include="data\tank\model\modelEnemyFast\Tank_Fast_Right4.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\armorTankfront1.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\armorTankfront2.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\armorTankfront3.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\armorTankBottom1.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\armorTankBottom2.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\armorTankBottom3.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\armorTankLeft3.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\armorTankRight2.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\armorTankRight1.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\armorTankRight3.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\armorTankLeft2.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\armorTankLeft1.tga" />
+    <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Right1.tga" />
+    <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Right2.tga" />
+    <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Right3.tga" />
+    <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Right4.tga" />
+    <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Left4.tga" />
+    <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Left3.tga" />
+    <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Left2.tga" />
+    <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Left1.tga" />
+    <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Front4.tga" />
+    <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Front3.tga" />
+    <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Front2.tga" />
+    <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Front1.tga" />
+    <Image Include="data\tank\model\modelEnemyEasy\Tank_Easy_Botton1.tga" />
+    <Image Include="data\tank\model\modelEnemyEasy\Tank_Easy_Botton2.tga" />
+    <Image Include="data\tank\model\modelEnemyEasy\Tank_Easy_Botton3.tga" />
+    <Image Include="data\tank\model\modelEnemyEasy\Tank_Easy_Front1.tga" />
+    <Image Include="data\tank\model\modelEnemyEasy\Tank_Easy_Front2.tga" />
+    <Image Include="data\tank\model\modelEnemyEasy\Tank_Easy_Front3.tga" />
+    <Image Include="data\tank\model\modelEnemyEasy\Tank_Easy_Left1.tga" />
+    <Image Include="data\tank\model\modelEnemyEasy\Tank_Easy_Left2.tga" />
+    <Image Include="data\tank\model\modelEnemyEasy\Tank_Easy_Left3.tga" />
+    <Image Include="data\tank\model\modelEnemyEasy\Tank_Easy_Right1.tga" />
+    <Image Include="data\tank\model\modelEnemyEasy\Tank_Easy_Right2.tga" />
+    <Image Include="data\tank\model\modelEnemyEasy\Tank_Easy_Right3.tga" />
+    <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Botom4.tga" />
+    <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Botom3.tga" />
+    <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Botom2.tga" />
+    <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Botom1.tga" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FrameworkRelease_x64.dll" />
@@ -305,9 +377,6 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="data\upgrade\darkSidePower.ini">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="data\tank\preset\Enemy_preset1.ini">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="data\tank\init\Hero_model.ini">
@@ -364,6 +433,15 @@
     <None Include="data\tank\preset\WidthTank.ini">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="data\tank\init\enemyFastInit.ini" />
+    <None Include="data\tank\init\armorTank.ini" />
+    <None Include="data\tank\preset\arrmorPreset.ini" />
+    <None Include="data\map\allMap.ini" />
+    <None Include="data\tank\init\powerTank.ini" />
+    <None Include="data\tank\init\easyTank.ini" />
+    <None Include="data\tank\preset\fastPreset.ini" />
+    <None Include="data\tank\preset\easyPreset.ini" />
+    <None Include="data\tank\preset\powerTank.ini" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="FrameworkRelease_x64.lib" />

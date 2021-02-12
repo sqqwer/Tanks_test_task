@@ -7,22 +7,25 @@ Animation(), Object(), health(0), live(true)
 
 Enemy::Enemy(tankPreset type,
 	const float poss_x, const float poss_y,
-	void (*draw)(Sprite*, int, int)
+	void (*draw)(Sprite*, int, int),
+	const int outOfScreenX, const int outOfScreenY
 )
 	:
-	Animation(draw), Object(poss_x, poss_y)
+	Animation(draw), 
+	Object(poss_x, poss_y, outOfScreenX, outOfScreenY) 
 {
 	Load(type);
 };
 
-void Enemy::Shoot()
+void Enemy::Shoot(const int outOfScreenX, const int outOfScreenY)
 {
 	sd = (side)ShootSide();
 	ChioceOutShoot();
 	bull.push_back(Bullet(pres.GetBulletAnimPress(),
 		(sd == side::LEFT) ? -vellB : (sd == side::RIGHT) ? vellB : 0.0f,
 		(sd == side::FRONT) ? -vellB : (sd == side::BOTTOM) ? vellB : 0.0f,
-		out_x, out_y, true, drawSprite
+		out_x, out_y, true, drawSprite,
+		outOfScreenX, outOfScreenY
 	));
 };
 
@@ -65,13 +68,13 @@ void Enemy::Draw()
 void Enemy::UpdateBullet(
 	int screenX, int screenY, float mark,
 	std::vector<Enemy>& en,
-	Map& map,
-	const int wich 
+	Map& map, const int wich,
+	const int outOfScreenX, const int outOfScreenY
 )
 {
 	for (int i = 0; i < bull.size(); i++)
 	{
-		bull[i].Update(screenX, screenY, mark);
+		bull[i].Update(screenX, screenY, mark, outOfScreenX, outOfScreenY);
 		if (bull[i].Work()) for (int j = 0; j < en.size(); j++) 
 		if (en[j].isAlive())
 		{
@@ -204,34 +207,35 @@ void Enemy::UpdateBullet(
 	}
 };
 
-void Enemy::Update(int w, int h, float spec)
+void Enemy::Update(int w, int h, float spec,
+	const int outOfScreenX, const int outOfScreenY
+)
 {
-	const int out = 30;
 	possition_x += velocity_x * (spec);
 	possition_y += velocity_y * (spec);
-	const int right = static_cast<int>(possition_x) + size_w;
-	if (possition_x < out)
+	const int right = (float)(possition_x) + size_w;
+	if (possition_x < outOfScreenX)
 	{
-		possition_x = static_cast<float>(out);
+		possition_x = (float)outOfScreenX;
 		velocity_x = -velocity_x;
 		velocity_y = 0;
 	}
 	else if (right >= w)
 	{
-		possition_x = static_cast<float>(w) - size_w;
+		possition_x = (float)(w) - size_w;
 		velocity_x = -velocity_x;
 		velocity_y = 0;
 	}
-	const int bottom = static_cast<int>(possition_y) + size_h;
-	if (possition_y < out)
+	const int bottom = (float)(possition_y) + size_h;
+	if (possition_y < outOfScreenY)
 	{
-		possition_y = static_cast<float>(out);
+		possition_y = (float)outOfScreenY;
 		velocity_y = -velocity_y;
 		velocity_x = 0;
 	}
 	else if (bottom >= h)
 	{
-		possition_y = static_cast<float>(h) - size_h;
+		possition_y = (float)(h) - size_h;
 		velocity_y = -velocity_y;
 		velocity_x = 0;
 	}
@@ -239,7 +243,8 @@ void Enemy::Update(int w, int h, float spec)
 
 void Enemy::Colisium(
 	const float possX, const float possY,
-	const float width, const float height, const float mark
+	const float width, const float height, 
+	const float mark, const int magicNumber
 )
 {
 	if (
@@ -254,17 +259,24 @@ void Enemy::Colisium(
 		{
 			possition_x -= (velocity_x)*mark;
 			possition_y -= (velocity_y)*mark;
-			if (!velocity_x)
-				velocity_y = -velocity_y;
-			else if (!velocity_y)
-				velocity_x = -velocity_x;
+			if (magicNumber % 2 == 0)
+			{
+				velocity_y = (velocity_x != 0) ? -velocity_x : -velocity_y;
+				velocity_x = 0;
+			}
+			else
+			{
+				velocity_x = (velocity_y != 0) ? -velocity_y : -velocity_x;
+				velocity_y = 0; 
+			}
 		}
 	}
 };
 
 void Enemy::TankColisium(
 	const float possX, const float possY,
-	const float width, const float height, const float mark
+	const float width, const float height,
+	const float mark, const int magicNumber
 )
 {
 	if (
@@ -277,16 +289,18 @@ void Enemy::TankColisium(
 			possition_y + 2 <= possY + height
 			)
 		{
-			if (!velocity_y)
+			possition_x -= velocity_x * mark;
+			possition_y -= velocity_y * mark;
+			/*if (magicNumber % 2 == 0)
 			{
-				possition_x -= velocity_x * mark;
+				velocity_y = (velocity_x != 0) ? -velocity_x : -velocity_y;
+				velocity_x = 0;
 			}
-			else if (!velocity_x)
+			else
 			{
-				possition_y -= velocity_y * mark;
-			}
-			velocity_x = 0;
-			velocity_y = 0;
+				velocity_x = (velocity_y != 0) ? -velocity_y : -velocity_x;
+				velocity_y = 0;
+			}*/
 		}
 	}
 };
@@ -301,6 +315,7 @@ void Enemy::Load(tankPreset type)
 	this->vellB = pres.GetBulletVel();
 	this->reloadTime = pres.GetBulletReload();
 	LoadPreset(pres.GetTankAnimPress());
+	SetTankPreset(type);
 };
 
 void Enemy::ClearAllBullet()

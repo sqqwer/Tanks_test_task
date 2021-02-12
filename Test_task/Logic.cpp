@@ -107,25 +107,29 @@ void Logic::Draw()
 	hero.UpdateReloadMark(mark); map.UpdateMark(mark);
 	land.Draw();
 	spawnExtraLifeTimer -= mark;
-	sqrtMark += mark; upMark += mark; hero.Draw();
+	spawnDrakSidePower -= mark;
+	enemyChoosetargetMark += mark;
+	enemyUpdatePossitionMark += mark; hero.Draw();
 	hero.TickTimer(-mark);
-	if (upMark > 1.5f)
+	if (enemyUpdatePossitionMark > 1.5f)
 	{
 		MoveToTarget();
-		upMark = 0.0f;
+		enemyUpdatePossitionMark = 0.0f;
 	}
-	if (sqrtMark > 4.0f)
+	if (enemyChoosetargetMark > 4.0f)
 	{
 		ChooseTarget();
-		sqrtMark = 0.0f;
+		enemyChoosetargetMark = 0.0f;
 	}
 };
 
 void Logic::PowerUpsColisium()
 {
 	for (int i = 0; i < upgrade.size(); i++)
+	{
 		if (upgrade[i].GetLiveBlock())
 			upgrade[i].PowerUpsColisium(hero);
+	}
 };
 
 void Logic::DrawUpgrade(const float mark)
@@ -211,7 +215,7 @@ void Logic::UpdateHeroTank()
 	WallHeroColisium();
 	if (hero.GetPowerTimer() < 0)
 		hero.SetPower(false);
-	prev = hero.GetKillCount();
+	prevHeroKill = hero.GetKillCount();
 };
 
 void Logic::UpdateEnemyTank()
@@ -362,7 +366,7 @@ tankPreset Logic::ChooseType()
 
 void Logic::CheckSpawnEnemy()
 {
-	if (GetEnemyCount() > 0)
+	if (GetEnemyCount() > 0 && enemy.size() < 5)
 	{
 		for (int i = 0; i < map.enemySpawn.size(); i++)
 		{
@@ -432,7 +436,7 @@ void Logic::SpawnUpgrade()
 			CheckSpawnUpgrade(
 				"./data/upgrade/darkSidePower.ini", powerUps::MOREPOWER
 			);
-			spawnDrakSidePower = 40.0f;
+			spawnDrakSidePower = 20.0f;
 		}
 	}
 };

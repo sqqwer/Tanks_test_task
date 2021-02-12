@@ -64,7 +64,7 @@ void Upgrade::Draw()
 				if (GetMark() >= GetConstTime() + lifeTime)
 				{
 					ClearMark();
-					//upgrade.reloadTime -= 0.01f;
+					reloadTime -= 0.05f;
 				}
 			}
 		}

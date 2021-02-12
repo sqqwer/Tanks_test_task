@@ -48,9 +48,7 @@ public:
 	void ChooseTarget();
 	void MoveToTarget();
 	void CanSHoot();
-	float sqrtMark = 0;
-	float upMark = 0;
-	int prev = 0;
+
 	Logic();
 	// Spawn upgrade
 	void SpawnUpgrade();
@@ -125,6 +123,10 @@ private:
 	struct possition lastUpgradePossiotion {};
 	float spawnEnemyMark{ 0.0f };
 	unsigned int possition{ 0 };
+
+	int prevHeroKill{ 0 };
+	float enemyUpdatePossitionMark{ 0.0f };
+	float enemyChoosetargetMark{ 0.0f };
 	int enemyCount{ 20 };
 	float mark{0.0f};
 	Map map{};

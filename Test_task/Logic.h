@@ -38,6 +38,7 @@ struct enemySpawnTypes {
 class Logic
 {
 public:
+	Logic();
 	float LenghtToObject(
 		float object1PosX, float object1PosY,
 		float object2PosX, float object2PosY
@@ -48,8 +49,6 @@ public:
 	void ChooseTarget();
 	void MoveToTarget();
 	void CanSHoot();
-
-	Logic();
 	// Spawn upgrade
 	void SpawnUpgrade();
 	bool CheckSpawnPoss(struct possition elem);
@@ -88,13 +87,14 @@ public:
 	void ClearLand();
 	void CloseProgram();
 	// Update function
-	void UpdateTank();
+	bool UpdateTank();
 	// Control function
 	void PressedKey(FRKey k);
 	void ReleasedKey(FRKey k);
 	void UpdateMouseClick(FRMouseButton button, bool isReleased);
 private:
 	void Draw();
+	void DrawEnemy();
 	void DrawUpgrade(const float mark);
 	void UpdateHeroTank();
 	void UpdateEnemyTank();
@@ -125,10 +125,14 @@ private:
 	unsigned int possition{ 0 };
 
 	int prevHeroKill{ 0 };
+
+	int enemySpawPossition{ 0 };
 	float enemyUpdatePossitionMark{ 0.0f };
 	float enemyChoosetargetMark{ 0.0f };
+	
 	int enemyCount{ 20 };
-	float mark{0.0f};
+	
+	float mark{ 0.0f };
 	Map map{};
 	Time tm{};
 	Hero  hero{};

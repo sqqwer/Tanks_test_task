@@ -141,5 +141,5 @@ Sprite* Animation::DrawPresset(const float mark, const float animationMark)
 
 void Animation::Draw()
 {
-	draw(GetSprite(), posX, posY);
+	drawSprite(GetSprite(), posX, posY);
 };

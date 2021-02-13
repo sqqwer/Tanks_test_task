@@ -40,9 +40,11 @@ public:
 	void Shoot(const int outOfScreenX, const int outOfScreenY);
 	void UpdateBullet(
 		int screenX, int screenY, float mark,
-		std::vector<Enemy>& en,
-		Map& map, const int wich,
-		const int outOfScreenX, const int outOfScreenY
+		std::vector<Enemy>& en, Map& map, const int wich,
+		const int outOfScreenX, const int outOfScreenY,
+		const int heroX, const int heroY,
+		const int heroW, const int heroH,
+		int& heroHealth
 	);
 	void ChioceOutShoot();
 	// Update possition
@@ -65,13 +67,13 @@ public:
 	};
 	// Markfunction
 	void ClearReloadMark() {
-		last = 0;
+		reloadMark = 0;
 	};
 	float GetReloadMark() const {
-		return last;
+		return reloadMark;
 	};
 	void UpdateReloadMark(const float mark) {
-		last += mark;
+		reloadMark += mark;
 	};
 	float GetReloadConstTime() const {
 		return reloadTime;
@@ -82,6 +84,21 @@ public:
 	};
 	void SetTraget(const int target) {
 		enemyTarget = target;
+	};
+	void UpdateRotateMark(const float mark) {
+		rotateMark += mark;
+	};
+	int GetHealth() const {
+		return health;
+	};
+	void UpdateHealth(const int update) {
+		health += update;
+	};
+	void SetChange(const bool ch) {
+		this->change = ch;
+	};
+	bool GetChange() const {
+		return change;
 	};
 private:
 	void ClearAllBullet();
@@ -94,11 +111,17 @@ public:
 private:
 	Preset pres;
 	tankPreset nowTank{ tankPreset::COUNT };
+	
+	float rotateMark{ 0.0f };
+	
+	float enemyTragetMark{ 0.0f };
 	int enemyTarget{ 0 };
-	float last{ 0.0f };
+	float reloadMark{ 0.0f };
 	float reloadTime{ 0.0f };
-	bool live{ true };
-	int	 health{ 1 };
+
+	bool live{ false };
+	int	 health{ 0 };
+	bool change{ false };
 	float out_x{ 0.0f };
 	float out_y{ 0.0f };
 	float speed = 70.0f;;

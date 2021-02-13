@@ -110,6 +110,19 @@ public:
 	int GetKillCount() const {
 		return killCount;
 	};
+	// health
+	int& GetRefenceHealth() {
+		return health;
+	};
+	void UpdateLives(const int i) {
+		lives += i;
+	};
+	int GetLives() const {
+		return lives;
+	};
+	void SetLives(const int ls) {
+		lives = ls;
+	};
 private:
 	void ClearAllBullet();
 	void ClerBull(const unsigned int elem);
@@ -125,6 +138,8 @@ private:
 	float reloadTime{ 0.0f };
 	float out_x{ 0.0f };
 	float out_y{ 0.0f };
+
+	int lives{ 3 };
 	bool live{ true };
 	int	 health{ 0 };
 	float speed = 70.0f;;

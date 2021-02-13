@@ -61,6 +61,10 @@ public:
 	void SetWorkUnit(const bool work) {
 		this->work = work;
 	};
+	// Set side
+	void SetSide(const side type) {
+		sd = type;
+	};
 protected:
 	bool work = false;
 	float posX{ 0 };

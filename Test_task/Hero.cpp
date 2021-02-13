@@ -55,7 +55,7 @@ void Hero::TankColisium(Enemy& en, const float mark)
 		{
 			if (en.isAlive())
 			{
-				/*if (GetTankPreset() >= tankPreset::HEROTANK3) // FIX IT
+				if (GetTankPreset() >= tankPreset::WIDTHTANK) // FIX IT
 				{
 					en.SetLive(false);
 					en.BackX(en.GetvellX(), mark);
@@ -63,7 +63,11 @@ void Hero::TankColisium(Enemy& en, const float mark)
 					en.SetVellX(0.0f);
 					en.SetVellY(0.0f);
 				}
-				else*/
+				if (en.GetTankPreset() == tankPreset::ENEMYTANKPOWER)
+				{
+					health = 0;
+				}
+				else
 				{
 					en.BackX(en.GetvellX(), mark);
 					en.BackY(en.GetvellY(), mark);
@@ -161,11 +165,15 @@ void Hero::UpdateBullet(
 					bull[i].GetY() >= en[j].GetY())
 				{
 					bull[i].SetWork(false);
-					UpdateKillCount(1);
-					en[j].SetLive(false);
-					en[j].FreeSprite();
-					en[j].SetVellY(0.0f);
-					en[j].SetVellX(0.0f);
+					en[j].UpdateHealth(GetPower() ? -2 : -1);
+					if (en[j].GetHealth() == 0)
+					{
+						UpdateKillCount(1);
+						en[j].SetLive(false);
+						en[j].FreeSprite();
+						en[j].SetVellY(0.0f);
+						en[j].SetVellX(0.0f);
+					}
 				}
 			}
 		}
@@ -198,7 +206,7 @@ void Hero::UpdateBullet(
 									{
 
 										if ((int)Type::STEEL == map.map[k][j].GetType() &&
-											nowTank <= tankPreset::HEROTANK2 && !GetPower())
+											nowTank < tankPreset::HEROTANK4 && !GetPower())
 											continue;
 
 										if (GetPower())
@@ -208,9 +216,8 @@ void Hero::UpdateBullet(
 											map.map[k][j].unit[2].SetWorkUnit(false);
 											map.map[k][j].unit[3].SetWorkUnit(false);
 										}
-										if (nowTank >= tankPreset::HEROTANK3)
+										if (nowTank > tankPreset::HEROTANK3)
 										{
-
 											if(bull[i].GetvellX() > 0)
 											{
 												if (map.map[k][j].unit[0].GetWorkUnit() ||
@@ -298,8 +305,7 @@ void Hero::Load(tankPreset type)
 {
 	ClearAllocatedMemory();
 	pres.LoadPreset(type);
-	if (GetTankPreset() == tankPreset::COUNT)
-		this->health += pres.GetHealth();
+	this->health = pres.GetHealth();
 	this->speed = pres.GetTankVel();
 	this->vellB = pres.GetBulletVel();
 	this->reloadTime = pres.GetBulletReload();

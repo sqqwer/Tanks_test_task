@@ -72,6 +72,18 @@ public:
 	float GetMonumentY() const {
 		return monument_y;
 	};
+	int GetMonX() const {
+		return monX;
+	};
+	int GetMonY() const {
+		return monY;
+	};
+	void SetMonumentLive(const bool type) {
+		monumentLive = type;
+	};
+	bool GetMonumentLive() const {
+		return monumentLive;
+	};
 private:
 	void Draw();
 public:
@@ -82,6 +94,10 @@ private:
 	bool isOpen{ false };
 	float hsz_x{ 0 };
 	float hsz_y{ 0 };
+
+	bool monumentLive{ false };
+	int monX{ 0 };
+	int monY{ 0 };
 	float monument_x{ 0 };
 	float monument_y{ 0 };
 	int map_size_w;

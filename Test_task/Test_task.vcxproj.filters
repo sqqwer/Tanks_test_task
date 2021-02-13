@@ -364,6 +364,62 @@
     <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Botom3.tga" />
     <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Botom2.tga" />
     <Image Include="data\tank\model\modelEnemyPower\Tank_Power_Botom1.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\first\armorTankBottom1.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\first\armorTankBottom2.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\first\armorTankBottom3.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\first\armorTankfront1.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\first\armorTankfront2.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\first\armorTankfront3.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\first\armorTankLeft1.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\first\armorTankLeft2.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\first\armorTankLeft3.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\first\armorTankRight1.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\first\armorTankRight2.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\first\armorTankRight3.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\second\armorTankBottom1.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\second\armorTankBottom2.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\second\armorTankBottom3.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\second\armorTankfront1.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\second\armorTankfront2.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\second\armorTankfront3.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\second\armorTankLeft1.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\second\armorTankLeft2.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\second\armorTankLeft3.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\second\armorTankRight1.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\second\armorTankRight2.tga" />
+    <Image Include="data\tank\model\modelEnemyArmor\second\armorTankRight3.tga" />
+    <Image Include="data\tank\model\model3\Tank_Power_Botom1.tga" />
+    <Image Include="data\tank\model\model3\Tank_Power_Botom2.tga" />
+    <Image Include="data\tank\model\model3\Tank_Power_Botom3.tga" />
+    <Image Include="data\tank\model\model3\Tank_Power_Botom4.tga" />
+    <Image Include="data\tank\model\model3\Tank_Power_Front1.tga" />
+    <Image Include="data\tank\model\model3\Tank_Power_Front2.tga" />
+    <Image Include="data\tank\model\model3\Tank_Power_Front3.tga" />
+    <Image Include="data\tank\model\model3\Tank_Power_Front4.tga" />
+    <Image Include="data\tank\model\model3\Tank_Power_Left1.tga" />
+    <Image Include="data\tank\model\model3\Tank_Power_Left2.tga" />
+    <Image Include="data\tank\model\model3\Tank_Power_Left3.tga" />
+    <Image Include="data\tank\model\model3\Tank_Power_Left4.tga" />
+    <Image Include="data\tank\model\model3\Tank_Power_Right1.tga" />
+    <Image Include="data\tank\model\model3\Tank_Power_Right2.tga" />
+    <Image Include="data\tank\model\model3\Tank_Power_Right3.tga" />
+    <Image Include="data\tank\model\model3\Tank_Power_Right4.tga" />
+    <Image Include="data\tank\model\model4\Tank_Fast_Botton1.tga" />
+    <Image Include="data\tank\model\model4\Tank_Fast_Botton2.tga" />
+    <Image Include="data\tank\model\model4\Tank_Fast_Botton3.tga" />
+    <Image Include="data\tank\model\model4\Tank_Fast_Botton4.tga" />
+    <Image Include="data\tank\model\model4\Tank_Fast_Front1.tga" />
+    <Image Include="data\tank\model\model4\Tank_Fast_Front2.tga" />
+    <Image Include="data\tank\model\model4\Tank_Fast_Front3.tga" />
+    <Image Include="data\tank\model\model4\Tank_Fast_Front4.tga" />
+    <Image Include="data\tank\model\model4\Tank_Fast_Left1.tga" />
+    <Image Include="data\tank\model\model4\Tank_Fast_Left2.tga" />
+    <Image Include="data\tank\model\model4\Tank_Fast_Left4.tga" />
+    <Image Include="data\tank\model\model4\Tank_Fast_Left3.tga" />
+    <Image Include="data\tank\model\model4\Tank_Fast_Right1.tga" />
+    <Image Include="data\tank\model\model4\Tank_Fast_Right2.tga" />
+    <Image Include="data\tank\model\model4\Tank_Fast_Right3.tga" />
+    <Image Include="data\tank\model\model4\Tank_Fast_Right4.tga" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FrameworkRelease_x64.dll" />
@@ -377,12 +433,6 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="data\upgrade\darkSidePower.ini">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="data\tank\init\Hero_model.ini">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="data\tank\init\Hero_model_ver1.ini">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="data\tank\preset\Hero_preset1.ini">
@@ -412,9 +462,6 @@
     <None Include="data\block\steel\steel.ini">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="data\tank\init\tank2.ini">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="data\map\TemplateMap.ini">
       <Filter>Resource Files</Filter>
     </None>
@@ -442,6 +489,21 @@
     <None Include="data\tank\preset\fastPreset.ini" />
     <None Include="data\tank\preset\easyPreset.ini" />
     <None Include="data\tank\preset\powerTank.ini" />
+    <None Include="data\tank\init\armorTankSec.ini" />
+    <None Include="data\tank\preset\Hero_preset3.ini" />
+    <None Include="data\tank\preset\Hero_preset4.ini" />
+    <None Include="data\tank\init\widhtTank.ini">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="data\tank\init\modeHero1.ini">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="data\tank\init\modeHero2.ini">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="data\tank\init\modeHero3.ini" />
+    <None Include="data\tank\init\modeHero4.ini" />
+    <None Include="data\map\FirstMap.ini" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="FrameworkRelease_x64.lib" />

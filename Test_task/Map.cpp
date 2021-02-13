@@ -5,7 +5,7 @@
 
 Map::Map()
 	:
-	map_size_w(22), map_size_h(18)
+	map_size_w(23), map_size_h(18)
 {
 	AlocateMemory();
 };
@@ -118,12 +118,15 @@ void Map::LoadMap(const char* name, void (*draw)(Sprite*, int, int),
 					map[i][j].SetLiveBlock(true);
 					break;
 				case (int)Type::MONUMENT:
+					SetMonumentLive(true);
 					map[i][j].SetStatus(side::COUNT);
+					map[i][j].SetLiveBlock(true);
 					map[i][j] = Block("./data/block/monument/monument.ini",
 						(float)(screenShiftX + (j) * 30),
 						(float)(screenShiftY + (i) * 30),
 						(int)Type::MONUMENT, false
 					);
+					monX = j; monY = i;
 					monument_x = (float)(screenShiftX + (j) * 30);
 					monument_y = (float)(screenShiftY + (i) * 30);
 					map[i][j].SetLiveBlock(true);

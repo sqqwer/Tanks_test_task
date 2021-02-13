@@ -21,9 +21,10 @@ void Logic::InitAllResources(const char* nameMap, const char* nameLand,
 	InitPossitionUpgrade(); 
 	spawnExtraLifeTimer = 10.f; 
 	spawnDrakSidePower = 40.f;
+	hero.SetLives(3);
 	enemyUnit = struct enemySpawnTypes(5, 5, 5, 5);
 	LoadNewMap(archiveMap[archivePossition++].c_str());
-	hero = Hero(tankPreset::ENEMYTANKPOWER, map.GetHszX(), map.GetHszY(), drawSprite, outOfScreenW, outOfScreenH);
+	hero = Hero(tankPreset::HEROTANK1, map.GetHszX(), map.GetHszY(), drawSprite, outOfScreenW, outOfScreenH);
 };
 
 void Logic::InitOutOfScreen()
@@ -107,9 +108,12 @@ void Logic::Draw()
 	hero.UpdateReloadMark(mark); map.UpdateMark(mark);
 	land.Draw();
 	spawnExtraLifeTimer -= mark;
-	spawnDrakSidePower -= mark;
+	//spawnDrakSidePower -= mark;
 	enemyChoosetargetMark += mark;
 	enemyUpdatePossitionMark += mark; hero.Draw();
+	DrawEnemy();
+	
+	map.DrawMap(map.GetRefMark());
 	hero.TickTimer(-mark);
 	if (enemyUpdatePossitionMark > 1.5f)
 	{
@@ -161,8 +165,8 @@ void Logic::WallHeroColisium()
 							hero.Object::Colisium(
 								(float)map.map[i][j].unit[k].GetAnimPosX(),
 								(float)map.map[i][j].unit[k].GetAnimPosY(),
-								(float)map.map[i][j].GetSpW(), (float)map.map[i][j].GetSpH(),
-								mark
+								(float)map.map[i][j].GetSpW(), 
+								(float)map.map[i][j].GetSpH(), mark
 							);
 						}
 					}
@@ -172,13 +176,19 @@ void Logic::WallHeroColisium()
 	}
 };
 
-void Logic::UpdateTank()
+bool Logic::UpdateTank()
 {
 	Draw();
 	UpdateHeroTank();
 	UpdateEnemyTank();
+	CanSHoot();
+	if (!map.GetMonumentLive() || hero.GetLives() <= 0)
+	{
+		std::string out((!map.GetMonumentLive()) ? "Base is falling" : "Tank destroyed");
+		std::cout << "You Lose : " << out << std::endl;
+		return true;
+	}
 	SpawnUpgrade();
-	map.DrawMap(map.GetRefMark());
 	DrawUpgrade(mark);
 	if (GetSpawnEnemyMark() > 5.0f || !enemy.size())
 	{
@@ -187,13 +197,15 @@ void Logic::UpdateTank()
 	if (!enemyCount && !enemy.size())
 	{
 		ClearUpgrade();
+		hero.SetLives(3);
 		enemyUnit = struct enemySpawnTypes(5, 5, 5, 5);
 		LoadNewMap(archiveMap[archivePossition++].c_str());
 		if (archivePossition >= archiveMap.size())
 			archivePossition = 0;
 		hero.SetPossitionX(map.GetHszX()); hero.SetPossitionY(map.GetHszY());
-		enemyCount = 5;
+		enemyCount = 20;
 	}
+	return false;
 };
 
 void Logic::UpdateHeroTank()
@@ -203,6 +215,13 @@ void Logic::UpdateHeroTank()
 	);
 	hero.Update(GetDifferenceW(), GetDifferenceH(), mark);
 	PowerUpsColisium();
+	if (!hero.GetHealth())
+	{
+		hero.UpdateLives(-1);
+		hero.Load(tankPreset::HEROTANK1);
+		getSpriteSize(hero.GetSprite(), hero.GetRefSizeW(), hero.GetRefSizeH());
+		hero.SetPossitionX(map.GetHszX()); hero.SetPossitionY(map.GetHszY());
+	}
 	for (int i = 0; i < upgrade.size(); i++)
 	{
 		if (!upgrade[i].GetLiveBlock())
@@ -211,7 +230,6 @@ void Logic::UpdateHeroTank()
 			upgrade.erase(upgrade.begin() + i);
 		}
 	}
-	
 	WallHeroColisium();
 	if (hero.GetPowerTimer() < 0)
 		hero.SetPower(false);
@@ -223,16 +241,22 @@ void Logic::UpdateEnemyTank()
 	std::uniform_int_distribution<int> magicNuber(0,10);
 	for (int i = 0; i < enemy.size(); i++)
 	{
+		if (enemy[i].isAlive() && enemy[i].GetHealth() == 1 && enemy[i].GetChange() &&
+			enemy[i].GetTankPreset() == tankPreset::ENEMYTANKARMOR)
+		{
+			enemy[i].SetChange(false);
+			enemy[i].LoadPreset("./data/tank/init/armorTankSec.ini");
+			getSpriteSize(enemy[i].GetSprite(), enemy[i].GetRefSizeW(), enemy[i].GetRefSizeH());
+		}
+		enemy[i].UpdateReloadMark(mark); enemy[i].UpdateRotateMark(mark);
 		enemy[i].UpdateBullet(GetDifferenceW(), GetDifferenceH(), mark, enemy, map, i,
-			outOfScreenW, outOfScreenH
+			outOfScreenW, outOfScreenH,
+			hero.GetX(), hero.GetY(), hero.GetSpW(), hero.GetSpH(), hero.GetRefenceHealth()
 		);
 		if (enemy[i].isAlive())
 		{
 			enemy[i].UpdateReloadMark(mark);
-			enemy[i].Update(GetDifferenceW(), GetDifferenceH(), mark,
-				outOfScreenW, outOfScreenH
-			);
-			enemy[i].Draw();
+			enemy[i].Update(GetDifferenceW(), GetDifferenceH(), mark, outOfScreenW, outOfScreenH);
 			hero.Hero::TankColisium(enemy[i], mark);
 			for (int j = 0; j < enemy.size(); j++)
 			{
@@ -289,13 +313,18 @@ void Logic::UpdateMouseClick(FRMouseButton button, bool isReleased)
 	if (button == FRMouseButton::LEFT && isReleased && 
 		hero.GetReloadMark() > hero.GetReloadConstTime())
 	{
-		hero.ClearReloadMark();	
-		hero.Shoot(GetDifferenceW(), GetDifferenceH());
-		getSpriteSize(
-			hero.bull[hero.bull.size() - 1].GetSprite(),
-			hero.bull[hero.bull.size() - 1].GetRefSizeW(),
-			hero.bull[hero.bull.size() - 1].GetRefSizeH()
-		);
+		const int size = (hero.GetTankPreset() >= tankPreset::HEROTANK3)
+			? 2 : 1 ;
+		if (hero.bull.size() < size)
+		{
+			hero.ClearReloadMark();
+			hero.Shoot(GetDifferenceW(), GetDifferenceH());
+			getSpriteSize(
+				hero.bull[hero.bull.size() - 1].GetSprite(),
+				hero.bull[hero.bull.size() - 1].GetRefSizeW(),
+				hero.bull[hero.bull.size() - 1].GetRefSizeH()
+			);
+		}
 	}
 };
 
@@ -366,9 +395,11 @@ tankPreset Logic::ChooseType()
 
 void Logic::CheckSpawnEnemy()
 {
-	if (GetEnemyCount() > 0 && enemy.size() < 5)
+	if (GetEnemyCount() > 0 && enemy.size() < 3)
 	{
-		for (int i = 0; i < map.enemySpawn.size(); i++)
+		if (++enemySpawPossition >= map.enemySpawn.size())
+			enemySpawPossition = 0;
+		for (int i = enemySpawPossition; i < map.enemySpawn.size(); i++)
 		{
 
 			if (SpawnPointClear(map.enemySpawn[i]))
@@ -411,6 +442,24 @@ bool Logic::SpawnPointClear(struct possition enSp)
 	}
 
 	return true;
+};
+
+void Logic::DrawEnemy()
+{
+	for (int i = 0; i < enemy.size(); i++)
+	{
+		if (enemy[i].isAlive())
+		{
+			enemy[i].Draw();
+			for (int j = 0; j < enemy[i].bull.size(); j++)
+			{
+				if (enemy[i].bull[j].Work())
+				{
+					enemy[i].bull[j].Draw();
+				}
+			}
+		}
+	}
 };
 
 void Logic::SpawnUpgrade()
@@ -504,11 +553,14 @@ float Logic::LenghtToObject(
 void Logic::ChooseTarget()
 {
 	float lenghtToHero = 0;
-	float lenghtToMonument = 99999;
+	float lenghtToMonument = 0;
 	for (int i = 0; i < enemy.size(); i++)
 	{
 		const float possEnX = (float)enemy[i].GetX();
 		const float possEnY = (float)enemy[i].GetY();
+
+		const float enemySizeW = (float)enemy[i].GetSpW();
+		const float enemySizeH = (float)enemy[i].GetSpH();
 
 		const float possHeX = (float)hero.GetX();
 		const float possHeY = (float)hero.GetY();
@@ -517,9 +569,27 @@ void Logic::ChooseTarget()
 		const float possMoY = (float)map.GetMonumentY();
 
 		lenghtToHero= LenghtToObject(possEnX, possEnY, possHeX, possHeY);
-		//lenghtToMonument = LenghtToObject(possEnX, possEnY, possHeX, possHeY);
+		lenghtToMonument = LenghtToObject(possEnX, possEnY, possMoX, possMoY);
 
-		if ((lenghtToHero < lenghtToMonument  && hero.isAlive() && lenghtToHero > 200.0f))
+		if ((possEnY + enemySizeH / 2 >= possHeY + enemySizeH / 2 && 
+			possEnY - enemySizeH / 2 <= possHeY + enemySizeH / 2) || 
+			(possEnX + enemySizeH / 2 >= possHeX + enemySizeH / 2 &&
+				possEnX - enemySizeH / 2 <= possHeX + enemySizeH / 2))
+		{
+			enemy[i].SetTraget(1);
+			continue;
+		}
+		else if (
+			((possEnY + enemySizeH / 2 >= possMoY + enemySizeH / 2 &&
+				possEnY - enemySizeH / 2 <= possMoY + enemySizeH / 2) ||
+				(possEnX + enemySizeH / 2 >= possMoX + enemySizeH / 2 &&
+					possEnX - enemySizeH / 2 <= possMoX + enemySizeH / 2)))
+		{
+			enemy[i].SetTraget(0);
+			continue;
+		}
+
+		if (lenghtToHero < lenghtToMonument)
 		{
 			enemy[i].SetTraget(1);
 		}
@@ -537,11 +607,11 @@ void Logic::MoveToTarget()
 		const float possEnX = (float)enemy[i].GetX();
 		const float possEnY = (float)enemy[i].GetY();
 
-		const float possObjX = (enemy[i].GetTarget()) ? (float)hero.GetX() : map.GetMonumentX();
-		const float possObjY = (enemy[i].GetTarget()) ? (float)hero.GetY() : map.GetMonumentY();
+		const float possObjX = (float)(enemy[i].GetTarget()) ? (float)hero.GetX() : map.GetMonumentX();
+		const float possObjY = (float)(enemy[i].GetTarget()) ? (float)hero.GetY() : map.GetMonumentY();
 		
-		float x = (possEnX > possObjX) ? possEnX - possObjX : possObjX - possEnX;
-		float y = (possEnY > possObjY) ? possEnY - possObjY : possObjY - possEnY;
+		float x = (float)(possEnX > possObjX) ? possEnX - possObjX : possObjX - possEnX;
+		float y = (float)(possEnY > possObjY) ? possEnY - possObjY : possObjY - possEnY;
 		
 		if (y < x)
 		{
@@ -587,5 +657,57 @@ void Logic::LoadArrayMap(const char* name_ini)
 
 void Logic::CanSHoot()
 {
+	for (int i = 0; i < enemy.size(); i++)
+	{
+		if (enemy[i].bull.size() < 1 && 
+			enemy[i].GetReloadMark() > enemy[i].GetReloadConstTime()
+			)
+		{
+			enemy[i].ClearReloadMark();
+			const float possEnX = (float)enemy[i].GetX();
+			const float possEnY = (float)enemy[i].GetY();
+			
+			const float enemySizeW = (float)enemy[i].GetSpW();
+			const float enemySizeH = (float)enemy[i].GetSpH();
 
+			const float possObjX = (float)(enemy[i].GetTarget()) ? (float)hero.GetX() : map.GetMonumentX();
+			const float possObjY = (float)(enemy[i].GetTarget()) ? (float)hero.GetY() : map.GetMonumentY();
+
+			if (possEnY + enemySizeH / 2 >= possObjY + enemySizeH / 2
+				&& possEnY - enemySizeH / 2 <= possObjY + enemySizeH / 2)
+			{
+				if (possEnX > possObjX)
+				{
+					enemy[i].SetVellX(-75.0f);
+				}
+				else if (possEnX < possObjX)
+				{
+					enemy[i].SetVellX(75.0f);
+				}
+				enemy[i].SetVellY(0.0f);
+				enemy[i].SetSide((possEnX > possObjX) ? side::LEFT : side::RIGHT);
+				enemy[i].Shoot(outOfScreenW, outOfScreenH);
+			}
+			else if (possEnX + enemySizeH / 2 >= possObjX + enemySizeH / 2 &&
+				possEnX - enemySizeH / 2 <= possObjX + enemySizeH / 2)
+			{
+				if (possEnY > possObjY)
+				{
+					enemy[i].SetVellY(-75.0f);
+				}
+				else if (possEnY < possObjY)
+				{
+					enemy[i].SetVellY(75.0f);
+				}
+				enemy[i].SetVellX(0.0f);
+				enemy[i].SetSide((possEnY > possObjY) ? side::FRONT : side::BOTTOM);
+				enemy[i].Shoot(outOfScreenW, outOfScreenH);
+			}
+			else
+			{
+				enemy[i].SetSide((side)enemy[i].ShootSide());
+				enemy[i].Shoot(outOfScreenW, outOfScreenH);
+			}
+		}
+	}
 };

@@ -11,7 +11,7 @@ Enemy::Enemy(tankPreset type,
 	const int outOfScreenX, const int outOfScreenY
 )
 	:
-	Animation(draw), 
+	Animation(draw), live(true),
 	Object(poss_x, poss_y, outOfScreenX, outOfScreenY) 
 {
 	Load(type);
@@ -19,7 +19,7 @@ Enemy::Enemy(tankPreset type,
 
 void Enemy::Shoot(const int outOfScreenX, const int outOfScreenY)
 {
-	sd = (side)ShootSide();
+	//sd = (side)ShootSide();
 	ChioceOutShoot();
 	bull.push_back(Bullet(pres.GetBulletAnimPress(),
 		(sd == side::LEFT) ? -vellB : (sd == side::RIGHT) ? vellB : 0.0f,
@@ -60,22 +60,24 @@ void Enemy::ClerBull(const unsigned int elem)
 
 void Enemy::Draw()
 {
-	draw(
+	drawSprite(
 		Choice(velocity_x, velocity_y), GetX(), GetY()
 	);
 };
 
 void Enemy::UpdateBullet(
 	int screenX, int screenY, float mark,
-	std::vector<Enemy>& en,
-	Map& map, const int wich,
-	const int outOfScreenX, const int outOfScreenY
+	std::vector<Enemy>& en, Map& map, const int wich,
+	const int outOfScreenX, const int outOfScreenY,
+	const int heroX, const int heroY,
+	const int heroW, const int heroH,
+	int& heroHealth
 )
 {
 	for (int i = 0; i < bull.size(); i++)
 	{
 		bull[i].Update(screenX, screenY, mark, outOfScreenX, outOfScreenY);
-		if (bull[i].Work()) for (int j = 0; j < en.size(); j++) 
+		/*if (bull[i].Work()) for (int j = 0; j < en.size(); j++) 
 		if (en[j].isAlive())
 		{
 				if (wich == j) continue;
@@ -94,6 +96,19 @@ void Enemy::UpdateBullet(
 						en[j].FreeSprite();
 					}
 				}
+		}*/
+		if (bull[i].Work())
+		{
+			if (bull[i].GetX() + bull[i].GetSpW() <=
+				heroX + heroW && bull[i].GetX() >= heroX)
+			{
+				if (bull[i].GetY() + bull[i].GetSpH() <=
+					heroY + heroH && bull[i].GetY() >= heroY)
+				{
+					bull[i].SetWork(false);
+					heroHealth--;
+				}
+			}
 		}
 		if (bull[i].Work())
 		{
@@ -121,9 +136,12 @@ void Enemy::UpdateBullet(
 								{
 									bull[i].SetWork(false);
 									if ((int)Type::STEEL != map.map[k][j].GetType())
-									{/*
-										if (nowTank == tankPreset::WIDTHTANK)
+									{
+										if (nowTank == tankPreset::ENEMYTANKARMOR)
+										//	||  nowTank == tankPreset::ENEMYTANKPOWER)
 										{
+											if ((int)Type::MONUMENT != map.map[k][j].GetType())
+												map.SetMonumentLive(false);
 											if (bull[i].GetvellX() > 0)
 											{
 												if (map.map[k][j].unit[0].GetWorkUnit() ||
@@ -181,9 +199,11 @@ void Enemy::UpdateBullet(
 												}
 											}
 										}
-										else*/
+										else
 										{
 											map.map[k][j].unit[l].SetWorkUnit(false);
+											if ((int)Type::MONUMENT == map.map[k][j].GetType())
+												map.SetMonumentLive(false);
 										}
 									}
 								}
@@ -213,7 +233,7 @@ void Enemy::Update(int w, int h, float spec,
 {
 	possition_x += velocity_x * (spec);
 	possition_y += velocity_y * (spec);
-	const int right = (float)(possition_x) + size_w;
+	const int right = int(possition_x) + size_w;
 	if (possition_x < outOfScreenX)
 	{
 		possition_x = (float)outOfScreenX;
@@ -226,7 +246,7 @@ void Enemy::Update(int w, int h, float spec,
 		velocity_x = -velocity_x;
 		velocity_y = 0;
 	}
-	const int bottom = (float)(possition_y) + size_h;
+	const int bottom = int(possition_y) + size_h;
 	if (possition_y < outOfScreenY)
 	{
 		possition_y = (float)outOfScreenY;
@@ -248,27 +268,19 @@ void Enemy::Colisium(
 )
 {
 	if (
-		possition_x + size_w - 2 >= possX &&
-		possition_x + 2 <= possX + width
+		possition_x + size_w - 1 >= possX &&
+		possition_x + 1 <= possX + width
 		)
 	{
 		if (
-			possition_y + size_h - 2 >= possY &&
-			possition_y + 2 <= possY + height
+			possition_y + size_h - 1 >= possY &&
+			possition_y + 1 <= possY + height
 			)
 		{
 			possition_x -= (velocity_x)*mark;
 			possition_y -= (velocity_y)*mark;
-			if (magicNumber % 2 == 0)
-			{
-				velocity_y = (velocity_x != 0) ? -velocity_x : -velocity_y;
-				velocity_x = 0;
-			}
-			else
-			{
-				velocity_x = (velocity_y != 0) ? -velocity_y : -velocity_x;
-				velocity_y = 0; 
-			}
+			velocity_x = 0.0f;
+			velocity_y = 0.0f;
 		}
 	}
 };
@@ -291,24 +303,29 @@ void Enemy::TankColisium(
 		{
 			possition_x -= velocity_x * mark;
 			possition_y -= velocity_y * mark;
-			/*if (magicNumber % 2 == 0)
+			if (rotateMark > 2.0f)
 			{
-				velocity_y = (velocity_x != 0) ? -velocity_x : -velocity_y;
-				velocity_x = 0;
+				rotateMark = 0.0f;
+				if (magicNumber % 2 == 0)
+				{
+					velocity_y = (velocity_x != 0) ? -velocity_x : -velocity_y;
+					velocity_x = 0;
+				}
+				else
+				{
+					velocity_x = (velocity_y != 0) ? -velocity_y : -velocity_x;
+					velocity_y = 0;
+				}
 			}
-			else
-			{
-				velocity_x = (velocity_y != 0) ? -velocity_y : -velocity_x;
-				velocity_y = 0;
-			}*/
 		}
 	}
 };
 //Load Preset
 void Enemy::Load(tankPreset type)
 {
-	if (obj.size())
-		FreeSprite();
+	change = (type == tankPreset::ENEMYTANKARMOR)
+		? true : false ;
+	if (obj.size()) FreeSprite();
 	pres.LoadPreset(type);
 	this->health = pres.GetHealth();
 	this->speed = pres.GetTankVel();

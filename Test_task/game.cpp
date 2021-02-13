@@ -55,7 +55,6 @@ public:
 		{
 			screenX = width = 800;
 		}
-
 		fullscreen = false;
 	}
 
@@ -63,22 +62,21 @@ public:
 		logic.InitAllResources(
 			"./data/map/allMap.ini", "./data/land/land.ini",
 			screenX, screenY
-		);	
-		if (!logic.InitSpriteSize())
+		);
+		if (!logic.InitSpriteSize()) {
 			return false;
+		}
 		return true;
 	}
 
 	virtual void Close() {
 		logic.CloseProgram();
-		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-		_CrtSetBreakAlloc(9554);
-		_CrtSetBreakAlloc(9553);
-		_CrtSetBreakAlloc(9552);
 	}
 
 	virtual bool Tick() {
-		logic.UpdateTank();
+		if (logic.UpdateTank()) {
+			return true;
+		}
 		return false;
 	}
 

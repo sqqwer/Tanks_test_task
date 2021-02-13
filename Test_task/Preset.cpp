@@ -26,7 +26,10 @@ void Preset::LoadPreset(tankPreset type)
 		ReadFile("./data/tank/preset/Hero_preset2.ini");
 		break;
 	case tankPreset::HEROTANK3:
-		ReadFile("./data/tank/preset/WidthTank.ini");
+		ReadFile("./data/tank/preset/Hero_preset3.ini");
+		break;
+	case tankPreset::HEROTANK4:
+		ReadFile("./data/tank/preset/Hero_preset4.ini");
 		break;
 	case tankPreset::ENEMYTANKEASY:
 		ReadFile("./data/tank/preset/easyPreset.ini");

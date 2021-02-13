@@ -25,17 +25,17 @@ void Upgrade::PowerUpsColisium(Hero& hero)
 		{
 			if (GetPowerType() == powerUps::EXTRALIVE)
 			{
-				hero.AddLives(1);	SetLiveBlock(false);
-				hero.GetInfo();
+				hero.UpdateLives(1);	
+				SetLiveBlock(false);
 			}
 			if (GetPowerType() == powerUps::UPGRADE)
 			{
 				if (hero.GetTankPreset() >= tankPreset::HEROTANK1 && 
-					hero.GetTankPreset() < tankPreset::HEROTANK3)
+					hero.GetTankPreset() < tankPreset::HEROTANK4) 
+					// tankPreset::WIDTHTANK)
 				{
 					hero.Load((tankPreset)((int)hero.GetTankPreset() + 1));
 					getSpriteSize(hero.GetSprite(), hero.GetRefSizeW(), hero.GetRefSizeH());
-					hero.GetInfo();
 				}
 				SetLiveBlock(false);
 			}

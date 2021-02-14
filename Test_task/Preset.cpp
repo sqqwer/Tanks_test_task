@@ -46,8 +46,6 @@ void Preset::LoadPreset(tankPreset type)
 	case tankPreset::WIDTHTANK:
 		ReadFile("./data/tank/preset/WidthTank.ini");
 		break;
-	case tankPreset::COUNT:
-		break;
 	default:
 		break;
 	}

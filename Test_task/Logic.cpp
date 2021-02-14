@@ -315,7 +315,7 @@ void Logic::UpdateMouseClick(FRMouseButton button, bool isReleased)
 	{
 		const int size = (hero.GetTankPreset() >= tankPreset::HEROTANK3)
 			? 2 : 1 ;
-		if (hero.bull.size() <= size)
+		if (hero.bull.size() < size)
 		{
 			hero.ClearReloadMark();
 			hero.Shoot(GetDifferenceW(), GetDifferenceH());

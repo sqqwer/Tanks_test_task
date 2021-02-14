@@ -92,12 +92,12 @@ public:
 	void PressedKey(FRKey k);
 	void ReleasedKey(FRKey k);
 	void UpdateMouseClick(FRMouseButton button, bool isReleased);
+	void UpdateEnemyTank();
 private:
 	void Draw();
 	void DrawEnemy();
 	void DrawUpgrade(const float mark);
 	void UpdateHeroTank();
-	void UpdateEnemyTank();
 	void PowerUpsColisium();
 	void WallHeroColisium();
 	bool CheackInitConstructor();

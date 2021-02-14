@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <thread>
 
 Logic::Logic()
 {};
@@ -120,11 +121,15 @@ void Logic::Draw()
 		MoveToTarget();
 		enemyUpdatePossitionMark = 0.0f;
 	}
+	std::thread first( [this]
+		{ this->ChooseTarget(); }
+	);
 	if (enemyChoosetargetMark > 4.0f)
 	{
-		ChooseTarget();
-		enemyChoosetargetMark = 0.0f;
+		
+		//enemyChoosetargetMark = 0.0f;
 	}
+	first.join();
 };
 
 void Logic::PowerUpsColisium()
@@ -180,8 +185,13 @@ bool Logic::UpdateTank()
 {
 	Draw();
 	UpdateHeroTank();
+	/*std::thread first([this]
+		{ this->UpdateEnemyTank(); }
+	);*/
 	UpdateEnemyTank();
-	CanSHoot();
+	std::thread second([this] 
+		{ this->CanSHoot(); }
+	);
 	if (!map.GetMonumentLive() || hero.GetLives() <= 0)
 	{
 		std::string out((!map.GetMonumentLive()) ? "Base is falling" : "Tank destroyed");
@@ -205,6 +215,8 @@ bool Logic::UpdateTank()
 		hero.SetPossitionX(map.GetHszX()); hero.SetPossitionY(map.GetHszY());
 		enemyCount = 20;
 	}
+	//first.join();
+	second.join();
 	return false;
 };
 

@@ -140,7 +140,7 @@ void Enemy::UpdateBullet(
 										if (nowTank == tankPreset::ENEMYTANKARMOR)
 										//	||  nowTank == tankPreset::ENEMYTANKPOWER)
 										{
-											if ((int)Type::MONUMENT != map.map[k][j].GetType())
+											if ((int)Type::MONUMENT == map.map[k][j].GetType())
 												map.SetMonumentLive(false);
 											if (bull[i].GetvellX() > 0)
 											{
@@ -203,7 +203,9 @@ void Enemy::UpdateBullet(
 										{
 											map.map[k][j].unit[l].SetWorkUnit(false);
 											if ((int)Type::MONUMENT == map.map[k][j].GetType())
+											{
 												map.SetMonumentLive(false);
+											}
 										}
 									}
 								}
